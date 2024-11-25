@@ -16,8 +16,8 @@ export default class ProductRepository{
         return this.dao.create(product);
     }
 
-    updateProduct(idProduct,product){
-        return this.dao.update(idProduct,product);
+    updateProduct(id,product){
+        return this.dao.update(id,product);
     }
 
     deleteProduct(id){
