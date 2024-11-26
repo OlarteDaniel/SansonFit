@@ -12,6 +12,8 @@ const PORT = config.app.PORT;
 
 const connection = mongoose.connect(config.mongo.URL);
 
+app.use(express.json());
+
 app.use('/api/categories',CategoriesRouter);
 app.use('/api/products',ProductsRouter);
 

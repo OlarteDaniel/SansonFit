@@ -11,6 +11,10 @@ class ProductsRouter extends BaseRouter{
         this.get('/:id',productsController.getOne);
 
         this.post('/',productsController.create);
+
+        this.put('/:id',productsController.update);
+
+        this.delete('/:id',productsController.eliminate);
     }
 
 }
