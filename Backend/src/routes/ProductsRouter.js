@@ -2,6 +2,8 @@ import BaseRouter from "./BaseRouter.js";
 
 import productsController from "../controllers/products.controller.js";
 
+import upload from "../service/uploadService.js";
+
 class ProductsRouter extends BaseRouter{
 
     init(){
@@ -10,7 +12,7 @@ class ProductsRouter extends BaseRouter{
 
         this.get('/:id',productsController.getOne);
 
-        this.post('/',productsController.create);
+        this.post('/',upload.array('thumbnails',3),productsController.create);
 
         this.put('/:id',productsController.update);
 

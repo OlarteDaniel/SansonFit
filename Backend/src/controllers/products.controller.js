@@ -1,4 +1,5 @@
 import {productService} from '../service/service.js'
+import cloudinary from '../utils/cloudinary.js';
 
 const getAll = async(req,res) =>{
     
@@ -30,6 +31,19 @@ const create = async(req,res) =>{
 
     if(!title || !description || !price || !category){
         return res.sendBadRequest('Information missing');
+    }
+
+    try {
+        for(let i = 0; i < req.files.length; i++){
+            const uploadedImage = await cloudinary.uploader.upload(req.files[i].path);
+            thumbnails.push({
+                mimeType: req.files[i].mimeType,
+                url: uploadedImage.secure_url,
+                main: i == 0
+            })
+        }
+    } catch (error) {
+        return res.sendBadRequest('Failed to upload images to Cloudinary');
     }
 
     const newProduct = {
