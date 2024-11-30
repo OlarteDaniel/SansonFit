@@ -1,5 +1,7 @@
-import {productService} from '../service/service.js'
+import {productService,categoryService} from '../service/service.js'
 import cloudinary from '../utils/cloudinary.js';
+import {unlink, promises as fsPromises} from 'fs'
+
 
 const getAll = async(req,res) =>{
     
@@ -29,18 +31,26 @@ const create = async(req,res) =>{
     const {title,description,price,stock,category} = req.body;
     const thumbnails = [];
 
+    const resultCategory = await categoryService.getCategoryById(category);
+
     if(!title || !description || !price || !category){
         return res.sendBadRequest('Information missing');
     }
 
     try {
         for(let i = 0; i < req.files.length; i++){
-            const uploadedImage = await cloudinary.uploader.upload(req.files[i].path);
+            const uploadedImage = await cloudinary.uploader
+                .upload(req.files[i].path,{
+                    public_id:`${title}-${resultCategory.name}`,
+                    folder:`Sanson Fit/${resultCategory.name}`
+                });
             thumbnails.push({
                 mimeType: req.files[i].mimeType,
                 url: uploadedImage.secure_url,
                 main: i == 0
-            })
+            });
+            await fsPromises.unlink(req.files[i].path);
+            console.log('File is deleted')
         }
     } catch (error) {
         return res.sendBadRequest('Failed to upload images to Cloudinary');
@@ -118,14 +128,32 @@ const eliminate = async(req,res)=>{
         return res.sendNotFound('Product not found');
     }
 
-    const result = await productService.deleteProduct(pid);
-
-    if(!result){
-        return res.sendBadRequest('Could not delete product');
+    const category = await categoryService.getCategoryById(product.category);
+    if(!category){
+        return res.sendNotFound('Category not found');
     }
 
-    res.sendSuccess('Deleted product')
-}
+    const publicId = `Sanson Fit/${category.name}/${product.title}-${category.name}`
+    
+
+    try {
+        const cloudinaryResponse = await cloudinary.uploader.destroy(publicId);
+        if (cloudinaryResponse.result !== 'ok') {
+            return res.sendBadRequest('Failed to delete image from Cloudinary');
+        }
+
+        const result = await productService.deleteProduct(pid);
+
+        if(!result){
+            return res.sendBadRequest('Could not delete product');
+        }
+
+        res.sendSuccess('Deleted product')
+
+    } catch (error) {
+        console.log(error)
+    }
+};
 
 export default{
     getAll,
