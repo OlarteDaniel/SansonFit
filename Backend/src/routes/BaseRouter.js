@@ -1,5 +1,7 @@
 import {Router} from 'express';
 
+import {passportCall} from '../middlewares/passportCall.js';
+
 export default class BaseRouter{
 
     constructor(){
@@ -14,19 +16,19 @@ export default class BaseRouter{
     }
 
     get(path,...callbacks){
-        this.router.get(path,this.generateCustomResponses,this.applyCallbacks(callbacks));
+        this.router.get(path,this.generateCustomResponses,passportCall('current'),this.applyCallbacks(callbacks));
     }
 
     post(path,...callbacks){
-        this.router.post(path,this.generateCustomResponses,this.applyCallbacks(callbacks));
+        this.router.post(path,this.generateCustomResponses,passportCall('current'),this.applyCallbacks(callbacks));
     }
 
     put(path,...callbacks){
-        this.router.put(path,this.generateCustomResponses,this.applyCallbacks(callbacks));
+        this.router.put(path,this.generateCustomResponses,passportCall('current'),this.applyCallbacks(callbacks));
     }
 
     delete(path,...callbacks){
-        this.router.delete(path,this.generateCustomResponses,this.applyCallbacks(callbacks));
+        this.router.delete(path,this.generateCustomResponses,passportCall('current'),this.applyCallbacks(callbacks));
     }
 
     generateCustomResponses(req,res,next){

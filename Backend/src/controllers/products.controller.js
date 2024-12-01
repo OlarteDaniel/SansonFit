@@ -41,7 +41,7 @@ const create = async(req,res) =>{
         for(let i = 0; i < req.files.length; i++){
             const uploadedImage = await cloudinary.uploader
                 .upload(req.files[i].path,{
-                    public_id:`${title}-${resultCategory.name}`,
+                    public_id:`${title}-image-${i}`,
                     folder:`Sanson Fit/${resultCategory.name}`
                 });
             thumbnails.push({
@@ -133,13 +133,16 @@ const eliminate = async(req,res)=>{
         return res.sendNotFound('Category not found');
     }
 
-    const publicId = `Sanson Fit/${category.name}/${product.title}-${category.name}`
-    
 
+    const publicId = `Sanson Fit/${category.name}/${product.title}-image`
+    
     try {
-        const cloudinaryResponse = await cloudinary.uploader.destroy(publicId);
-        if (cloudinaryResponse.result !== 'ok') {
-            return res.sendBadRequest('Failed to delete image from Cloudinary');
+
+        for(let i = 0; i < product.thumbnails.length; i++){
+            const cloudinaryResponse = await cloudinary.uploader.destroy(`${publicId}-${i}`);
+            if (cloudinaryResponse.result !== 'ok') {
+                return res.sendBadRequest('Failed to delete image from Cloudinary');
+            }
         }
 
         const result = await productService.deleteProduct(pid);
