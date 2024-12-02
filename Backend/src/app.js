@@ -4,6 +4,7 @@ import passport from 'passport';
 import cookieParser from 'cookie-parser';
 
 import __dirname from './utils.js';
+import logger from './utils/loggers.js';
 import initializePassportConfig from './config/passport.config.js';
 import config from './config/config.js';
 
@@ -28,4 +29,6 @@ app.use('/api/sessions',SessionsRouter);
 app.use('/api/categories',CategoriesRouter);
 app.use('/api/products',ProductsRouter);
 
-const serve = app.listen(PORT,()=> console.log(`Listening on PORT: ${PORT}`));
+const serve = app.listen(PORT,()=> {
+    logger.info(`Server is listening on PORT: ${PORT}`);
+})

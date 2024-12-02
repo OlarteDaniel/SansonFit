@@ -6,11 +6,13 @@ import sessionsController from '../controllers/sessions.controller.js';
 class SessionsRouter extends BaseRouter{
     init(){
 
-        this.post('/register',passportCall('register'),sessionsController.register)
+        this.post('/register',['PUBLIC'],passportCall('register'),sessionsController.register)
 
-        this.post('/login',passportCall('login'),sessionsController.login);
+        this.post('/login',['PUBLIC'],passportCall('login'),sessionsController.login);
 
-        this.get('/logout',sessionsController.logout);
+        this.get('/logout',['USER','ADMIN'],sessionsController.logout);
+
+        this.get('/current',['USER', 'ADMIN'],sessionsController.curren);
     }
 }
 

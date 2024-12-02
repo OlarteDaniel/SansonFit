@@ -6,15 +6,15 @@ class CategoriesRouter extends BaseRouter{
 
     init(){
 
-        this.get('/',categoriesController.getAll);
+        this.get('/',['ADMIN'],categoriesController.getAll);
 
-        this.get('/:id',categoriesController.getOne);
+        this.get('/:id',['ADMIN'],categoriesController.getOne);
 
-        this.post('/',categoriesController.create);
+        this.post('/',['ADMIN'],categoriesController.create);
 
-        this.put('/:id',categoriesController.update);
+        this.put('/:id',['ADMIN'],categoriesController.update);
 
-        this.delete('/:id',categoriesController.eliminate);
+        this.delete('/:id',['ADMIN'],categoriesController.eliminate);
     }
 
 }

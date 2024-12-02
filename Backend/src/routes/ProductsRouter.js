@@ -8,15 +8,15 @@ class ProductsRouter extends BaseRouter{
 
     init(){
 
-        this.get('/',productsController.getAll);
+        this.get('/',['PUBLIC'],productsController.getAll);
 
-        this.get('/:id',productsController.getOne);
+        this.get('/:id',['PUBLIC'],productsController.getOne);
 
-        this.post('/',upload.array('thumbnails',3),productsController.create);
+        this.post('/',['ADMIN'],upload.array('thumbnails',3),productsController.create);
 
-        this.put('/:id',productsController.update);
+        this.put('/:id',['ADMIN'],productsController.update);
 
-        this.delete('/:id',productsController.eliminate);
+        this.delete('/:id',['ADMIN'],productsController.eliminate);
     }
 
 }
