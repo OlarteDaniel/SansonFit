@@ -1,4 +1,13 @@
 import winston from 'winston';
+import options from '../config/commander.config.js';
+
+import fs from 'fs';
+import path from 'path';
+
+const logDir = path.resolve('logs');
+if (!fs.existsSync(logDir)) {
+    fs.mkdirSync(logDir);
+}
 
 const customLevelOptions = {
     levels: {
@@ -17,6 +26,22 @@ const customLevelOptions = {
     }
 }
 
+const transports = [];
+if(options.mode === 'dev'){
+    transports.push(
+        new winston.transports.Console({
+            level:'info'
+        })
+    )
+}else if (options.mode === 'prod'){
+    transports.push(
+        new winston.transports.File({
+            filename: path.join(logDir, 'error.log'),
+            level: 'error'
+        })
+    );
+}
+
 const logger = winston.createLogger({
     levels: customLevelOptions.levels,
     format: winston.format.combine(
@@ -29,9 +54,7 @@ const logger = winston.createLogger({
             return `[${level}]: ${message}`;
         })
     ),
-    transports: [
-        new winston.transports.Console({level:'info'})
-    ]
+    transports
 })
 
 export default logger;

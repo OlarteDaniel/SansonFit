@@ -1,6 +1,12 @@
 import {config} from 'dotenv';
+import options from './commander.config.js';
 
-config();
+
+config({
+    // Implementamos commander para que las variables de entorno
+    // Se obtengan depediendo del modo en que ejecutemos la aplicacion
+    path:options.mode==='dev'?'./.env.dev':'./.env.prod'
+});
 
 export default{
     app:{
