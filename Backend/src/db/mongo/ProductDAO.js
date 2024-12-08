@@ -10,12 +10,12 @@ export default class ProductDAO{
         return productModel.findOne(params);
     }
 
-    async create(product){
+    async create(product){                                      //Posiblemente se elimine
         return productModel.create(product);
     }
 
-    async update(id,product){
-        return productModel.updateOne({_id:id},{$set:product});
+    async update(id,product){                                   //Posiblemente se elimine
+        return productModel.updateOne({_id:id},{$set:product}); 
     }
 
     async delete(id){

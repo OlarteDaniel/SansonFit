@@ -12,6 +12,10 @@ export default class ProductRepository{
         return this.dao.getOne({_id:id});
     }
 
+    getProductByCode(code){
+        return this.dao.getOne({code:code});
+    }
+
     createProduct(product){
         return this.dao.create(product);
     }

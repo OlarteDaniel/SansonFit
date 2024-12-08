@@ -23,14 +23,15 @@ const getOne = async(req,res)=>{
 }
 
 const create = async(req,res)=>{
-    const {name} = req.body;
+    const {name,type} = req.body;
 
     if(!name){
         return res.sendBadRequest('Information missing');
     }
 
     const newCategory = {
-        name
+        name,
+        type
     }
 
     const result = await categoryService.createCategory(newCategory);

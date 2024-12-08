@@ -7,7 +7,7 @@ export default class CategoryDAO{
     }
 
     async getOne(params){
-        return categoryModel.findOne();
+        return categoryModel.findOne(params);
     }
 
     async create(category){
