@@ -2,6 +2,17 @@ import {productService,categoryService,apparelService} from '../service/service.
 import cloudinary from '../utils/cloudinary.js';
 import {unlink, promises as fsPromises} from 'fs'
 
+const getAllBySize = async(req,res) =>{
+    const size = req.params.size;
+
+    const products = await apparelService.getBySize(size);
+    if(!products){
+        res.sendNotFound('Size not found');
+    }
+
+    return res.sendSuccessWithPayload(products);
+}
+
 const createApparel = async(req,res) =>{
     const {title,description,code,price,stock,category, size, material} = req.body;
     const thumbnails = [];
@@ -111,6 +122,7 @@ const updateApparel = async(req,res) =>{
 }
 
 export default {
+    getAllBySize,
     createApparel,
     updateApparel
 }

@@ -2,8 +2,8 @@ import apparelModel from "./models/apparel.model.js";
 
 export default class ApparelDAO {
 
-    async get(){
-        return apparelModel.find();
+    async get(filter = null){
+        return apparelModel.find(filter);
     }
 
     async getOne(params){

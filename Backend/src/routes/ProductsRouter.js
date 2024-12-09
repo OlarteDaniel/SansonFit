@@ -14,6 +14,8 @@ class ProductsRouter extends BaseRouter{
 
         this.get('/:id',['PUBLIC'],productsController.getOne);
 
+        this.get('/apparel/:size',['PUBLIC'],apparelController.getAllBySize);
+
         this.get('/supplements/:flavor',['PUBLIC'],supplementController.getAllByFlavor);
 
         this.post('/apparel',['ADMIN'],upload.array('thumbnails',3),apparelController.createApparel);

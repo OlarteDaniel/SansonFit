@@ -7,6 +7,10 @@ export default class SupplementRepository{
         return this.dao.get();
     }
 
+    getAllBySize(size){
+        return this.dao.get({size:size});
+    }
+
     getByFlavor(flavor) {
         return this.dao.get({ flavor:flavor });
     }

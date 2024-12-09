@@ -8,7 +8,7 @@ export default class ApparelRepository{
     }
 
     getBySize(size) {
-        return this.dao.getOne({ size:size });
+        return this.dao.get({ size:size });
     }
 
     createApparel(apparel){
