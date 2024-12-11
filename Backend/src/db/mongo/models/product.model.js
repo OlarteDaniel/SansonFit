@@ -2,12 +2,7 @@ import mongoose from 'mongoose';
 
 const collection = 'Products';
 
-const baseOptions = {
-    discriminatorKey : 'type', //Clave para distinguir tipos
-    collection: collection //Todos los documentos van a esta coleccion
-}
-
-const baseSchema = new mongoose.Schema({
+const schema = new mongoose.Schema({
     title:{
         type:String,
         required: true
@@ -29,10 +24,6 @@ const baseSchema = new mongoose.Schema({
         type:Number,
         default: 0
     },
-    status:{
-        type:Boolean,
-        default:true
-    },
     stock:{
         type:Number,
         default: 1
@@ -46,8 +37,9 @@ const baseSchema = new mongoose.Schema({
         type:Array,
         default:[]
     }
-}, baseOptions);
+    
+});
 
-const productModel = mongoose.model(collection,baseSchema);
+const productModel = mongoose.model(collection,schema);
 
 export default productModel;

@@ -7,12 +7,16 @@ export default class SupplementRepository{
         return this.dao.get();
     }
 
-    getAllBySize(size){
-        return this.dao.get({size:size});
+    getAllByFlavor(flavor) {
+        return this.dao.get({ flavor:flavor });
     }
 
-    getByFlavor(flavor) {
-        return this.dao.get({ flavor:flavor });
+    getAllByProduct(productId){
+        return this.dao.get({productId:productId});
+    }
+
+    getById(id){
+        return this.dao.getOne({_id:id})
     }
 
     createSupplement(supplement){

@@ -1,19 +1,24 @@
 import mongoose from 'mongoose';
-import productModel from './product.model.js';
 
 const collection = 'Apparel';
 
 const schema = new mongoose.Schema({
+    productId:{
+        type: mongoose.SchemaTypes.ObjectId,
+        index:true,
+        ref:'Products',
+        required:true
+    },
     size: {
         type: String,
         required: true
     },
-    material: {
+    color: {
         type: String,
         required: true
     }
 });
 
-const apparelModel = productModel.discriminator(collection,schema);
+const apparelModel = mongoose.model(collection,schema);
 
 export default apparelModel;

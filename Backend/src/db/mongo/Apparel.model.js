@@ -18,4 +18,8 @@ export default class ApparelDAO {
         return apparelModel.updateOne({_id:id},{$set:apparel});
     }
 
+    async delete(id){
+        return apparelModel.deleteOne(id);
+    }
+
 }

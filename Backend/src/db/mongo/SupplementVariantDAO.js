@@ -1,4 +1,4 @@
-import supplementModel from "./models/supplement.model.js";
+import supplementModel from "./models/supplementVariants.model.js";
 
 export default class SupplementDAO{
 
@@ -16,6 +16,10 @@ export default class SupplementDAO{
 
     async update(id,supplement){
         return supplementModel.updateOne({_id:id},{$set:supplement});
+    }
+
+    async delete(id){
+        return supplementModel.deleteOne(id);
     }
 
 }
