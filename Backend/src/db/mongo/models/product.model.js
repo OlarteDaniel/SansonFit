@@ -26,12 +26,16 @@ const schema = new mongoose.Schema({
     },
     stock:{
         type:Number,
-        default: 1
+        default: 0
     },
     category:{
         type:mongoose.SchemaTypes.ObjectId,
         ref: 'Categories',
         required:true
+    },
+    globalStatus:{
+        type: Boolean,
+        default: true
     },
     thumbnails:{
         type:Array,

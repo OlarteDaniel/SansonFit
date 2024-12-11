@@ -1,6 +1,6 @@
 import supplementModel from "./models/supplementVariants.model.js";
 
-export default class SupplementDAO{
+export default class SupplementVariantDAO{
 
     async get(filter = null){
         return supplementModel.find(filter);

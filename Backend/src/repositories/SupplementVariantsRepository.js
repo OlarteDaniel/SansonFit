@@ -1,4 +1,4 @@
-export default class SupplementRepository{
+export default class SupplementVariantsRepository{
     constructor(dao){
         this.dao = dao
     }
