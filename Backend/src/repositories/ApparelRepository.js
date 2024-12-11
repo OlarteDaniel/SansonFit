@@ -7,8 +7,20 @@ export default class ApparelRepository{
         return this.dao.get();
     }
 
-    getBySize(size) {
+    getAllBySize(size) {
         return this.dao.get({ size:size });
+    }
+
+    getAllByProduct(productId){
+        return this.dao.get({productId:productId});
+    }
+
+    getAllByProductSizes(productId,size){
+        return this.dao.get({productId:productId,size:size});
+    }
+
+    getById(id){
+        return this.dao.getOne({_id:id});
     }
 
     createApparel(apparel){

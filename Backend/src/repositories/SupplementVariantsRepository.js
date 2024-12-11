@@ -15,8 +15,12 @@ export default class SupplementRepository{
         return this.dao.get({productId:productId});
     }
 
+    getAllByProductFlavors(productId,flavor){
+        return this.dao.get({productId:productId,flavor:flavor});
+    }
+
     getById(id){
-        return this.dao.getOne({_id:id})
+        return this.dao.getOne({_id:id});
     }
 
     createSupplement(supplement){
