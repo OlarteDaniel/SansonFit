@@ -1,6 +1,22 @@
 import mongoose from 'mongoose';
 import {productService,supplementVariantsService} from '../service/service.js'
 
+const getAll = async(req,res) =>{
+    try {
+        
+        const supplementeVariants = await supplementVariantsService.getAll();
+        if(supplementeVariants.length === 0){
+            return res.sendNotFound('There are no registered Variants');
+        }
+
+        res.sendSuccessWithPayload(supplementeVariants);
+
+    } catch (error) {
+        req.logger.error(`Error getting supplement variants: ${error}`);
+        return res.sendServerError('An error occurred while fetching supplement variants.');
+    }
+}
+
 const getAllByFlavor = async(req,res) =>{
     const flavor = req.params.flavor;
     if (!flavor) {
@@ -109,9 +125,37 @@ const updateFlavor = async(req,res)=>{
     }
 }
 
+const deleteFlavor = async(req,res)=>{
+    const fid = req.params.id;
 
+    if(!mongoose.isValidObjectId(fid)){
+        return res.sendBadRequest('Invalid Flavor ID');
+    }
+
+    const supplement = await supplementVariantsService.getById(fid);
+    if(!supplement){
+        return res.sendNotFound('flavor not found');
+    }
+
+    try {
+        
+        const result = await supplementVariantsService.deleteSupplement(fid);
+        if(!result){
+            return res.sendBadRequest('Could not delete flavor');
+        }
+
+        res.sendSuccess(`supplement '${supplement.flavor}' deleted successfully`);
+
+    } catch (error) {
+        req.logger.error(`Error deleting supplement: ${error}`);
+        return res.sendServerError('An error occurred while deleting the supplement');
+    }
+
+}
 export default {
     addFlavor,
+    deleteFlavor,
+    getAll,
     getAllByFlavor,
     updateFlavor
 }

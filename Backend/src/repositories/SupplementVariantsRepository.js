@@ -31,4 +31,8 @@ export default class SupplementVariantsRepository{
         return this.dao.update(id,supplement);
     }
 
+    deleteSupplement(id){
+        return this.dao.delete({_id:id});
+    }
+
 }

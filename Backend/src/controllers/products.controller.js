@@ -19,8 +19,11 @@ const getAll = async(req,res) =>{
 const getOneById = async(req,res) =>{
     const pid = req.params.id;
 
-    const product = await productService.getProductsById(pid);
+    if (!mongoose.isValidObjectId(pid)) {
+        return res.sendBadRequest('Invalid ID format');
+    }
 
+    const product = await productService.getProductsById(pid);
     if(!product){
         res.sendNotFound('Product not found');
     }
