@@ -7,7 +7,7 @@ export default class SupplementVariantDAO{
     }
 
     async getOne(params){
-        return supplementModel.findOne(params);
+        return supplementModel.findOne(params).populate('productId');;
     }
 
     async create(supplement){
