@@ -18,26 +18,6 @@ class ProductsRouter extends BaseRouter{
         this.put('/:id',['ADMIN'],productsController.updateProduct);
 
         this.delete('/:id',['ADMIN'],productsController.eliminate);
-
-        
-        // this.get('/supplements/',['PUBLIC'],supplementVariantController.getAll);
-
-        // this.get('/supplements/:flavor',['PUBLIC'],supplementVariantController.getAllByFlavor);
-        
-        // this.post('/supplements/:id',['ADMIN'],supplementVariantController.addFlavor);
-
-        // this.put('/supplements/:id',['ADMIN'],supplementVariantController.updateFlavor);
-
-        // this.delete('/supplements/:id',['ADMIN'],supplementVariantController.deleteFlavor);
-
-
-        // this.get('/:code',['PUBLIC'],productsController.getOneByCode);
-
-        // this.get('/apparel/:size',['PUBLIC'],apparelController.getAllBySize);
-
-        // this.post('/apparel',['ADMIN'],upload.array('thumbnails',3),apparelController.createApparel);
-
-        // this.put('/apparel/:id',['ADMIN'],apparelController.updateApparel);
     }
 
 }

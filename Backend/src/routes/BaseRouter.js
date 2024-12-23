@@ -19,22 +19,22 @@ export default class BaseRouter{
 
     get(path,policies,...callbacks){
         if(!policies || !Array.isArray(policies))throw new Error('Policies required for endpoint' + path);
-        this.router.get(path,this.generateCustomResponses,passportCall('current'),addLogger,executePolicies(policies),this.applyCallbacks(callbacks));
+        this.router.get(path,addLogger,this.generateCustomResponses,passportCall('current'),executePolicies(policies),this.applyCallbacks(callbacks));
     }
 
     post(path,policies,...callbacks){
         if(!policies || !Array.isArray(policies))throw new Error('Policies required for endpoint' + path);
-        this.router.post(path,this.generateCustomResponses,passportCall('current'),addLogger,executePolicies(policies),this.applyCallbacks(callbacks));
+        this.router.post(path,addLogger,this.generateCustomResponses,passportCall('current'),executePolicies(policies),this.applyCallbacks(callbacks));
     }
 
     put(path,policies,...callbacks){
         if(!policies || !Array.isArray(policies))throw new Error('Policies required for endpoint' + path);
-        this.router.put(path,this.generateCustomResponses,passportCall('current'),addLogger,executePolicies(policies),this.applyCallbacks(callbacks));
+        this.router.put(path,addLogger,this.generateCustomResponses,passportCall('current'),executePolicies(policies),this.applyCallbacks(callbacks));
     }
 
     delete(path,policies,...callbacks){
         if(!policies || !Array.isArray(policies))throw new Error('Policies required for endpoint' + path);
-        this.router.delete(path,this.generateCustomResponses,passportCall('current'),addLogger,executePolicies(policies),this.applyCallbacks(callbacks));
+        this.router.delete(path,addLogger,this.generateCustomResponses,passportCall('current'),executePolicies(policies),this.applyCallbacks(callbacks));
     }
 
     generateCustomResponses(req,res,next){
@@ -64,7 +64,7 @@ export default class BaseRouter{
         }
 
         res.sendUnauthorized = (reason) => {
-
+            
             req.logger.warning(`[${req.method}] ${req.originalUrl} - Response: 401 - ${String(reason)}`);
             res.status(401).send({ status: 'error', error: reason });
         }
