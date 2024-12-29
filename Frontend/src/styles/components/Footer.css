@@ -1,0 +1,30 @@
+.footer{
+    position: fixed;
+    bottom: 0;
+    padding: 1.5rem 2rem;
+    background-color: #00457E;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    font-family: 'Smack Laideth';
+}
+
+.information,
+.contacts{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.title{
+    color: #fff;
+    font-size: 1.2em;
+}
+
+.details{
+    text-align: center;
+    color: #fff;
+    font-size: 1em;
+}
+
