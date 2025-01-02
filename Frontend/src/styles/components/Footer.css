@@ -1,5 +1,5 @@
-.footer{
-    position: fixed;
+.footer {
+    width: 100%;
     bottom: 0;
     padding: 1.5rem 2rem;
     background-color: #00457E;
@@ -7,24 +7,132 @@
     flex-direction: column;
     gap: 2rem;
     font-family: 'Smack Laideth';
+    font-size: 20px;
 }
 
 .information,
-.contacts{
+.contacts,
+.networks {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 10px; 
 }
 
-.title{
-    color: #fff;
-    font-size: 1.2em;
-}
-
-.details{
-    text-align: center;
+.title {
     color: #fff;
     font-size: 1em;
 }
 
+.details {
+    width: 80vw;
+    text-align: center;
+    color: #fff;
+    font-size: 0.9em;
+}
+
+.address,
+.phone,
+.mail {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.position-icon,
+.phone-icon,
+.mail-icon {
+    font-size: 1em;
+}
+
+.nets {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10vw; 
+}
+
+.instagram-icon,
+.facebook-icon,
+.whatsapp-icon {
+    font-size: 1.5em;
+}
+
+.whatsapp-icon {
+    color: #25D366;
+}
+
+.facebook-icon {
+    color: #1877F2;
+}
+
+.instagram-icon {
+    color: #DD2A7B;
+}
+
+/* Media Queries */
+@media (min-width: 480px) {
+    .footer {
+        font-size: 22px;
+    }
+}
+
+@media (min-width: 768px) {
+    .footer {
+        padding: 0.5rem 3rem;
+        font-size: 24px;
+        display: grid;
+        grid-template-rows: 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        align-items: start;
+    }
+
+    .information {
+        grid-column: 1 / -1;
+        grid-row: 1 / 2;
+    }
+
+    .contacts {
+        grid-column: 1 / 2;
+        grid-row: 2 / 3;
+    }
+
+    .networks {
+        grid-column: 2 / 3;
+        grid-row: 2 / 3;
+    }
+
+    .details {
+        width: 100%;
+    }
+
+    .nets {
+        gap: 6vw;
+    }
+
+    .instagram-icon,
+    .facebook-icon,
+    .whatsapp-icon {
+        font-size: 2em;
+    }
+}
+
+@media (min-width: 1024px) {
+    .footer {
+        padding: 0.5rem 4rem;
+        font-size: 28px;
+    }
+
+    .nets {
+        gap: 4vw;
+    }
+
+    .instagram-icon,
+    .facebook-icon,
+    .whatsapp-icon {
+        font-size: 2.5em; 
+    }
+}

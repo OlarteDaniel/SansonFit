@@ -16,10 +16,10 @@ const Footer = () => {
 
             <div className="information">
                 <div className="title">
-                    <h2>Sanson Fit</h2>
+                    <h2>SansonFit</h2>
                 </div>
 
-                <div className="details">
+                <div className="details info">
                     <p>
                     Lorem ipsum dolor sit amet consectetur 
                     adipisicing elit. Architecto perferendis 
@@ -36,26 +36,33 @@ const Footer = () => {
                     <h2>Contactos</h2>
                 </div>
 
-                <div className="details">
+                <div className="details data">
                     <div className="address">
-                        <GiPositionMarker/>
+                        <GiPositionMarker className='position-icon'/>
                         <p>8819 Ohio St. South Gate</p>
                     </div>
 
                     <div className="phone">
-                        <FaPhoneAlt/> 
+                        <FaPhoneAlt className='phone-icon'/> 
                         <p>+1 386-688-3295</p>                       
                     </div>
 
                     <div className="mail">
-                        <MdEmail/>
+                        <MdEmail className='mail-icon'/>
                         <p>SansonFit@gmail.com</p>
                     </div>
                 </div>
             </div>
 
             <div className="networks">
-
+                <div className="title">
+                    <h2>Redes</h2>
+                </div>
+                <div className="details nets">
+                    <button><SiInstagram className='instagram-icon'/></button>
+                    <button><SiFacebook className='facebook-icon'/></button>
+                    <button><SiWhatsapp className='whatsapp-icon'/></button>
+                </div>
             </div>
 
         </footer>

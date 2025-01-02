@@ -1,73 +1,113 @@
-.navBar{
+/* === Estilos Generales === */
+.navBar {
+    position: fixed;
+    width: 100%;
     padding: 1.5rem 2rem;
-    background-color: #00457E;
+    background-color: transparent; 
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-size: 20px;
+    transition: background-color 0.3s ease-in-out, padding 0.3s ease-in-out;
 }
 
-.link-logo{
+.navBar.abajo {
+    padding: 2rem 3rem;
+    background-color: #00457E;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.superior {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.link-logo {
+    margin: 0 auto;
     display: flex;
 }
 
-.logo{
+.logo {
     width: 50vw;
     max-width: 350px;
 }
 
-button{
+.deactivate {
+    display: none;
+}
+
+button {
     display: flex;
     background: none;
-	border: none;
+    border: none;
     font-size: 1.5em;
     cursor: pointer;
+    transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .burger-icon,
-.cart-icon,
+.cart-icon {
+    color: #00457E;
+}
+
 .user-icon,
-.x-icon{
+.x-icon {
     color: #fff;
-    transition: .3s;
+}
+
+.light {
+    color: #fff;  
 }
 
 button:hover .burger-icon,
-button:hover .cart-icon{
+button:hover .cart-icon {
     transform: scale(1.2);
-    color: #02315E;
-} 
+    color: #02315E; 
+}
 
-.nav-container{
+button:hover .user-icon,
+button:hover .x-icon {
+    transform: scale(1.2);
+    color: #00335F;
+}
+
+.button-user {
+    display: none;
+}
+
+/* === Barra de Navegación Móvil === */
+.nav-container {
     width: 35vw;
     min-width: 250px;
     height: 100vh;
     padding: 1.5rem 2rem;
+    position: fixed;
     top: 0;
     left: 0;
-    position: fixed;
     display: flex;
-    gap: 3rem;
     flex-direction: column;
+    gap: 3rem;
     background-color: #00457E;
     transform: translateX(-100%);
-    transition: .5s ease-in;
+    transition: transform 0.5s ease-in-out;
 }
 
-.nav_active{
-    box-shadow: 0 0 0 100vmax rgba(0, 0, 0, .5);
+.nav_active {
+    z-index: 10;
+    box-shadow: 0 0 0 100vmax rgba(0, 0, 0, 0.5);
     transform: translateX(0);
-    
 }
 
-.nav-icons{
+.nav-icons {
     padding: 1rem;
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid #fff;
 }
 
-.nav-list{
+.nav-list {
     display: flex;
     flex-direction: column;
     list-style: none;
@@ -75,27 +115,93 @@ button:hover .cart-icon{
     gap: 2rem;
     color: #fff;
     font-family: 'Smack Laideth';
-    font-size: 1.2em;
+    font-size: 1em;
+    text-align: center;
 }
 
-@media (min-width: 480px){
-    .navBar{
-        font-size: 24px;
-    }
+.nav-link {
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    transition: color 0.3s ease;
 }
 
-@media (min-width:768px){
+.nav-link:hover {
+    text-decoration: underline;
+}
 
-    .logo{
-        width: 180px;
-    }
+/* === Media Queries === */
 
+/* === Para pantallas mayores a 480px === */
+@media (min-width: 480px) {
+    .navBar {
+        font-size: 22px;
+    }   
+}
+
+/* === Para pantallas mayores a 768px === */
+@media (min-width: 768px) {
     .burger-icon,
-    .nav-icons{
+    .nav-icons {
         display: none;
     }
 
-    .nav-container{
+    .nav_active {
+        display: none;
+    }
+
+    .navBar {
+        padding: 0.5rem 3rem;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .navBar.abajo {
+        padding: 1rem 3rem;
+    }
+
+    .superior {
+        align-items: flex-end;
+        justify-content: space-between;
+    }
+
+    .link-logo {
+        margin: 0;
+    }
+
+    .logo {
+        width: 30vw;
+    }
+
+    button {
+        font-size: 1em;
+    }
+
+    .button-user {
+        display: flex;
+    }
+
+    .user-icon {
+        color: #00457E;
+    }
+
+    button:hover .user-icon {
+        transform: scale(1.2);
+        color: #02315E; 
+    }
+
+    .buttons {
+        margin: 0;
+        display: flex;
+        gap: 50px;
+    }
+
+    .lower {
+        width: 100%;
+    }
+
+    .nav-container {
         padding: 0;
         position: relative;
         width: 100%;
@@ -103,45 +209,38 @@ button:hover .cart-icon{
         transform: translateX(0);
         transition: none;
         align-items: center;
-        background: none;    
-}
+        background: none;
+    }
 
-    .nav-list{
+    .nav-list {
+        width: 100%;
         flex-direction: row;
-        font-size: 1em;
         align-items: center;
-        justify-content: center;
-        
-    }
-    
-    .button-cart{
-        display: flex;
-        align-items: center;
+        justify-content: space-around;
+        color: #00457E;
     }
 
+    .light {
+        color: #fff;
+    }
 }
 
-@media (min-width:1024px){
-    .navBar{
+/* === Para pantallas mayores a 1024px === */
+@media (min-width: 1024px) {
+    .navBar {
+        padding: 0.5rem 4rem;
         font-size: 28px;
     }
 
-    .nav-list{
-        gap: 3em;
-    }
-
-    .logo{
-        width: 200px;
+    .navBar.abajo {
+        padding: 1rem 4rem;
     }
 }
 
-@media (min-width:1280px){
-
-    .nav-list{
-        gap: 4em;
-    }
-
-    .logo{
-        width: 250px;
+/* === Para pantallas mayores a 1280px === */
+@media (min-width: 1280px) {
+    .nav-list {
+        justify-content: flex-end;
+        gap: 3em;
     }
 }
