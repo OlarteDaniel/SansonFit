@@ -10,9 +10,9 @@
     font-size: 20px;
 }
 
-.information,
-.contacts,
-.networks {
+.footer .information,
+.footer .contacts,
+.footer .networks {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -20,55 +20,66 @@
     gap: 10px; 
 }
 
-.title {
+.footer .title {
     color: #fff;
     font-size: 1em;
 }
 
-.details {
+.footer .title h2{
+    font-weight: 100;
+}
+
+.footer .details {
     width: 80vw;
     text-align: center;
     color: #fff;
     font-size: 0.9em;
 }
 
-.address,
-.phone,
-.mail {
+.footer .address,
+.footer .phone,
+.footer .mail {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
 }
 
-.position-icon,
-.phone-icon,
-.mail-icon {
+.footer .position-icon,
+.footer .phone-icon,
+.footer .mail-icon {
     font-size: 1em;
 }
 
-.nets {
+.footer .nets {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10vw; 
 }
 
-.instagram-icon,
-.facebook-icon,
-.whatsapp-icon {
+.footer button{
+    background: none;
+    border: none;
     font-size: 1.5em;
+    cursor: pointer;
 }
 
-.whatsapp-icon {
+.footer .instagram-icon,
+.footer .facebook-icon,
+.footer .whatsapp-icon {
+    font-size: 1em;
+}
+
+.footer .whatsapp-icon {
     color: #25D366;
 }
 
-.facebook-icon {
+.footer .facebook-icon {
     color: #1877F2;
 }
 
-.instagram-icon {
+.footer .instagram-icon {
     color: #DD2A7B;
 }
 
@@ -90,32 +101,32 @@
         align-items: start;
     }
 
-    .information {
+    .footer .information {
         grid-column: 1 / -1;
         grid-row: 1 / 2;
     }
 
-    .contacts {
+    .footer .contacts {
         grid-column: 1 / 2;
         grid-row: 2 / 3;
     }
 
-    .networks {
+    .footer .networks {
         grid-column: 2 / 3;
         grid-row: 2 / 3;
     }
 
-    .details {
+    .footer .details {
         width: 100%;
     }
 
-    .nets {
+    .footer .nets {
         gap: 6vw;
     }
 
-    .instagram-icon,
-    .facebook-icon,
-    .whatsapp-icon {
+    .footer .instagram-icon,
+    .footer .facebook-icon,
+    .footer .whatsapp-icon {
         font-size: 2em;
     }
 }
@@ -126,13 +137,13 @@
         font-size: 28px;
     }
 
-    .nets {
+    .footer .nets {
         gap: 4vw;
     }
 
-    .instagram-icon,
-    .facebook-icon,
-    .whatsapp-icon {
+    .footer .instagram-icon,
+    .footer .facebook-icon,
+    .footer .whatsapp-icon {
         font-size: 2.5em; 
     }
 }

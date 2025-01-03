@@ -17,28 +17,28 @@
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.superior {
+.navBar .superior {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.link-logo {
+.navBar .link-logo {
     margin: 0 auto;
     display: flex;
 }
 
-.logo {
+.navBar .logo {
     width: 50vw;
     max-width: 350px;
 }
 
-.deactivate {
+.navBar .deactivate {
     display: none;
 }
 
-button {
+.navBar button {
     display: flex;
     background: none;
     border: none;
@@ -47,38 +47,38 @@ button {
     transition: transform 0.3s ease, color 0.3s ease;
 }
 
-.burger-icon,
-.cart-icon {
+.navBar .burger-icon,
+.navBar .cart-icon {
     color: #00457E;
 }
 
-.user-icon,
-.x-icon {
+.navBar .user-icon,
+.navBar .x-icon {
     color: #fff;
 }
 
-.light {
+.navBar .light {
     color: #fff;  
 }
 
-button:hover .burger-icon,
-button:hover .cart-icon {
+.navBar button:hover .burger-icon,
+.navBar button:hover .cart-icon {
     transform: scale(1.2);
     color: #02315E; 
 }
 
-button:hover .user-icon,
-button:hover .x-icon {
+.navBar button:hover .user-icon,
+.navBar button:hover .x-icon {
     transform: scale(1.2);
     color: #00335F;
 }
 
-.button-user {
+.navBar .button-user {
     display: none;
 }
 
 /* === Barra de Navegación Móvil === */
-.nav-container {
+.navBar .nav-container {
     width: 35vw;
     min-width: 250px;
     height: 100vh;
@@ -94,20 +94,20 @@ button:hover .x-icon {
     transition: transform 0.5s ease-in-out;
 }
 
-.nav_active {
+.navBar .nav_active {
     z-index: 10;
     box-shadow: 0 0 0 100vmax rgba(0, 0, 0, 0.5);
     transform: translateX(0);
 }
 
-.nav-icons {
+.navBar .nav-icons {
     padding: 1rem;
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid #fff;
 }
 
-.nav-list {
+.navBar .nav-list {
     display: flex;
     flex-direction: column;
     list-style: none;
@@ -119,7 +119,7 @@ button:hover .x-icon {
     text-align: center;
 }
 
-.nav-link {
+.navBar .nav-link {
     text-align: center;
     text-decoration: none;
     color: inherit;
@@ -127,7 +127,7 @@ button:hover .x-icon {
     transition: color 0.3s ease;
 }
 
-.nav-link:hover {
+.navBar .nav-link:hover {
     text-decoration: underline;
 }
 
@@ -142,12 +142,12 @@ button:hover .x-icon {
 
 /* === Para pantallas mayores a 768px === */
 @media (min-width: 768px) {
-    .burger-icon,
-    .nav-icons {
+    .navBar .burger-icon,
+    .navBar .nav-icons {
         display: none;
     }
 
-    .nav_active {
+    .navBar .nav_active {
         display: none;
     }
 
@@ -161,47 +161,47 @@ button:hover .x-icon {
         padding: 1rem 3rem;
     }
 
-    .superior {
+    .navBar .superior {
         align-items: flex-end;
         justify-content: space-between;
     }
 
-    .link-logo {
+    .navBar .link-logo {
         margin: 0;
     }
 
-    .logo {
+    .navBar .logo {
         width: 30vw;
     }
 
-    button {
+    .navBar button {
         font-size: 1em;
     }
 
-    .button-user {
+    .navBar .button-user {
         display: flex;
     }
 
-    .user-icon {
+    .navBar .user-icon {
         color: #00457E;
     }
 
-    button:hover .user-icon {
+    .navBar button:hover .user-icon {
         transform: scale(1.2);
         color: #02315E; 
     }
 
-    .buttons {
+    .navBar .buttons {
         margin: 0;
         display: flex;
         gap: 50px;
     }
 
-    .lower {
+    .navBar .lower {
         width: 100%;
     }
 
-    .nav-container {
+    .navBar .nav-container {
         padding: 0;
         position: relative;
         width: 100%;
@@ -212,7 +212,7 @@ button:hover .x-icon {
         background: none;
     }
 
-    .nav-list {
+    .navBar .nav-list {
         width: 100%;
         flex-direction: row;
         align-items: center;
@@ -220,7 +220,7 @@ button:hover .x-icon {
         color: #00457E;
     }
 
-    .light {
+    .navBar .light {
         color: #fff;
     }
 }
@@ -239,7 +239,7 @@ button:hover .x-icon {
 
 /* === Para pantallas mayores a 1280px === */
 @media (min-width: 1280px) {
-    .nav-list {
+    .navBar .nav-list {
         justify-content: flex-end;
         gap: 3em;
     }

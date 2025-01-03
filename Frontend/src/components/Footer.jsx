@@ -16,7 +16,7 @@ const Footer = () => {
 
             <div className="information">
                 <div className="title">
-                    <h2>SansonFit</h2>
+                    <h2>Sanson Fit</h2>
                 </div>
 
                 <div className="details info">

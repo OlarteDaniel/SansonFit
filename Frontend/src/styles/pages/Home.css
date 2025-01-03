@@ -1,0 +1,61 @@
+.home{
+    font-family: 'Smack Laideth';
+    font-size: 16px;
+}
+
+.home .presentation{
+    background-color: #F4F4F4;
+}
+
+.home .presentation .products{
+    display: none;
+}
+
+.home .presentation{
+    padding: 6rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.home .presentation .welcome h2{
+    font-style: italic;
+    font-weight: 100;
+    color: #0085CA;
+    text-align: center;
+}
+
+.home .presentation .details{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .5em;
+}
+
+.home .presentation .details h1{
+    font-style: italic;
+    font-weight: 100;
+    color: #00457E
+}
+
+.home .presentation .details p{
+    color: #333333;
+}
+
+.home .presentation .details button{
+    padding: .5em;
+    background-color: #00457E;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    font-family: 'Smack Laideth';
+    font-weight: 100;
+    font-size: 1em;
+    transition: .3s;
+}
+
+.home .presentation .details button:hover{
+    transform: scale(1.2);
+    background-color: #0085CA;
+}
