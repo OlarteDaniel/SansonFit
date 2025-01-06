@@ -68,7 +68,7 @@
 .footer .instagram-icon,
 .footer .facebook-icon,
 .footer .whatsapp-icon {
-    font-size: 1em;
+    font-size: 1.5em;
 }
 
 .footer .whatsapp-icon {
@@ -121,13 +121,7 @@
     }
 
     .footer .nets {
-        gap: 6vw;
-    }
-
-    .footer .instagram-icon,
-    .footer .facebook-icon,
-    .footer .whatsapp-icon {
-        font-size: 2em;
+        gap: 5vw;
     }
 }
 
@@ -139,11 +133,5 @@
 
     .footer .nets {
         gap: 4vw;
-    }
-
-    .footer .instagram-icon,
-    .footer .facebook-icon,
-    .footer .whatsapp-icon {
-        font-size: 2.5em; 
     }
 }

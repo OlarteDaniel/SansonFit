@@ -7,8 +7,8 @@ import { FaShoppingCart } from "react-icons/fa";
 import { BsXLg } from "react-icons/bs";
 
 import '../styles/components/NavBar.css';
-import Logotipo from '../assets/img/Logotipo.png';
-import LogotipoDeactivate from '../assets/img/LogotipoDeactivate.png' 
+import Logotipo from '../assets/img/logos/Logotipo.png';
+import LogotipoDeactivate from '../assets/img/logos/LogotipoDeactivate.png' 
 
 const NavBar = () => {
     const [menuActive, setMenuActive] = useState(false);
