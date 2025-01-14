@@ -1,0 +1,21 @@
+.button-cart {
+    position: relative;
+    padding-right: 5px;
+}
+
+.stock {
+    position: absolute; 
+    top: -12px;  
+    right: -10px; 
+    background-color: #00457E; 
+    color: white;
+    font-size: .5em;  
+    padding: 2px 6px;
+    border-radius: 50%; 
+}
+
+.button-cart .stock.light{
+    color: black;
+    font-weight: 600;
+    background-color: #fff;
+}

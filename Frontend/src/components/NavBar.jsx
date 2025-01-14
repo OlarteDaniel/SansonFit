@@ -1,32 +1,24 @@
 import React, { useState,useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import { FaUser } from "react-icons/fa6";
 import { RxHamburgerMenu } from "react-icons/rx";
-import { FaShoppingCart } from "react-icons/fa";
 import { BsXLg } from "react-icons/bs";
 
-import '../styles/components/NavBar.css';
+import Cart from './widgets/Cart';
+import User from './widgets/User';
+import useScroll from '../hooks/useScroll';
+
 import Logotipo from '../assets/img/logos/Logotipo.png';
 import LogotipoDeactivate from '../assets/img/logos/LogotipoDeactivate.png' 
 
+import '../styles/components/NavBar.css';
+
 const NavBar = () => {
     const [menuActive, setMenuActive] = useState(false);
-    const [isScrolled, setIsScrolled] = useState(false);
 
     const toggleMenu = () => setMenuActive(!menuActive);
 
-    useEffect(() =>{
-        const handleScroll = () =>{
-            setIsScrolled(window.scrollY > 0);
-        }
-
-        window.addEventListener('scroll',handleScroll);
-
-        return () =>{
-            window.removeEventListener('scroll',handleScroll);
-        }
-    },[]);
+    const isScrolled = useScroll();
 
     return (
         <header className={`navBar ${isScrolled ? 'abajo' : ''}`}>
@@ -41,31 +33,29 @@ const NavBar = () => {
                 </Link>
 
                 <div className="buttons">
-                    <button className="button-cart">
-                        <FaShoppingCart className={`cart-icon ${isScrolled ? 'light' : ''}`} />
-                    </button>
-                    <button className="button-user">
-                        <FaUser className={`user-icon ${isScrolled ? 'light' : ''}`} />
-                    </button>
+                    <Cart/>
+
+                    <User ButtonClass="button-user"/>
                 </div>
             </div>
 
             <nav className={`nav-container ${menuActive ? "nav_active" : ""}`}>
                 <div className="nav-icons">
-                    <button className="button-user-active">
-                        <FaUser className="user-icon"/>
-                    </button>
+
                     <button onClick={toggleMenu} className="button-x">
                         <BsXLg className="x-icon" />
                     </button>
+
+                    <User ButtonClass="button-user-active"/>
+                    
                 </div>
 
                 <ul className={`nav-list ${isScrolled ? 'light' : ''}`}>
                     <li>
-                        <Link to="#" className="nav-link">Inicio</Link>
+                        <Link to="/" className="nav-link">Inicio</Link>
                     </li>
                     <li>
-                        <Link to="#" className="nav-link">Productos</Link>
+                        <Link to="/products" className="nav-link">Productos</Link>
                     </li>
                     <li>
                         <Link to="#" className="nav-link">Sobre nosotros</Link>

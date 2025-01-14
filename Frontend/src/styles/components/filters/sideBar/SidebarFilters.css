@@ -1,0 +1,368 @@
+/* Estilos generales */
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] { 
+    appearance: none;
+    -moz-appearance:textfield; 
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 16px;
+}
+
+/* Botón de activación */
+.sidebar .btn {
+    width: 70%;
+    padding: 0.8em;
+    background-color: #005F9E;
+    border: none;
+    border-radius: 3px;
+    color: #fff;
+    cursor: pointer;
+    font-family: 'Smack Laideth';
+    font-size: 0.9em;
+    text-align: center;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+.sidebar .btn:hover {
+    background-color: #0085CA;
+    color: #00335F;
+}
+
+/* Contenedor del filtro */
+.sidebar .filter-container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 90vw;
+    height: 100vh;
+    min-width: 280px;
+    display: flex;
+    flex-direction: column;
+    background-color: #00457E;
+    transform: translateX(100%);
+    transition: transform 0.5s ease-in-out;
+}
+
+.sidebar .filter-active {
+    transform: translateX(0%);
+    z-index: 10;
+    box-shadow: 0 0 0 100vmax rgba(0, 0, 0, 0.5);
+}
+
+/* Header del filtro */
+.sidebar .filter-container .header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
+    border-bottom: 1px solid #fff;
+    position: relative;
+}
+
+.sidebar .filter-container .header p {
+    font-size: 2em;
+    color: #fff;
+}
+
+.sidebar .filter-container .header button {
+    position: absolute;
+    top: 34%;
+    right: 5%;
+    background: none;
+    border: none;
+    font-size: 1.3em;
+    font-weight: 600;
+    cursor: pointer;
+    color: #fff;
+}
+
+/* Cuerpo del filtro */
+.sidebar .filter-container .body {
+    display: flex;
+    flex-direction: column;
+    padding-left: 2rem;
+}
+
+.sidebar .filter-container .body button {
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem;
+    background: none;
+    border: none;
+    border-bottom: 1px solid #fff;
+    font-family: 'Smack Laideth';
+    font-size: 1.3em;
+    color: #fff;
+    text-align: start;
+}
+
+.sidebar .filter-container .body button .arrowUp-icon{
+    display: none;
+}
+
+/* Subfiltro de precios y tipos*/
+.sidebar .filter-container .body .prices,
+.sidebar .filter-container .body .types {
+    position: fixed;
+    right: 0;
+    width: 90vw;
+    height: 100vh;
+    min-width: 280px;
+    display: flex;
+    flex-direction: column;
+    background-color: #00457E;
+    transform: translateX(100%);
+    transition: transform 0.5s ease-in-out;
+}
+
+.sidebar .filter-container .body .prices-active,
+.sidebar .filter-container .body .types-active  {
+    transform: translateX(0%);
+    z-index: 10;
+}
+
+/* Header de precios y tipos*/
+.sidebar .filter-container .body .prices .header-prices,
+.sidebar .filter-container .body .types .header-types {
+    border-bottom: 1px solid #fff;
+}
+
+.sidebar .filter-container .body .prices .header-prices button,
+.sidebar .filter-container .body .types .header-types button  {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    gap: 5px;
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* Contenedor de precios y tipos*/
+.sidebar .filter-container .body .prices .body-prices,
+.sidebar .filter-container .body .types .body-types {
+    display: flex;
+    flex-direction: column;
+    padding-left: 2rem;
+}
+
+.sidebar .filter-container .body .prices .body-prices .inputbox,
+.sidebar .filter-container .body .types .body-types .inputbox{
+    padding: 2rem;
+    border-bottom: 1px solid #fff;
+    font-family: 'Smack Laideth';
+    font-size: 1.3em;
+    color: #fff;
+}
+
+.sidebar .filter-container .body .prices .body-prices .inputbox label,
+.sidebar .filter-container .body .types .body-types .inputbox label{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Input de precios */
+
+.sidebar .filter-container .body .prices .body-prices .inputbox .input {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 5px;
+    font-size: 1em;
+}
+
+.sidebar .filter-container .body .prices .body-prices .inputbox .input input {
+    margin: 0;
+    background: none;
+    width: 70%;
+    border: none;
+    outline: none;
+    caret-color: #fff;
+    color: #fff;
+    font-family: 'Smack Laideth';
+    font-size: 1em;
+}
+
+/* Botones de la parte inferior */
+.sidebar .filter-container .btns {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    height: 80px;
+    position: absolute;
+    bottom: 0;
+    border-top: 1px solid #fff;
+}
+
+.sidebar .filter-container .btns button {
+    padding: 0.5em 1em;
+    font-family: 'Smack Laideth';
+    font-size: 1em;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    transition: color 0.3s, background-color 0.3s;
+    color: #fff;
+}
+
+.sidebar .filter-container .btns .apply {
+    background-color: #005F9E;
+}
+
+.sidebar .filter-container .btns .apply:hover {
+    background-color: #0085CA;
+    color: #00335F;
+}
+
+.sidebar .filter-container .btns .trash {
+    background-color: #D32F2F;
+}
+
+.sidebar .filter-container .btns .trash:hover {
+    background-color: #B71C1C;
+    color: #FCE4EC;
+}
+
+/* Contenedor de tipos */
+
+.sidebar .filter-container .body .types .body-types .inputbox{
+    gap: 5px;
+    justify-content: flex-start;
+}
+
+/* Input de tipos */
+
+.sidebar .filter-container .body .types .body-types .inputbox label input {
+    width: 20px; 
+    height: 20px; 
+    appearance: none; 
+    border: 2px solid #005F9E; 
+    border-radius: 4px; 
+    background-color: #fff; 
+    transition: all 0.3s ease; 
+    cursor: pointer; 
+}
+
+.sidebar .filter-container .body .types .body-types .inputbox label input:checked::after {
+    content: '';
+    display: block;
+    width: 8px;
+    height: 8px;
+    margin: auto;
+    background: #333333;
+    position: relative;
+    top: 4px;
+}
+
+@media(min-width:480px){
+
+    .sidebar .filter-container .body,
+    .sidebar .filter-container .body .prices .body-prices,
+    .sidebar .filter-container .body .types .body-types{
+        padding-left: 1rem;
+    }
+
+    .sidebar .filter-container .header,
+    .sidebar .filter-container .body button,
+    .sidebar .filter-container .body .prices .body-prices .inputbox,
+    .sidebar .filter-container .body .types .body-types .inputbox {
+        padding: 1rem;
+    }
+    
+}
+
+@media(min-width:768px){
+
+    .sidebar {
+        font-size: 12px;
+    }
+
+    .sidebar .btn,
+    .sidebar .filter-active,
+    .sidebar .filter-container .header,
+    .sidebar .filter-container .body button .arrow-icon,
+    .sidebar .filter-container .body .prices-active,
+    .sidebar .filter-container .body .types-active ,
+    .sidebar .filter-container .body .prices .header-prices,
+    .sidebar .filter-container .body .prices .body-prices .inputbox,
+    .sidebar .filter-container .body .types .header-types,
+    .sidebar .filter-container .btns {
+        display: none;
+    }
+
+    .sidebar .filter-container,
+    .sidebar .filter-container .body .prices,
+    .sidebar .filter-container .body .types {
+        transform: none;
+        transition: none;
+    }
+
+    .sidebar .filter-container {
+        position: relative;
+        width: fit-content;
+        height: fit-content;
+        min-height: none;
+        background: none;
+    }
+
+    .sidebar .filter-container .body {
+        width: 40vh;
+        padding: 0;
+    }
+
+    .sidebar .filter-container .body button {
+        padding: 0;
+        border: none;
+        justify-content: space-between;
+        align-items: flex-end;
+        color: #333333;
+    }
+
+    .sidebar .filter-container .body button .arrowUp-icon{
+        display: block;
+        transform: rotate(180deg);
+    }
+
+    .sidebar .filter-container .body .arrowOne-active .arrowUp-icon,
+    .sidebar .filter-container .body .arrowTwo-active .arrowUp-icon{
+        transform: rotate(0deg);
+    }
+
+    .sidebar .filter-container .body .prices,
+    .sidebar .filter-container .body .types {
+        position: relative;
+        width: fit-content;
+        height: fit-content;
+        min-width: none;
+        background: none;
+    }
+
+    .sidebar .filter-container .body .prices .body-prices .inputbox,
+    .sidebar .filter-container .body .types .body-types .inputbox{
+        justify-content: flex-start;
+        padding: 0;
+        border: none;
+        color: #333333;
+    }
+
+    .sidebar .filter-container .body .types .body-types .inputbox label input:checked::after {
+        width: 6px;
+        height: 6px;
+        top: 5px;
+    }
+
+}

@@ -1,0 +1,17 @@
+.productsList{
+    padding: 5.5rem 2rem 2rem;
+    background-color: #F7F9FB;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    gap: 1em;
+    font-family: 'Smack Laideth';
+    font-size: 18px;
+}
+
+.productsList .title h2{
+    font-style: italic;
+    font-weight: 100;
+    color: #0085CA;
+    text-align: center;
+}

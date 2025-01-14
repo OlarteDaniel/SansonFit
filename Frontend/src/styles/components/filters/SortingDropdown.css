@@ -1,0 +1,90 @@
+.dropdown{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 16px;
+}
+
+.dropdown button{
+    width: 70%;
+    padding: 0.8em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: #005F9E;
+    border: none;
+    border-radius: 3px;
+    color: #fff;
+    cursor: pointer;
+    font-family: 'Smack Laideth';
+    font-size: 0.9em;
+    text-align: center;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+.dropdown button:hover {
+    background-color: #0085CA;
+    color: #00335F;
+}
+
+.dropdown .sortings{
+    display: none;
+    font-size: .9em;
+    padding: .4rem 1rem;
+    color: #333333;
+}
+
+.dropdown .sortings .radio{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.dropdown .sortings .label{
+    cursor: pointer;
+    transition: .3s;
+}
+
+label{
+    position: relative;
+}
+
+/* Regla general, excluyendo los elementos con la clase .activate */
+.dropdown .sortings .label:not(.activate)::before {
+    content: '-';
+    border-bottom: 2px solid #333333;
+    position: absolute;
+    width: 20%;
+    opacity: 0;
+    transition: .5s;
+}
+
+/* Regla para el efecto hover */
+.dropdown .sortings .label:not(.activate):hover::before {
+    opacity: 1;
+    width: 100%;
+}
+
+.dropdown .sortings .activate::before{
+    content: '-';
+    position: absolute;
+    left: .2em;
+}
+
+.dropdown .sortings .activate{
+    padding-left: 1em;
+    cursor: default;
+    color: #aaaaaa;
+}
+
+.dropdown .sortings-active{
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    gap: .2em;
+    list-style: none;
+    border: 1px solid #bbbbbb;
+}
+
+
