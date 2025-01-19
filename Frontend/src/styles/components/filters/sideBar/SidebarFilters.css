@@ -40,6 +40,7 @@ input[type=number] {
 
 /* Contenedor del filtro */
 .sidebar .filter-container {
+    z-index: 10;
     position: fixed;
     top: 0;
     right: 0;
@@ -55,7 +56,6 @@ input[type=number] {
 
 .sidebar .filter-active {
     transform: translateX(0%);
-    z-index: 10;
     box-shadow: 0 0 0 100vmax rgba(0, 0, 0, 0.5);
 }
 
@@ -128,7 +128,6 @@ input[type=number] {
 .sidebar .filter-container .body .prices-active,
 .sidebar .filter-container .body .types-active  {
     transform: translateX(0%);
-    z-index: 10;
 }
 
 /* Header de precios y tipos*/
@@ -270,6 +269,10 @@ input[type=number] {
 
 @media(min-width:480px){
 
+    .sidebar .btn{
+        width: 100%;
+    }
+
     .sidebar .filter-container .body,
     .sidebar .filter-container .body .prices .body-prices,
     .sidebar .filter-container .body .types .body-types{
@@ -287,9 +290,17 @@ input[type=number] {
 
 @media(min-width:768px){
 
-    .sidebar {
-        font-size: 12px;
+    .sidebar .filter-container{
+        z-index: 1;
     }
+
+    .sidebar .filter-container,
+    .sidebar .filter-container .body .prices,
+    .sidebar .filter-container .body .types {
+        transform: none;
+        transition: none;
+    }
+
 
     .sidebar .btn,
     .sidebar .filter-active,
@@ -304,24 +315,34 @@ input[type=number] {
         display: none;
     }
 
-    .sidebar .filter-container,
-    .sidebar .filter-container .body .prices,
-    .sidebar .filter-container .body .types {
-        transform: none;
-        transition: none;
+    .sidebar {
+        flex-direction: row;
+        font-size: 12px;
     }
 
     .sidebar .filter-container {
         position: relative;
         width: fit-content;
         height: fit-content;
-        min-height: none;
+        min-width: 0;
+        min-height: 0;
         background: none;
     }
 
     .sidebar .filter-container .body {
-        width: 40vh;
+        width: 25vw;
+        max-width: 180px;
         padding: 0;
+    }
+
+    .sidebar .filter-container .body{
+        padding-left: 0;
+    }
+
+    .sidebar .filter-container .body .prices .body-prices,
+    .sidebar .filter-container .body .types .body-types{
+        padding-left: .8rem;
+        max-width: 180px;
     }
 
     .sidebar .filter-container .body button {
@@ -337,6 +358,12 @@ input[type=number] {
         transform: rotate(180deg);
     }
 
+    .sidebar .filter-container .body .arrowOne,
+    .sidebar .filter-container .body .arrowTwo{
+        padding-bottom: .5em;
+        border-bottom: 2px solid #bebebe;
+    }
+
     .sidebar .filter-container .body .arrowOne-active .arrowUp-icon,
     .sidebar .filter-container .body .arrowTwo-active .arrowUp-icon{
         transform: rotate(0deg);
@@ -347,16 +374,26 @@ input[type=number] {
         position: relative;
         width: fit-content;
         height: fit-content;
-        min-width: none;
+        min-width: 0;
         background: none;
+    }
+
+    .sidebar .filter-container .body .prices .body-prices{
+        width: 25vw;
     }
 
     .sidebar .filter-container .body .prices .body-prices .inputbox,
     .sidebar .filter-container .body .types .body-types .inputbox{
+        width: fit-content;
         justify-content: flex-start;
         padding: 0;
         border: none;
         color: #333333;
+    }
+
+    .sidebar .filter-container .body .types .body-types{
+        padding-top: 1em;
+        gap: 1em;
     }
 
     .sidebar .filter-container .body .types .body-types .inputbox label input:checked::after {

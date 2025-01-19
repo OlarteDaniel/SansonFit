@@ -1,17 +1,83 @@
-.productsList{
+.products-list {
     padding: 5.5rem 2rem 2rem;
     background-color: #F7F9FB;
     display: grid;
-    grid-template-columns: auto;
-    grid-template-rows: auto;
     gap: 1em;
     font-family: 'Smack Laideth';
     font-size: 18px;
 }
 
-.productsList .title h2{
+.title-primary{
+    max-width: 180px;
+}
+
+.title-primary h2 {
     font-style: italic;
     font-weight: 100;
     color: #0085CA;
     text-align: center;
+    font-size: 1.8em;
+}
+
+/* Breakpoint: Tablets */
+@media (min-width: 480px) {
+    .products-list {
+        grid-template-columns: 1fr 2fr;
+    }
+
+    .title-primary {
+        grid-column: 1 / -1;
+    }
+
+    .filter-sidebar {
+        grid-column: 1 / 2;
+    }
+
+    .sorting-dropdown {
+        grid-column: 2 / 3;
+    }
+
+    .product-grid {
+        grid-column: 1 / -1;
+    }
+}
+
+/* Breakpoint: Desktop */
+@media (min-width: 768px) {
+    .products-list {
+        padding: 6.5rem 3rem 2rem;
+        grid-template-columns: 1fr 3fr;
+        grid-template-rows: auto 5fr;
+        align-items: start;
+        font-size: 16px;
+        column-gap: 1.2em;
+    }
+
+        
+    .title-primary {
+        grid-column: 1 / 2;
+        grid-row: 1;
+    }
+
+    .title-primary h2 {
+        padding-bottom: .2em;
+        border-bottom: 2px solid #bebebe;
+        text-align: start;
+    }
+
+    .filter-sidebar {
+        grid-column: 1 / 2;
+        grid-row: 2;
+    }
+
+    .sorting-dropdown {
+        grid-column: 2 / 3;
+        grid-row: 1;
+        justify-self: flex-end;
+    }
+
+    .product-grid {
+        grid-column: 2 / 3;
+        grid-row: 2;
+    }
 }

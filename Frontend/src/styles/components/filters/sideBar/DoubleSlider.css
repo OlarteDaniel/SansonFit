@@ -1,10 +1,10 @@
 .double-slider{
+    width: 90%; /* Si no devolver a 90*/
     display: none;
     font-size: 1em;
 }
 
 .slider-container{
-    width: 100%;
     height: 3.5em;
     position: relative;
 }
@@ -52,32 +52,34 @@
 
 .slider::-webkit-slider-thumb{
     -webkit-appearance: none;
-    height: 1.7em;
-    width: 1.7em;
+    height: 1em;
+    width: 1em;
     background-color: #005F9E;
     border-radius: 10px;
     pointer-events: auto;
-    margin-top: -9px;
+    margin-top: -4px;
 }
 
 .slider::-moz-range-thumb{
     -moz-appearance: none;
-    height: 1.7em;
-    width: 1.7em;
+    height: 1em;
+    width: 1em;
     cursor: pointer;
     border-radius: 50%;
     background-color: #005F9E;
     pointer-events: auto;
+    margin-top: -4px;
 }
 
 .slider::-ms-thumb{
     appearance: none;
-    height: 1.7em;
-    width: 1.7em;
+    height: 1em;
+    width: 1em;
     cursor: pointer;
     border-radius: 50%;
     background-color: #005F9E;
     pointer-events: auto;
+    margin-top: -4px;
 }
 
 .slider:active::-webkit-slider-thumb {
@@ -105,25 +107,30 @@
 
 .slider-values{
     display: flex;
+    flex-direction: column;
     gap: 1em;
 }
 
 .slider-values .inputbox-min,
 .slider-values .inputbox-max{
+    width: 100%;
     display: flex;
-    gap: .5em;
     align-items: center;
+    justify-content: space-between;
+    gap: .5em;
     font-size: 1.3em;
 }
 
 .slider-values .inputbox-min input,
 .slider-values .inputbox-max input{
+    width: 50px;
     border: 1px solid #333333;
     outline: none;
     caret-color: #00335F;
     color: #005F9E;
     font-family: 'Smack Laideth';
     font-size: 1.2em;
+    text-align: center;
 }
 
 @media(min-width:768px){

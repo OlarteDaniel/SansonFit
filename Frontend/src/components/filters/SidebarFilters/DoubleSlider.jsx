@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import '../../../styles/components/filters/sideBar/DoubleSlider.css';
 
 const DoubleSlider = () => {
-    const [minValue, setMinValue] = useState(10); 
+    const [minValue, setMinValue] = useState(0); 
     const [maxValue, setMaxValue] = useState(90); 
 
     const min = 0; 

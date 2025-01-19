@@ -3,9 +3,32 @@
     display: grid;
     grid-template-columns: 
         repeat(
-            auto-fit,
+            auto-fit, 
             minmax(200px, 1fr)
+        ); /* Flexibilidad en tamaños */
+    gap: 1.5em;
+    justify-items: center;
+}
+
+@media(min-width:480px){
+    .grid{
+        grid-template-columns: 
+        repeat(
+            auto-fit, 
+            minmax(180px, 1fr)
         );
-    gap: 2em;
-    justify-items: center; 
+        gap: 2em;
+    }
+}
+
+@media (min-width:768px) {
+    .grid{
+        grid-template-columns: 
+        repeat(
+            auto-fit, 
+            minmax(160px, 1fr)
+        );
+        gap: 1.5em;
+    }
+    
 }

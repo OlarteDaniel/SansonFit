@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 
 import { IoFilter } from "react-icons/io5";
 import { BsXLg } from "react-icons/bs";
@@ -8,8 +8,10 @@ import { FaRegTrashAlt } from "react-icons/fa";
 import { IoIosArrowUp } from "react-icons/io";
 
 import DoubleSlider from './DoubleSlider.jsx';
+import useClickOutside from '../../../hooks/useClickOutside .jsx';
 
 import '../../../styles/components/filters/sideBar/SidebarFilters.css'
+
 
 const SidebarFilters = () => {
 
@@ -61,15 +63,28 @@ const SidebarFilters = () => {
     const [priceActive, setPriceActive] = useState(false);
     const [typeActive, setTypeActive] = useState(false);
 
-    const toggleFilterMenu = () => setFilterMenuActive(!filterMenuActive);
+    const toggleFilterMenu = () => {
+        setFilterMenuActive(!filterMenuActive);
+    }
+
     const togglePrice = () => setPriceActive(!priceActive);
     const toggleType = () => setTypeActive(!typeActive);
+
+    const dropdownRef = useRef(null)
+
+    useClickOutside(dropdownRef, () =>{
+        if(dropdownRef.current.className === 'filter-container filter-active'){
+            setFilterMenuActive(false)
+            setPriceActive(false);
+            setTypeActive(false);
+        }
+    })
 
     return (
         <div className='sidebar'>
             <button className='btn' onClick={toggleFilterMenu}> <IoFilter className='filer-icon'/> FILTROS</button>
 
-            <div className={`filter-container ${filterMenuActive? 'filter-active': ''}`}>
+            <div ref={dropdownRef} className={`filter-container ${filterMenuActive? 'filter-active': ''}`}>
 
                 <div className="header">
                     <p>Filtros</p>
@@ -78,7 +93,7 @@ const SidebarFilters = () => {
 
                 <div className="body">
 
-                    <button className={`${priceActive? '':'arrowOne-active'}`} onClick={togglePrice}>Precio <FaArrowRight className='arrow-icon'/> <IoIosArrowUp className='arrowUp-icon'/> </button>
+                    <button className={`arrowOne ${priceActive? '':'arrowOne-active'}`} onClick={togglePrice}>Precio <FaArrowRight className='arrow-icon'/> <IoIosArrowUp className='arrowUp-icon'/> </button>
 
                     <div className= {`prices ${priceActive? 'prices-active':''}`}>
 
@@ -116,7 +131,7 @@ const SidebarFilters = () => {
 
                     </div>
 
-                    <button className={`${typeActive? '':'arrowTwo-active'}`} onClick={toggleType}>Tipo de producto <FaArrowRight className='arrow-icon'/> <IoIosArrowUp className='arrowUp-icon'/> </button>
+                    <button className={`arrowTwo ${typeActive? '':'arrowTwo-active'}`} onClick={toggleType}>Tipo de producto <FaArrowRight className='arrow-icon'/> <IoIosArrowUp className='arrowUp-icon'/> </button>
 
                     <div className={`types ${typeActive? 'types-active':''}`}>
 

@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, {useRef, useState } from 'react'
 
 import { IoIosArrowDown } from "react-icons/io";
 
+import useClickOutside from '../../hooks/useClickOutside ';
+
 import '../../styles/components/filters/SortingDropdown.css'
+
 
 const SortingDropdown = () => {
 
@@ -16,6 +19,10 @@ const SortingDropdown = () => {
     const [dropdownActive,setDropdownActive] = useState(false);
     const [sorting, setSorting] = useState(1);
 
+    const dropdownRef = useRef(null)
+
+    useClickOutside(dropdownRef, () => setDropdownActive(false))
+
     const toggleDropdown = () => setDropdownActive(!dropdownActive);
 
     const handleRadioChange = (e)=>{
@@ -24,7 +31,7 @@ const SortingDropdown = () => {
     }
 
     return (
-        <div className="dropdown">
+        <div ref={dropdownRef} className="dropdown">
 
             <button onClick={toggleDropdown}>ORDENAR POR <IoIosArrowDown className='arrowDown-icon'/></button>
 
