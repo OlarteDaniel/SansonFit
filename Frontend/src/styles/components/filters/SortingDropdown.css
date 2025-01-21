@@ -20,6 +20,7 @@
     cursor: pointer;
     font-family: 'Smack Laideth';
     font-size: 0.9em;
+    letter-spacing: 0.1em;
     text-align: center;
     transition: color 0.3s, background-color 0.3s;
 }
@@ -93,21 +94,41 @@ label{
 }
 
 @media(min-width:480px){
+
     .dropdown button{
         width: 100%;
     }
 
+    .dropdown .sortings .label{
+        font-size: 1.2em;
+    }
+
     .dropdown .sortings-active{
         width: 100%;
+        gap: .8em;
     }
 }
 
 @media(min-width:768px){
     .dropdown button{
-        width: 250px;
+        width: 280px;
     }
 
     .dropdown .sortings-active{
-        width: 250px;
+        width: 280px;
+    }
+}
+
+@media(min-width:1024px){
+    .dropdown{
+        font-size: 18px;
+    }
+
+    .dropdown button{
+        width: 320px;
+    }
+
+    .dropdown .sortings-active{
+        width: 320px;
     }
 }

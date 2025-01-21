@@ -32,7 +32,6 @@ const SortingDropdown = () => {
 
     return (
         <div ref={dropdownRef} className="dropdown">
-
             <button onClick={toggleDropdown}>ORDENAR POR <IoIosArrowDown className='arrowDown-icon'/></button>
 
             <ul className={`sortings ${dropdownActive? 'sortings-active':''}`}>

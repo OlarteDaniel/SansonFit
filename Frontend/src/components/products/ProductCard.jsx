@@ -10,12 +10,13 @@ const ProductCard = ({title,price}) => {
     const priceFormat = Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(price);
 
     return (
-        <div className='card'>
+        //Acabamos de remplazar un div por el link , en caso de fallar reemplazar el Link por el div //
+        <Link className='card'>  
             <div className="card-product">
-                <Link to='/' className='img'>
+                <div className="img">
                     <img src={Creatina} alt="" />
                     <button>Comprar</button>
-                </Link>
+                </div>
             </div>
             <div className="card-details">
                 <div className="title">
@@ -25,7 +26,7 @@ const ProductCard = ({title,price}) => {
                     <p>{priceFormat}</p>
                 </div>
             </div>
-        </div>
+        </Link>
     )
 }
 

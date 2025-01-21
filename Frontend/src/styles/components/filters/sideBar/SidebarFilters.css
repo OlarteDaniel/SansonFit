@@ -29,6 +29,7 @@ input[type=number] {
     cursor: pointer;
     font-family: 'Smack Laideth';
     font-size: 0.9em;
+    letter-spacing: 0.1em;
     text-align: center;
     transition: color 0.3s, background-color 0.3s;
 }
@@ -318,6 +319,7 @@ input[type=number] {
     .sidebar {
         flex-direction: row;
         font-size: 12px;
+        letter-spacing: 0.1em;
     }
 
     .sidebar .filter-container {
@@ -333,6 +335,7 @@ input[type=number] {
         width: 25vw;
         max-width: 180px;
         padding: 0;
+        gap: 10px;
     }
 
     .sidebar .filter-container .body{
@@ -341,7 +344,7 @@ input[type=number] {
 
     .sidebar .filter-container .body .prices .body-prices,
     .sidebar .filter-container .body .types .body-types{
-        padding-left: .8rem;
+        padding-left: .25rem;
         max-width: 180px;
     }
 
@@ -392,7 +395,6 @@ input[type=number] {
     }
 
     .sidebar .filter-container .body .types .body-types{
-        padding-top: 1em;
         gap: 1em;
     }
 

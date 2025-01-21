@@ -1,5 +1,7 @@
 import {BrowserRouter, Route, Routes, useLocation} from 'react-router-dom';
+import { useEffect } from 'react';
 
+import Wrapper from './hocs/Wrapper';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -11,12 +13,14 @@ function App() {
   return (
     <div className="app">
         <BrowserRouter>
-          <NavBar/>
-          <Routes>
-            <Route path='/' element={<Home/>}/>
-            <Route path='/products' element={<ProductsList/>}/>
-          </Routes>
-          <Footer/>
+          <Wrapper>
+            <NavBar/>
+            <Routes>
+              <Route path='/' element={<Home/>}/>
+              <Route path='/products' element={<ProductsList/>}/>
+            </Routes>
+            <Footer/>
+          </Wrapper>
         </BrowserRouter>
     </div>
   );

@@ -18,17 +18,19 @@ import '../styles/components/NavBar.css';
 const NavBar = () => {
     const [menuActive, setMenuActive] = useState(false);
 
-    const toggleMenu = () => setMenuActive(!menuActive);
-
     const isScrolled = useScroll();
 
     const dropdownRef = useRef(null);
 
-    useClickOutside(dropdownRef, () => {
-        if(dropdownRef.current.className === 'nav-container nav_active'){
+    const toggleMenu = () => setMenuActive(!menuActive);
+
+    const resetState = () =>{
+        if(menuActive){
             setMenuActive(false)
         }
-    });
+    }
+
+    useClickOutside(dropdownRef,resetState);
     
     return (
         <header className={`navBar ${isScrolled ? 'abajo' : ''}`}>
@@ -62,16 +64,16 @@ const NavBar = () => {
 
                 <ul className={`nav-list ${isScrolled ? 'light' : ''}`}>
                     <li>
-                        <Link to="/" className="nav-link">Inicio</Link>
+                        <Link onClick={resetState} to="/" className="nav-link">Inicio</Link>
                     </li>
                     <li>
-                        <Link to="/products" className="nav-link">Productos</Link>
+                        <Link onClick={resetState} to="/products" className="nav-link">Productos</Link>
                     </li>
                     <li>
-                        <Link to="#" className="nav-link">Sobre nosotros</Link>
+                        <Link onClick={resetState} to="#" className="nav-link">Sobre nosotros</Link>
                     </li>
                     <li>
-                        <Link to="#" className="nav-link">Contacto</Link>
+                        <Link onClick={resetState} to="#" className="nav-link">Contacto</Link>
                     </li>
                 </ul>
             </nav>
