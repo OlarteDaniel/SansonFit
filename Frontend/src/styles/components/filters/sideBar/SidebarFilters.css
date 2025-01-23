@@ -405,3 +405,19 @@ input[type=number] {
     }
 
 }
+
+@media(min-width:1024px){
+    .sidebar{
+        font-size: 14px;
+    }
+
+    .sidebar .filter-container .body {
+        max-width: 200px;
+    }
+
+    .sidebar .filter-container .body .prices .body-prices,
+    .sidebar .filter-container .body .types .body-types{
+        padding-left: 0rem;
+        max-width: 220px;
+    }
+}

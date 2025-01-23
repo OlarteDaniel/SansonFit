@@ -20,6 +20,7 @@
     background: #ffffff;
     border-radius: 8px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    letter-spacing: 0.05em;
 }
 
 .card .card-product{
@@ -133,5 +134,17 @@
 }
 
 @media(min-width:1024px){
-    
+    .card .card-product .img img{
+        width: 55%;
+    }
+
+    .card .card-details .price p{
+        font-size: 1.2em;
+    }
+
+    .card .card-product .img button{
+        padding: 0.6em;
+        font-size: 1em;
+        letter-spacing: 0.05em;
+    }
 }
