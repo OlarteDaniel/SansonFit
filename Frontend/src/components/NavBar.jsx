@@ -17,6 +17,7 @@ import '../styles/components/NavBar.css';
 
 const NavBar = () => {
     const [menuActive, setMenuActive] = useState(false);
+    const [scrollBase, setScrollBase] = useState(0)
 
     const isScrolled = useScroll();
 

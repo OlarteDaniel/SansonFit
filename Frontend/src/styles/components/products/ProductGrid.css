@@ -16,7 +16,7 @@
         grid-template-columns: 
         repeat(
             auto-fit, 
-            minmax(180px, 1fr)
+            minmax(190px, 1fr)
         );
         gap: 2em;
     }
@@ -28,7 +28,7 @@
         grid-template-columns: 
         repeat(
             auto-fit, 
-            minmax(160px, 1fr)
+            minmax(180px, 1fr)
         );
         gap: 1.5em;
     }

@@ -105,6 +105,7 @@ input[type=number] {
     font-size: 1.3em;
     color: #fff;
     text-align: start;
+    cursor: pointer;
 }
 
 .sidebar .filter-container .body button .arrowUp-icon{
@@ -171,6 +172,7 @@ input[type=number] {
     display: flex;
     align-items: center;
     gap: 5px;
+    cursor: pointer;
 }
 
 /* Input de precios */

@@ -109,12 +109,14 @@
 }
 
 @media(min-width:480px){
+
     .card .card-product .img img{
         width: 65%;
     }
 }
 
 @media(min-width:768px){
+
     .card .card-product .img{
         display: flex;
         flex-direction: column;
@@ -167,6 +169,10 @@
         width: 55%;
     }
 
+    .card .card-details .title h3{
+        font-size: 1.1em;
+    }
+
     .card .card-details .price p{
         font-size: 1.2em;
     }
@@ -175,5 +181,19 @@
         padding: 0.6em;
         font-size: 1em;
         letter-spacing: 0.05em;
+    }
+}
+
+@media(min-width:1280px){
+    .card .card-product .img img{
+        width: 60%;
+    }
+
+    .card .card-details .title h3{
+        font-size: 1em;
+    }
+
+    .card .card-details .price p{
+        font-size: 1.3em;
     }
 }
