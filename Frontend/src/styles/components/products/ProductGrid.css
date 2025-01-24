@@ -42,7 +42,29 @@
             auto-fit, 
             minmax(170px, 1fr)
         );
-        gap: 1.9em;
+        gap: 1.25em;
     }
     
+}
+
+@media(min-width:1280px){
+    .grid{
+        grid-template-columns: 
+        repeat(
+            auto-fit,
+            minmax(175px,1fr)
+        );
+        gap: 1em;
+    }
+}
+
+@media(min-width:1440px){
+    .grid{
+        grid-template-columns: 
+        repeat(
+            auto-fit,
+            minmax(200px,1fr)
+        );
+        gap: 1.25em;
+    }
 }

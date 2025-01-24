@@ -250,3 +250,15 @@
         gap: 3em;
     }
 }
+
+@media(min-width:1440px){
+
+    .navBar {
+        font-size: 28px;
+    }
+
+    .superior,
+    .nav-container .nav-list{
+        max-width: 1395px;
+    }
+}

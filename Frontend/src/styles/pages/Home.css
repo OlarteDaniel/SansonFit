@@ -1,7 +1,12 @@
 .home{
+    
     font-family: 'Smack Laideth';
     font-size: 18px;
     background-color: #F7F9FB;
+}
+
+.home .background{
+    background-color: #F2F2F2;
 }
 
 .home .presentation{
@@ -9,7 +14,6 @@
     display: flex;
     flex-direction: column;
     gap: 1em;
-    background-color: #F2F2F2;
 }
 
 .home .presentation .products{
@@ -274,8 +278,33 @@
     }
 }
 
+/* Solucion Temporanea */
+/* Se que esta solucion no es la ideal, aun no encuentro una solucion optima */
+/* Recordar investigar para que las paginas al llegar a cierta resolucion se centren */
+
 @media(min-width:1440px){
+
+    .home{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .home .background{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
     .home .presentation{
+        max-width: 1650px;
         grid-template-columns: 4fr 2fr 2fr;
+    }
+
+    .home .feactured_products{
+        width: 100%;
+        max-width: 1650px;
     }
 }

@@ -34,6 +34,7 @@ const NavBar = () => {
     
     return (
         <header className={`navBar ${isScrolled ? 'abajo' : ''}`}>
+            <div></div>
             <button onClick={toggleMenu} className="button-burger">
                 <RxHamburgerMenu className={`burger-icon ${isScrolled ? 'light' : ''}`} />
             </button>

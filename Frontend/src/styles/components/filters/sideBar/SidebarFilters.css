@@ -20,7 +20,7 @@ input[type=number] {
 
 /* Botón de activación */
 .sidebar .btn {
-    width: 70%;
+    width: 100%;
     padding: 0.8em;
     background-color: #005F9E;
     border: none;
@@ -29,7 +29,7 @@ input[type=number] {
     cursor: pointer;
     font-family: 'Smack Laideth';
     font-size: 0.9em;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.05em;
     text-align: center;
     transition: color 0.3s, background-color 0.3s;
 }
@@ -319,8 +319,10 @@ input[type=number] {
     .sidebar {
         flex-direction: row;
         font-size: 12px;
-        letter-spacing: 0.1em;
+        letter-spacing: 0.05em;
     }
+
+
 
     .sidebar .filter-container {
         position: relative;
@@ -419,5 +421,33 @@ input[type=number] {
     .sidebar .filter-container .body .types .body-types{
         padding-left: 0rem;
         max-width: 220px;
+    }
+}
+
+@media(min-width:1280px){
+    .sidebar{
+        font-size: 16px;
+    }
+
+    .sidebar .filter-container .body {
+        max-width: 220px;
+    }
+
+    .sidebar .filter-container .body .prices .body-prices,
+    .sidebar .filter-container .body .types .body-types{
+        padding-left: 0rem;
+        max-width: 240px;
+    }
+}
+
+@media(min-width:1440px){
+    .sidebar .filter-container .body {
+        max-width: 240px;
+    }
+
+    .sidebar .filter-container .body .prices .body-prices,
+    .sidebar .filter-container .body .types .body-types{
+        padding-left: 0rem;
+        max-width: 260px;
     }
 }

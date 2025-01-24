@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 
 import Creatina from '../../assets/img/productsList/Creatina-Start.png'
+import { HiMagnifyingGlass } from "react-icons/hi2";
 
 import '../../styles/components/products/ProductCard.css'
 
@@ -14,8 +15,11 @@ const ProductCard = ({title,price}) => {
         <Link className='card'>  
             <div className="card-product">
                 <div className="img">
+                    <button className='button-glass'>
+                        <HiMagnifyingGlass className='glass-icon'/>
+                    </button>
                     <img src={Creatina} alt="" />
-                    <button>Comprar</button>
+                    <button className='button-buys'>Comprar</button>
                 </div>
             </div>
             <div className="card-details">

@@ -14,28 +14,30 @@ const Home = () => {
     return (
         <main className='home'>
             
-            <div className="presentation">
-                <div className="welcome">
-                    <h2>Bienvenido a nuestra tienda</h2>
-                </div>
+            <div className="background">
+                <div className="presentation">
+                    <div className="welcome">
+                        <h2>Bienvenido a nuestra tienda</h2>
+                    </div>
 
-                <div className="details">
-                    <h1>SANSON FIT</h1>
-                    <p>
-                        Lorem ipsum dolor sit amet 
-                        consectetur adipisicing elit. 
-                        Omnis corrupti incidunt aperiam. 
-                        Rem omnis magnam soluta eum eius 
-                        corrupti harum quo molestias. Magni, 
-                        eligendi. Beatae dolorem id quaerat 
-                        error eligendi.
-                    </p>
-                    <button>Mas sobre nosotros</button>
-                </div>
-                
-                <div className="products">
-                    <img className='img2' src={N2} alt="" />
-                    <img className='img1' src={N1} alt="" />
+                    <div className="details">
+                        <h1>SANSON FIT</h1>
+                        <p>
+                            Lorem ipsum dolor sit amet 
+                            consectetur adipisicing elit. 
+                            Omnis corrupti incidunt aperiam. 
+                            Rem omnis magnam soluta eum eius 
+                            corrupti harum quo molestias. Magni, 
+                            eligendi. Beatae dolorem id quaerat 
+                            error eligendi.
+                        </p>
+                        <button>Mas sobre nosotros</button>
+                    </div>
+                    
+                    <div className="products">
+                        <img className='img2' src={N2} alt="" />
+                        <img className='img1' src={N1} alt="" />
+                    </div>
                 </div>
             </div>
 

@@ -45,6 +45,22 @@
     overflow: hidden;
 }
 
+.card .card-product .img .button-glass{
+    padding: .5em;
+    position: absolute;
+    top: 6px;  
+    right: 5px; 
+    background-color: #ffffff;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2em;
+    display: none;
+    transition: transform 0.25s ease;
+    z-index: 3;
+}
+
 .card .card-product .img img{
     width: 70%; 
     max-width: 160px;
@@ -52,7 +68,7 @@
 }
 
 
-.card .card-product .img button{
+.card .card-product .img .button-buys{
     width: 70%;
     padding: 0.5em;
     background-color: #005F9E;
@@ -67,7 +83,7 @@
     display: none;
 }
 
-.card .card-product .img button:hover {
+.card .card-product .img .button-buys:hover {
     background-color: #0085CA;
     color: #00335F;
 }
@@ -99,7 +115,6 @@
 }
 
 @media(min-width:768px){
-
     .card .card-product .img{
         display: flex;
         flex-direction: column;
@@ -109,7 +124,7 @@
         width: 60%;
     }
 
-    .card .card-product .img button{
+    .card .card-product .img .button-buys{
         position: absolute;
         bottom: 0;
         display: block;
@@ -120,11 +135,25 @@
         transition: .2s ease-in;
     }
 
+    .card:hover .img .button-glass{
+        display: flex;
+    }
+
+    .img .button-glass:hover{
+        animation: glasshover .5s infinite;
+    }
+
+    @keyframes glasshover {
+        0%{transform: scale(1);}
+        50%{transform: scale(1.1);}
+        100%{transform: scale(1);}
+    }
+
     .card:hover img{
         transform: scale(1.05);
     }
 
-    .card:hover .img button{
+    .card:hover .img .button-buys{
         transform: translateY(0);
     }
 
@@ -142,7 +171,7 @@
         font-size: 1.2em;
     }
 
-    .card .card-product .img button{
+    .card .card-product .img .button-buys{
         padding: 0.6em;
         font-size: 1em;
         letter-spacing: 0.05em;
