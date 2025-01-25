@@ -7,6 +7,7 @@ import SortingDropdown from '../components/filters/SortingDropdown';
 import '../styles/pages/ProductsList.css';
 
 const ProductsList = () => {
+
     return (
         <main className="products-list">
             <header className="title-primary">
