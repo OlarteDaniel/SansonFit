@@ -59,7 +59,7 @@ const NavBar = () => {
                         <BsXLg className="x-icon" />
                     </button>
 
-                    <User ButtonClass="button-user-active"/>
+                    <User handleState={resetState} ButtonClass="button-user-active"/>
                     
                 </div>
 
