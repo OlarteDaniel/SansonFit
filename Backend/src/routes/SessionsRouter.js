@@ -12,6 +12,10 @@ class SessionsRouter extends BaseRouter{
 
         this.get('/logout',['USER','ADMIN'],sessionsController.logout);
 
+        this.get('/auth/google',['PUBLIC'],passportCall('google'),(req,res) => {});
+
+        this.get('/auth/google/callback',['PUBLIC'],passportCall('google'),sessionsController.login);
+
         this.get('/current',['USER', 'ADMIN'],sessionsController.curren);
     }
 }

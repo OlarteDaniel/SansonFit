@@ -1,6 +1,8 @@
 import passport from 'passport';
 import {Strategy as LocalStrategy} from 'passport-local';
 import {ExtractJwt,Strategy as JWTStrategy} from 'passport-jwt';
+import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
+
 
 import {userService} from '../service/service.js';
 
@@ -55,6 +57,37 @@ const initializePassportConfig = () =>{
 
         return done(null,user)
     }));
+
+    passport.use('google',new GoogleStrategy({
+        clientID: config.google.ID,
+        clientSecret: config.google.SECRET,
+        callbackURL: "http://localhost:8080/api/sessions/auth/google/callback"
+    },
+    async (accessToken, refreshToken, profile, cb) => {
+        const userInfo = profile._json;
+        if(!userInfo){
+            return cb(null,{message:"Error loging from Google"})
+        }
+
+        const user = await userService.getUserByEmail(userInfo.email);
+        if(user){
+            return cb(null,user)
+        }else{
+            const authService = new AuthService();
+            const hashedPassword = await authService.hashPassword(await authService.generateRandomPassword())
+
+            const newUser = {
+                first_name: userInfo.given_name,
+                last_name: userInfo.family_name,
+                email:userInfo.email,
+                password: hashedPassword,
+            }
+            const result = await userService.createUser(newUser);
+            
+            return cb(null,result);
+        }
+    }
+    ));
 
     passport.use('current', new JWTStrategy({
         secretOrKey:config.auth.jwt.SECRET,

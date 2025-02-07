@@ -24,5 +24,9 @@ export default{
         NAME:process.env.CLOUDINARY_NAME,
         KEY: process.env.CLOUDINARY_KEY,
         SECRET: process.env.CLOUDINARY_SECRET
+    },
+    google:{
+        ID:process.env.CLIENT_ID,
+        SECRET:process.env.CLIENT_SECRET
     }
 };

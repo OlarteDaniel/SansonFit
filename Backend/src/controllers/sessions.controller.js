@@ -18,10 +18,6 @@ const login = (req,res)=>{
 }
 
 const logout = (req,res)=>{
-    // if(!req.cookies['sid']){
-    //     return res.sendBadRequest('No active session found. Please log in first.')
-    // }
-
     res.clearCookie('sid').sendSuccess('logged out');
 }
 

@@ -1,0 +1,266 @@
+.register{
+    padding: 6.5rem 2rem 4rem;
+    font-family: 'Smack Laideth';
+    font-size: 18px;
+    letter-spacing: .05em;
+}
+
+.register .container{
+    padding: 1em;
+    max-width: 380px;
+    display: flex;
+    border-radius: 8px;
+    background-color: #F2F2F2;
+    border: 1px solid #d1d1d1;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.register .container .section-form{
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: .8em;
+}
+
+.register .container .section-form .title{
+    font-size: 1.8em;
+    font-weight: 100;
+    color: #0085CA;
+    text-align: center;
+}
+
+.register .container .section-form .form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .8em;
+}
+
+.register .container .section-form .form .inputbox{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    color: #333333;
+}
+
+.register .container .section-form .form .inputbox label{
+    font-size: 1.1em;
+}
+
+.register .container .section-form .form .inputbox input{
+    appearance: none; 
+    padding: .3em;
+    width: 100%;
+    outline: none;
+    font-size: .9em;
+    border-radius: 5px;
+    background: rgba(192, 192, 192, 0.1);
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    color: #333333;
+    cursor: pointer;
+}
+
+.register .container .section-form .form .inputbox input[type="date"]::-webkit-calendar-picker-indicator{
+    filter: invert(40%); /* Ajusta el color del ícono */
+    cursor: pointer;
+}
+
+.register .container .section-form .form .inputbox .input-password{
+    position: relative;
+}
+
+.register .container .section-form .form .inputbox .input-password .checkbox{
+    position: absolute;
+    top: 6px;
+    right: 6px;
+}
+
+.register .container .section-form .form .inputbox .input-password .checkbox .eye-icon{
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.register .container .section-form .form button{
+    padding: 0.5em;
+    width: 100%;
+    background-color: #005F9E;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    font-family: 'Smack Laideth';
+    font-size: .9em;
+    letter-spacing: .05em;
+    text-align: center;
+    transition: color 0.3s, background-color 0.3s, transform 0.2s ease-in;
+}
+
+.register .container .section-form .form button:hover{
+    background-color: #0085CA;
+    color: #00335F;
+}
+
+.register .container .section-form .register-nets{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .9em;
+}
+
+.register .container .section-form .register-nets .btn-google,
+.register .container .section-form .register-nets .btn-facebook{
+    padding: 0.5em;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: .2em;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    color: #1a1a1a;
+    cursor: pointer;
+    font-family: 'Smack Laideth';
+    font-size: .9em;
+    letter-spacing: .05em;
+}
+
+.register .container .section-form .register-nets .btn-facebook .facebook-icon{
+    color: #1877F2;
+}
+
+.register .container .section-form .register-nets .btn-google:hover,
+.register .container .section-form .register-nets .btn-facebook:hover{
+    border: 1px solid #1a1a1a;
+}
+
+.register .container .section-form .text-login{
+    font-size: 1em;
+    color: #333333;
+    text-align: center;
+}
+
+.register .container .text-login .link-login{
+    padding-left: .5em;
+    text-decoration: none;
+    color: #0085CA;
+}
+
+.register .container .text-login .link-login:hover{
+    text-decoration: underline;
+}
+
+.section-info{
+    display: none;
+}
+
+@media(min-width:480px){
+    .register{
+        padding: 5.5rem 2rem 3.5rem;
+        font-size: 22px;
+    }
+    
+    .register .container{
+        max-width: 400px;
+    }
+
+    .register .container .section-form .form .inputbox .input-password .checkbox{
+        top: 8px;
+    }
+}
+
+@media(min-width:768px){
+    .register{
+        padding: 7rem 2rem 2.5rem;
+        font-size:20px;
+    }
+
+    .register .container{
+        max-width: none;
+    }
+
+    .register .container .section-form .form .inputbox .input-password .checkbox{
+        top: 10px;
+    }
+}
+
+@media(min-width:1024px){
+
+    .register{
+        padding: 7rem 4rem 2.5rem;
+    }
+
+    .register .container {
+        flex-direction: row;
+        max-width: 800px;
+    }
+
+    .register .container .section-info {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1em;
+        width: 60%;
+        padding-right: 1em;
+    }
+
+    .register .container .section-form{
+        padding-left: 1em;
+    }
+
+    .register .container .section-info .title {
+        font-size: 1.6em;
+        font-weight: 100;
+        color: #0085CA;
+        text-align: center;
+    }
+
+    .register .container .section-form .title{
+        font-size: 1.6em;
+    }
+
+    .register .container .section-info .feature-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5em;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .register .container .section-info .feature-list .feature {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        font-size: 1em;
+        color: #333333;
+    }
+
+    .register .container .section-info .feature-list .feature .icon {
+        width: fit-content;
+        height: fit-content;
+        font-size: 3em;
+        color: #0085CA;
+    }
+
+    .register .container .section-form .form .inputbox .input-password .checkbox{
+        top: 8px;
+    }
+}
+
+@media(min-width:1280px){
+
+    .register{
+        padding: 7rem 4rem 2.5rem;
+        font-size: 24px;
+    }
+
+    .register .container{
+        max-width: 1100px;
+    }
+
+    .register .container .section-info .feature-list {
+        gap: 2em;
+    }
+}
