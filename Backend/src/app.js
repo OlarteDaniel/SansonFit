@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import passport from 'passport';
 import cookieParser from 'cookie-parser';
+import cors from 'cors';
 
 import __dirname from './utils.js';
 import logger from './utils/loggers.js';
@@ -22,6 +23,10 @@ const connection = mongoose.connect(config.mongo.URL);
 app.use(express.json());
 app.use(express.urlencoded({extended:true}))
 app.use(cookieParser());
+
+app.use(cors({
+    origin:['http://localhost:5173']
+}))
 
 initializePassportConfig();
 app.use(passport.initialize());

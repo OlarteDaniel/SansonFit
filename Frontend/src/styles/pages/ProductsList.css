@@ -2,7 +2,8 @@
     width: 100%;
     padding: 5.5rem 2rem 2rem;
     background-color: #F7F9FB;
-    display: grid;
+    display: flex;
+    flex-direction: column;
     gap: 1em;
     font-family: 'Smack Laideth';
     font-size: 18px;
@@ -14,12 +15,13 @@
     color: #0085CA;
     text-align: center;
     font-size: 1.8em;
-}
+}   
 
 /* Breakpoint: Tablets */
 @media (min-width: 480px) {
     .products-list {
         padding: 4rem 2rem 2rem;
+        display: grid;
         grid-template-columns: 1fr 2fr;
         row-gap: 1.2em;
     }
