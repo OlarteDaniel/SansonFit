@@ -206,3 +206,10 @@
         font-size: 1.3em;
     }
 }
+
+@media(min-width:1440px){
+    .card{
+        /* Modificar o borrar en casos de futuros errores */
+        font-size: 20px;
+    }
+}

@@ -12,15 +12,12 @@ import '../../styles/components/products/ProductGrid.css'
 const ProductGrid = () => {
 
     const [products,setProducts] = useState([]);
-    const [quantity,setQuantity] = useState(false);
-
 
     useEffect(()=>{
 
         const fetchProducts = async () =>{
             const result = await productsService.getProducts();
             setProducts(result.data.payload);
-            setQuantity(products.length > 0);
         }
 
         products.length===0&&fetchProducts();        
@@ -116,13 +113,10 @@ const ProductGrid = () => {
     
 
     return (
-
-        
-        <div className='grid'>
+        <div className='grid' >
             {products.map((product) =>(
                 <ProductCard key={product._id} title={product.title} price={product.price}/>
             ))}
-
         </div>
     )
 }

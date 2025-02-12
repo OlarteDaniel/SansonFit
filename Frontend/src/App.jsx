@@ -1,6 +1,6 @@
 import {BrowserRouter, Route, Routes, useLocation} from 'react-router-dom';
-import { useEffect } from 'react';
 
+import {UserContextProvider} from './context/UserContext'
 import Wrapper from './hocs/Wrapper';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
@@ -17,16 +17,18 @@ function App() {
   return (
     <div className="app">
         <BrowserRouter>
-          <Wrapper>
-            <NavBar/>
-            <Routes>
-              <Route path='/' element={<Home/>}/>
-              <Route path='/products' element={<ProductsList/>}/>
-              <Route path='/login' element={<Login/>}/>
-              <Route path='/register' element={<Register/>}/>
-            </Routes>
-            <Footer/>
-          </Wrapper>
+          <UserContextProvider>
+            <Wrapper>
+              <NavBar/>
+              <Routes>
+                <Route path='/' element={<Home/>}/>
+                <Route path='/products' element={<ProductsList/>}/>
+                <Route path='/login' element={<Login/>}/>
+                <Route path='/register' element={<Register/>}/>
+              </Routes>
+              <Footer/>
+            </Wrapper>
+            </UserContextProvider>
         </BrowserRouter>
     </div>
   );

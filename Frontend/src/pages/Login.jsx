@@ -1,11 +1,11 @@
-import React, {useEffect, useState } from 'react'
+import React, {useContext, useState } from 'react'
 
-import { Link } from 'react-router-dom';
-import {GoogleLogin} from '@react-oauth/google';
-import { useGoogleLogin } from '@react-oauth/google';
-import { jwtDecode } from "jwt-decode";
+import { Link,useNavigate } from 'react-router-dom';
+import {useForm} from 'react-hook-form';
 
-import {productsService} from '../services/services.js'
+import {sessionsService} from '../services/services.js'
+
+import UserContext from '../context/UserContext';
 
 import { FaRegEye,FaRegEyeSlash } from "react-icons/fa6";
 import { FcGoogle } from "react-icons/fc";
@@ -17,24 +17,38 @@ import '../styles/pages/Login.css'
 
 const Login = () => {
 
+    
+    const {updateSession} = useContext(UserContext);
+
     const [visible,setVisible] = useState(false);
-    const [products,setProducts] = useState([]);
 
     const toggleEye = () => {
         setVisible((prev) => !prev);
     };
 
-    useEffect(()=>{
-        const fetchProducts = async()=>{
-            const result = await productsService.getProducts();
-            console.log(result.data.payload)
+    const {register, handleSubmit,reset} = useForm();
+    const navigate = useNavigate();
+
+    const onSubmit = async (data) =>{
+
+        const user = {
+            email:data.email,
+            password:data.password
         }
 
-        products.length===0&&fetchProducts();
-
-    },[])
-
-
+        try {
+            const result = await sessionsService.loginUser(user);
+            if(result.status === 200){
+                updateSession();
+                navigate('/')
+            }else{
+                console.log('Error en autenticacion: ',result)
+            }
+        } catch (error) {
+            console.error("Error al iniciar sesión:", error);
+        }
+    }
+    
     return (
         <main className="login">
 
@@ -47,10 +61,10 @@ const Login = () => {
 
                     <h2 className='title'>Iniciar Sesión</h2>
 
-                    <form action="" className='form'>
+                    <form onSubmit={handleSubmit(onSubmit)} className='form'>
                         <div className="inputbox">
                             <label>Email:</label>
-                            <input type="email" required/>
+                            <input type="email" {...register('email',{required:true})}/>
                             
                         </div>
                         <div className="inputbox">
@@ -58,7 +72,7 @@ const Login = () => {
 
                             <div className="input-password">
 
-                                <input type={visible ? 'text' : 'password'} required/>
+                                <input type={visible ? 'text' : 'password'} {...register('password',{required:true})}/>
                                 <span 
                                     className='checkbox' 
                                     onClick={toggleEye}

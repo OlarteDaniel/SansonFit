@@ -96,7 +96,7 @@ export default class BaseRouter{
                 await callback.apply(this,params);
             } catch (error) {
                 params[0].logger.error(`Error in route ${params[0].method} ${params[0].originalUrl}: ${error.name} ${error.message}`);
-                params[1].status(500).send({status:"error",error:`${error.name} ${error.message}`});
+                params[1].status(500).send({status:"errors",error:`${error.name} ${error.message}`});
             }
         })
     }

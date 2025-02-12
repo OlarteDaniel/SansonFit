@@ -11,10 +11,10 @@ import config from './config.js';
 
 const initializePassportConfig = () =>{
     passport.use('register', new LocalStrategy({usernameField: 'email', passReqToCallback:true}, async(req,email,password,done) =>{
-
+        
         const {first_name,last_name,birthdate,roles} = req.body;
 
-        if(!first_name || !last_name || !birthdate){
+        if(!first_name || !last_name){
             return done(null,false,{message:'Incomplete values'});
         }
 
