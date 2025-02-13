@@ -19,7 +19,9 @@ const ProductCard = ({title,price}) => {
                         <HiMagnifyingGlass className='glass-icon'/>
                     </button>
                     <img src={Creatina} alt="" />
-                    <button className='button-buys'>Comprar</button>
+                    <div className="buttons">
+                        <button className='button-buys'>Comprar</button>
+                    </div>
                 </div>
             </div>
             <div className="card-details">

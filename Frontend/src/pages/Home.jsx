@@ -1,5 +1,7 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import { Link } from 'react-router-dom';
+
+import UserContext from '../context/UserContext';
 
 import N1 from '../assets/img/home/N1.png'
 import N2 from '../assets/img/home/N2.png'
@@ -11,6 +13,9 @@ import Preentreno from '../assets/img/home/Pre-Entreno-Start.png'
 import '../styles/pages/Home.css'
 
 const Home = () => {
+
+    const {session} = useContext(UserContext);
+
     return (
         <main className='home'>
             
@@ -80,7 +85,16 @@ const Home = () => {
                     </div>
                 </div>
 
-                <Link to='/products'><button>Ver Productos</button></Link>
+                <div className="buttons">
+                    <Link to='/products'><button>Ver Productos</button></Link>
+                    {session?.data.payload.role === 'admin' && 
+                        <Link to='/register/products'>
+                            <button>
+                                Agregar Productos
+                            </button>
+                        </Link>
+                    }
+                </div>
             </div>
 
         </main>

@@ -17,6 +17,7 @@ import '../styles/pages/Login.css'
 
 const Login = () => {
 
+    const [serverError,setServerError] = useState('');
     
     const {updateSession} = useContext(UserContext);
 
@@ -26,9 +27,9 @@ const Login = () => {
         setVisible((prev) => !prev);
     };
 
-    const {register, handleSubmit,reset} = useForm();
     const navigate = useNavigate();
 
+    const {register, handleSubmit, formState:{errors}} = useForm();
     const onSubmit = async (data) =>{
 
         const user = {
@@ -38,13 +39,29 @@ const Login = () => {
 
         try {
             const result = await sessionsService.loginUser(user);
+
             if(result.status === 200){
                 updateSession();
                 navigate('/')
-            }else{
-                console.log('Error en autenticacion: ',result)
+                return;
             }
+            
+            if(result.status >= 300 & result.status < 500){
+
+                const errorMsg = result.error || "Error desconocido";
+                
+                if(errorMsg === 'Incorrect credentials'){
+                    setServerError('Credenciales incorrectas');
+                }else{
+                    setServerError(`Error en la autenticacion: ${errorMsg}`);
+                }
+                return;
+            }
+
+            setServerError("Error en el registro. Intente nuevamente.");
+
         } catch (error) {
+            setServerError(`Ocurrió un problema con el servidor.`);
             console.error("Error al iniciar sesión:", error);
         }
     }
@@ -62,29 +79,52 @@ const Login = () => {
                     <h2 className='title'>Iniciar Sesión</h2>
 
                     <form onSubmit={handleSubmit(onSubmit)} className='form'>
+                        
                         <div className="inputbox">
                             <label>Email:</label>
-                            <input type="email" {...register('email',{required:true})}/>
-                            
+                            <input 
+                                className={`${errors.email?.type === 'required' && 'border-red'}`}
+                                type="email" 
+                                {...register('email',{required:true})}
+                            />
+                            {
+                            errors.email?.type==='required' 
+                            && 
+                            <p className='error-message'>El campo es obligatorio</p>
+                            }
                         </div>
                         <div className="inputbox">
                             <label>Contraseña:</label>
 
                             <div className="input-password">
 
-                                <input type={visible ? 'text' : 'password'} {...register('password',{required:true})}/>
+                                <input 
+                                    className={`${errors.password?.type === 'required' && 'border-red'}`}
+                                    type={visible ? 'text' : 'password'} 
+                                    {...register('password',{required:true})}
+                                />
                                 <span 
                                     className='checkbox' 
                                     onClick={toggleEye}
                                 >
                                     {visible? <FaRegEye className='eye-icon'/> : <FaRegEyeSlash className='eye-icon'/>}
                                 </span>
-                                
+                                {
+                                errors.email?.type==='required' 
+                                && 
+                                <p className='error-message'>El campo es obligatorio</p>
+                                }
                             </div>
                         </div>
                         
                         <button type="submit">Ingresar</button>
+                        {
+                            serverError && <p className='error-message'>{serverError}</p>
+                        }
                     </form>
+
+                    
+
                 </div>
                 
                 <div className="login-nets">

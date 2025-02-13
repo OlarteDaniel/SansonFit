@@ -11,13 +11,10 @@ import '../styles/pages/ProductsList.css';
 const ProductsList = () => {
 
     const {session} = useContext(UserContext);
-    // console.log(session?.data.payload.role)
 
     return (
         
         <main className="products-list">
-
-            <p>{session?.data.payload.role}</p>
 
             <header className="title-primary">
                 <h2>PRODUCTOS</h2>

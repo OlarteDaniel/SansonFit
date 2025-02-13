@@ -40,12 +40,24 @@ const Register = () => {
 
         try {
             const result = await sessionsService.registerUser(newUser);
-            console.log("Respuesta del servidor:", result);
+
             if(result.status === 200){
                 navigate('/login')
-            }else{
-                setServerError("Error en el registro. Intente nuevamente.");
+                return;
             }
+            if(result.status >= 300 & result.status < 500){
+
+                const errorMsg = result.error || "Error desconocido";
+
+                if(errorMsg === 'User already exists'){
+                    setServerError("Esta dirección de e‑mail ya ha sido asociada con una cuenta.");
+                }else{
+                    setServerError(`Error en el registro: ${errorMsg}`);
+                }
+                return;
+            }
+            setServerError("Error en el registro. Intente nuevamente.");
+            
         } catch (error) {
             setServerError(`Ocurrió un problema con el servidor.`);
             console.error("Error al crear usuario:", error);

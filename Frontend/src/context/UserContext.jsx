@@ -10,11 +10,17 @@ export const UserContextProvider = ({children}) => {
     const fetchSession = async () =>{
         try {
             const result = await sessionsService.currentSession();
-            setSession(result || null);
+            
+            if(result?.status === 200){
+                setSession(result);
+                return;
+            }
+
         } catch (error) {
             console.error('Error obteniendo la session:',error);
-            setSession(null)
         }
+
+        setSession(null);
     };
 
     useEffect(() =>{

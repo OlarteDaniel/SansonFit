@@ -2,6 +2,7 @@
     font-family: 'Smack Laideth';
     font-size: 18px;
     background-color: #F7F9FB;
+    letter-spacing: .05em; /*Eliminar en caso de errores visuales*/
 }
 
 .home .background{
@@ -61,6 +62,7 @@
     font-family: 'Smack Laideth';
     font-weight: 100;
     font-size: 1em;
+    letter-spacing: .05em;
     transition: .3s;
 }
 
@@ -114,6 +116,14 @@
 .home .feactured_products img{
     width: 25vw;
     max-width: 100px;
+}
+
+.home .feactured_products .buttons{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
 }
 
 @media(min-width:480px){
@@ -221,6 +231,12 @@
     .home .feactured_products .products img{
         width: 8vw;
     }
+
+    .home .feactured_products .buttons{
+        flex-direction: row;
+        justify-content: center;
+        gap: 3em;
+    }
 }
 
 @media(min-width:1024px){
@@ -252,6 +268,10 @@
         width: 6vw;
     }
 
+    .home .feactured_products .buttons{
+        gap: 5em;
+    }
+
 }
 
 @media(min-width:1280px){
@@ -274,6 +294,10 @@
 
     .home .feactured_products{
         font-size: .9em;
+    }
+
+    .home .feactured_products .buttons{
+        gap: 7em;
     }
 }
 
