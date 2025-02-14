@@ -14,7 +14,7 @@ const login = (req,res)=>{
 
     const token = jwt.sign(sessionUser,config.auth.jwt.SECRET,{expiresIn:'1d'});
 
-    return res.cookie('sid',token).sendSuccess('loggend in');
+    return res.cookie('sid',token,{httpOnly:true}).sendSuccess('loggend in');
 }
 
 const logout = (req,res)=>{

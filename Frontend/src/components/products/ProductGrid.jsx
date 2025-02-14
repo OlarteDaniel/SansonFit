@@ -3,6 +3,7 @@ import React, { useEffect, useState, useContext } from 'react'
 import ProductCard from './ProductCard'
 
 import UserContext from '../../context/UserContext';
+import ProductContext from '../../context/ProductContext';
 
 import { productsService } from '../../services/services';
 
@@ -13,24 +14,12 @@ import '../../styles/components/products/ProductGrid.css'
 
 const ProductGrid = () => {
 
-    const {session} = useContext(UserContext);
-    const [products,setProducts] = useState([]);
-
-    useEffect(()=>{
-
-        const fetchProducts = async () =>{
-            const result = await productsService.getProducts();
-            setProducts(result.data.payload);
-        }
-
-        products.length===0&&fetchProducts();        
-        
-    },[])
+    const {products} = useContext(ProductContext);
 
     return (
         <div className='grid' >
             {products.map((product) =>(
-                <ProductCard key={product._id} title={product.title} price={product.price}/>
+                <ProductCard key={product._id} id={product._id} title={product.title} price={product.price}/>
             ))}
         </div>
     )

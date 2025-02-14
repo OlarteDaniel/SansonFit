@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export default class AxiosClient{
 
-    makeGetRequest = async({url,config}) =>{
+    makeGetRequest = ({url,config}) =>{
         return axios.get(url,config)
             .then(result =>({
                 status: result.status,
@@ -14,7 +14,7 @@ export default class AxiosClient{
             }))
     };
 
-    makePostRequest = async({url,body,config}) =>{
+    makePostRequest = ({url,body,config}) =>{
         return axios.post(url, body, config)
             .then(result => ({
                 status: result.status,
@@ -43,21 +43,18 @@ export default class AxiosClient{
         }
     };
 
-    makeDeleteRequest = async({url,config}) =>{
-        try {
-            const result = await axios.delete(url,config)
-
-            return {
+    makeDeleteRequest = ({url,config}) =>{
+        return axios.delete(url,config)
+            .then(result => ({
                 status: result.status,
                 data: result.data
-            }
-        } catch (error) {
-            if(config.withStackTrace){
-                console.log(error)
-            }else{
-                console.log(error.message)
-            }
-        }
+            }))
+            .catch(error => ({
+                status: error.response?.status || 500,
+                error: error.response?.data?.error || 'Error desconocido'
+            }))
     };
 
 }
+
+// En caso de error volver a colocar los async

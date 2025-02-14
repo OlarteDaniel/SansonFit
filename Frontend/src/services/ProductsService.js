@@ -11,4 +11,9 @@ export default class ProductsService {
         const requestInfo = {url:`${PRODUCTS_ENDPOINT}`,config: getBaseHeaders()};
         return this.client.makeGetRequest(requestInfo);
     }
+
+    deleteProduct = (id) =>{
+        const requestInfo = {url: `${PRODUCTS_ENDPOINT}/${id}`,config: getBaseHeaders()};
+        return this.client.makeDeleteRequest(requestInfo)
+    }
 }

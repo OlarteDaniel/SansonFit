@@ -88,7 +88,7 @@ const Home = () => {
                 <div className="buttons">
                     <Link to='/products'><button>Ver Productos</button></Link>
                     {session?.data.payload.role === 'admin' && 
-                        <Link to='/register/products'>
+                        <Link to='/register/product'>
                             <button>
                                 Agregar Productos
                             </button>

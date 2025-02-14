@@ -73,10 +73,9 @@
     display: none;
 }
 
-.card .card-product .img .button-buys{
+.card .card-product .img .button{
     width: 70%;
     padding: 0.5em;
-    background-color: #005F9E;
     border: none;
     border-radius: 3px;
     color: #fff;    
@@ -87,9 +86,31 @@
     transition: color 0.3s, background-color 0.3s;
 }
 
+.card .card-product .img .button-buys{
+    background-color: #005F9E;
+}
+
 .card .card-product .img .button-buys:hover {
     background-color: #0085CA;
     color: #00335F;
+}
+
+.card .card-product .img .button-edit{
+    background-color: #FFB300;;
+}
+
+.card .card-product .img .button-edit:hover {
+    background-color: #FF8C00; 
+    color: #00335F;
+}
+
+.card .card-product .img .button-delete{
+background-color: #D32F2F;
+}
+
+.card .card-product .img .button-delete:hover {
+    background-color: #C2185B; 
+    color: #00335F; 
 }
 
 .card .card-details{
