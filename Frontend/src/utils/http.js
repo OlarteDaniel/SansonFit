@@ -11,8 +11,8 @@ export const getBaseHeaders = () =>{
 export const getFormHeaders = () =>{
     return {
         headers: {
-            'Content-Type': 'application/json', 
-            Accept: 'application/json'
+            'Content-Type':'application/json', 
+            Accept:'application/json'
         },
         withCredentials: true
     }

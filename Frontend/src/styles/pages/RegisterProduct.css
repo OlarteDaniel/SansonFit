@@ -30,3 +30,165 @@
     align-items: center;
     gap: .8em;
 }
+
+.registerProduct .container .form .inputbox{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    color: #333333;
+}
+
+.registerProduct .container .form .inputbox label{
+    font-size: 1.1em;
+}
+
+.registerProduct .container .form .inputbox input,
+.registerProduct .container .form .inputbox select{
+    appearance: none; 
+    padding: .3em;
+    width: 100%;
+    outline: none;
+    font-size: .9em;
+    border-radius: 5px;
+    background: rgba(192, 192, 192, 0.1);
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    color: #333333;
+    cursor: pointer;
+}
+
+.registerProduct .container .form .inputbox input[type="file"] {
+    display: none; 
+}
+
+.registerProduct .container .form .inputbox .file-label {
+    display: inline-block;
+    background: rgba(192, 192, 192, 0.2);
+    color: #333;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: .9em;
+    cursor: pointer;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    text-align: center;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.registerProduct .container .form .inputbox .file-label:hover {
+    background: rgba(192, 192, 192, 0.4);
+}
+
+.registerProduct .container .form .inputbox select:focus{
+    border-color: #007bff;
+    box-shadow: inset 0 0 15px rgba(0, 123, 255, 0.2);
+}
+
+.registerProduct .container .form .inputbox select option {
+    background: white;
+    color: #333;
+    padding: 10px;
+}
+
+/* Estilo para mejorar la apariencia en navegadores WebKit (Chrome, Safari) */
+
+.registerProduct .container .form .inputbox select::-webkit-scrollbar {
+    width: 8px;
+}
+
+.registerProduct .container .form .inputbox select::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+}
+
+.registerProduct .container .form .inputbox select::-webkit-scrollbar-track {
+    background: rgba(192, 192, 192, 0.1);
+}
+
+/* Para Edge (ocultar el ícono por defecto) */
+.registerProduct .container .form .inputbox select::-ms-expand {
+    display: none;
+}
+
+.registerProduct .container .form .inputbox select option:hover {
+    background: rgba(0, 123, 255, 0.2);
+}
+
+/* Estilo cuando una opción está seleccionada */
+.registerProduct .container .form .inputbox select option:checked {
+    background: rgba(0, 123, 255, 0.4);
+    color: #fff;
+}
+
+.registerProduct .container .form .inputbox .border-red{
+    border: 1px solid red;
+    background: rgba(255, 0, 0, 0.1);
+    box-shadow: inset 0 0 10px a(255, 0, 0, 0.2);
+}
+
+.registerProduct .container .form .error-message{
+    color: red;
+    font-size: 0.9em;
+    margin-top: 0.3em;
+}
+
+.registerProduct .container .form .btns{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.registerProduct .container .form .btns button{
+    padding: 0.5em;
+    background-color: #005F9E;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    font-family: 'Smack Laideth';
+    font-size: .9em;
+    letter-spacing: .05em;
+    text-align: center;
+    transition: color 0.3s, background-color 0.3s, transform 0.2s ease-in;
+}
+
+.registerProduct .container .form .btns button:hover{
+    background-color: #0085CA;
+    color: #00335F;
+}
+
+@media(min-width:480px){
+    .registerProduct{
+        padding: 5.5rem 2rem 3.5rem;
+        font-size: 22px;
+    }
+
+    .registerProduct .container{
+        max-width: 400px;
+    }
+}
+
+@media(min-width:768px){
+    .registerProduct{
+        padding: 7rem 2rem 2.5rem;
+        font-size: 20px;
+    }
+
+    .registerProduct .container{
+        max-width: none;
+    }
+
+}
+
+@media(min-width:1024px){
+    .registerProduct{
+        padding: 7rem 4rem 2.5rem;
+    }
+}
+
+@media(min-width:1280px){
+    .registerProduct{
+        padding: 7rem 4rem 2.5rem;
+        font-size: 24px;
+    }
+}

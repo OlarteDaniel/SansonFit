@@ -37,11 +37,6 @@
     gap: .8em;
 }
 
-.register .container .section-form .form .error-message{
-    color: red;
-    font-size: .8em;
-}
-
 .register .container .section-form .form .inputbox{
     width: 100%;
     display: flex;

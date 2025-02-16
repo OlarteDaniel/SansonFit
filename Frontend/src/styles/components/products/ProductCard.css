@@ -63,22 +63,31 @@
 
 
 .card .card-product .img .buttons{
+    position: absolute;
+    bottom: 0;
     width: 100%;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: flex-end;
     gap: .5em;
+    transform: translateY(102%);
     transition: transform 0.2s ease-in;;
+}
+
+.card:hover .img .buttons{
+    transform: translateY(0);
+}
+
+.card .card-product .img .buttons button .desktop{
     display: none;
 }
 
 .card .card-product .img .button{
-    width: 70%;
-    padding: 0.5em;
+    width: 50px;
+    padding: .8em;
     border: none;
-    border-radius: 3px;
-    color: #fff;    
+    border-radius: 50%;
+    color: #fff;
     cursor: pointer;
     font-family: 'Smack Laideth';
     font-size: .9em;
@@ -160,11 +169,23 @@ background-color: #D32F2F;
         width: 60%;
     }
 
+    .card .card-product .img .button{
+        width: 70%;
+        padding: .5em;
+        border-radius: 3px;
+    }
+
     .card .card-product .img .buttons{
-        position: absolute;
-        bottom: 0;
-        display: flex;
-        transform: translateY(102%);
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card .card-product .img .buttons button .desktop{
+        display: block;
+    }
+
+    .card .card-product .img .buttons button .mobil{
+        display: none;
     }
 
     .card .card-product .img img{
@@ -187,10 +208,6 @@ background-color: #D32F2F;
 
     .card:hover img{
         transform: scale(1.05);
-    }
-
-    .card:hover .img .buttons{
-        transform: translateY(0);
     }
 
     .card .card-details .title h3{

@@ -23,13 +23,13 @@ export const UserContextProvider = ({children}) => {
         setSession(null);
     };
 
-    useEffect(() =>{
-        fetchSession();
-    },[]);
-
     const updateSession = async () => {
         await fetchSession();
     };
+
+    useEffect(() =>{
+        fetchSession();
+    },[]);
 
     return (
         <Context.Provider 

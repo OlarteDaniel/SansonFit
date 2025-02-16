@@ -58,7 +58,7 @@ const Login = () => {
                 return;
             }
 
-            setServerError("Error en el registro. Intente nuevamente.");
+            setServerError("Error al iniciar sesion. Intente nuevamente.");
 
         } catch (error) {
             setServerError(`Ocurrió un problema con el servidor.`);

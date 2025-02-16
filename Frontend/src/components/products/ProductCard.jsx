@@ -7,7 +7,8 @@ import { HiMagnifyingGlass } from "react-icons/hi2";
 import UserContext from '../../context/UserContext';
 import ProductContext from '../../context/ProductContext';
 
-import { productsService } from '../../services/services';
+import { FaRegTrashAlt } from "react-icons/fa";
+import { FaPencilAlt } from "react-icons/fa";
 
 import '../../styles/components/products/ProductCard.css'
 
@@ -37,14 +38,16 @@ const ProductCard = ({id,title,price}) => {
                                         <button 
                                             className='button button-edit'
                                         >
-                                                Editar
+                                            <span className='mobil'><FaPencilAlt /></span>
+                                            <span className='desktop'>Editar</span>
                                         </button>
 
                                         <button 
                                             className='button button-delete'
                                             onClick={() => deleteProduct(id)}
                                         >
-                                                Eliminar
+                                            <span className='mobil'><FaRegTrashAlt /></span>
+                                            <span className='desktop'>Eliminar</span>
                                         </button>
                                     </>
                                 }

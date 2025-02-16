@@ -18,7 +18,6 @@ const Home = () => {
 
     return (
         <main className='home'>
-            
             <div className="background">
                 <div className="presentation">
                     <div className="welcome">
