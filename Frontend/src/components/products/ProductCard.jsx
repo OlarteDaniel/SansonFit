@@ -9,6 +9,7 @@ import ProductContext from '../../context/ProductContext';
 
 import { FaRegTrashAlt } from "react-icons/fa";
 import { FaPencilAlt } from "react-icons/fa";
+import { FaPlus } from "react-icons/fa";
 
 import '../../styles/components/products/ProductCard.css'
 
@@ -31,27 +32,31 @@ const ProductCard = ({id,title,price}) => {
                     {
                         session && 
                             <div className="buttons">
-                                {session.data.payload.role === 'user'? 
-                                    <button className='button button-buys'>Comprar</button>
-                                :  
-                                    <>
-                                        <button 
-                                            className='button button-edit'
-                                        >
-                                            <span className='mobil'><FaPencilAlt /></span>
-                                            <span className='desktop'>Editar</span>
-                                        </button>
+                            {session.data.payload.role === 'user'? 
+                                <button className='button button-buys'>Comprar</button>
+                            :  
+                                <>
+                                    <button 
+                                        className='button button-edit'
+                                    >
+                                        <span className='pencil-icon'><FaPencilAlt /></span>
+                                    </button>
 
-                                        <button 
-                                            className='button button-delete'
-                                            onClick={() => deleteProduct(id)}
-                                        >
-                                            <span className='mobil'><FaRegTrashAlt /></span>
-                                            <span className='desktop'>Eliminar</span>
-                                        </button>
-                                    </>
-                                }
-                            </div>
+                                    <button 
+                                        className='button button-delete'
+                                        onClick={() => deleteProduct(id)}
+                                    >
+                                        <span className='trash-icon'><FaRegTrashAlt /></span>
+                                    </button>
+
+                                    <button
+                                        className='button button-plus'
+                                    >
+                                        <span className='plus-icon'><FaPlus /></span>
+                                    </button>
+                                </>
+                            }
+                        </div>
                     }
                 </div>
             </div>

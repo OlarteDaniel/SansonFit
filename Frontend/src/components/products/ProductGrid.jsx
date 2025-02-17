@@ -17,11 +17,18 @@ const ProductGrid = () => {
     const {products} = useContext(ProductContext);
 
     return (
-        <div className='grid' >
-            {products.map((product) =>(
-                <ProductCard key={product._id} id={product._id} title={product.title} price={product.price}/>
-            ))}
-        </div>
+        
+        products?.length?
+            <div className='grid' >
+                {products.map((product, index) =>(
+                    <ProductCard key={product._id || index} id={product._id} title={product.title} price={product.price}/>
+                ))}
+            </div>
+        :
+            <div className="img-notProducts">
+                <img src={notProduct} alt="Not Product Image" />
+                <p className='textNotProduct'>No hay productos actualmente!!!</p>
+            </div>
     )
 }
 

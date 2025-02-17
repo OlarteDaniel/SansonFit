@@ -17,6 +17,25 @@
     color: #333333;
 }
 
+.img-notProducts{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.img-notProducts img{
+    width: 100%;
+    max-width: 400px;
+}
+
+
+.img-notProducts .textNotProduct{
+    font-size: 1.5em;
+    text-align: center;
+}
+
 @media(min-width:480px){
     .grid{
         padding-top: 1rem;
@@ -39,7 +58,15 @@
         );
         gap: 1.5em;
     }
-    
+
+    .img-notProducts{
+        margin-top: 1.5em;
+    }
+
+    .img-notProducts img{
+        max-width: 300px;
+    }
+
 }
 
 @media(min-width:1024px){

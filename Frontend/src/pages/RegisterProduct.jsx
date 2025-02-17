@@ -1,7 +1,9 @@
-import React, {useEffect, useState } from 'react'
+import React, {useContext, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import {productsService,categoryService} from '../services/services';
+
+import ProductContext from '../context/ProductContext';
 
 import '../styles/pages/RegisterProduct.css'
 
@@ -10,6 +12,7 @@ const RegisterProduct = () => {
     const [categories,setCategories] = useState([]);
     const [serverError, setServerError] = useState('');
     const {register, handleSubmit, formState:{errors}} = useForm();
+    const {addProducts} = useContext(ProductContext);
 
     const onSubmit =  async (data) =>{
         setServerError('');
@@ -28,8 +31,7 @@ const RegisterProduct = () => {
 
         try {
             
-            const result = await productsService.createProduct(formData);
-            console.log(result);
+            addProducts(formData);
 
         } catch (error) {
             setServerError(`Ocurrió un problema con el servidor.`);
