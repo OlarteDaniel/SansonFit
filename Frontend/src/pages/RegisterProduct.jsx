@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
-import {productsService,categoryService} from '../services/services';
+import {categoryService} from '../services/services';
 
 import ProductContext from '../context/ProductContext';
 

@@ -109,8 +109,8 @@ const createProduct = async(req,res) =>{
     if(!result){
         return res.sendBadRequest('Could not create product');
     }
-
-    return res.sendSuccess('Product created');
+    console.log(result);
+    return res.sendCreated('Product created',result);
 }
 
 const updateProduct = async(req,res) =>{

@@ -35,7 +35,7 @@ const schema = new mongoose.Schema({
     },
     globalStatus:{
         type: Boolean,
-        default: true
+        default: false
     },
     thumbnails:{
         type:Array,

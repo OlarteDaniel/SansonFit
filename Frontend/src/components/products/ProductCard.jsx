@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import Creatina from '../../assets/img/productsList/Creatina-Start.png'
 import { HiMagnifyingGlass } from "react-icons/hi2";
@@ -13,16 +13,33 @@ import { FaPlus } from "react-icons/fa";
 
 import '../../styles/components/products/ProductCard.css'
 
-const ProductCard = ({id,title,price}) => {
+const ProductCard = ({id,title,price,status}) => {
     
-    const {deleteProduct} = useContext(ProductContext);
+    const {deleteProduct,activeVariant} = useContext(ProductContext);
     const {session} = useContext(UserContext);
+
+    const navigate = useNavigate();
 
     const priceFormat = Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(price);
 
+    const handleClickInformation = (event) =>{
+        event.stopPropagation() // Evita que el evento se propague al padre
+        navigate('/')
+    }
+
+    const handleClickDelete = (event) => {
+        event.stopPropagation(); 
+        deleteProduct(id)
+    };
+
+    const handleclickAddVariant = (event) => {
+        event.stopPropagation(); 
+        activeVariant(id)
+    };
+
     return (
         //Acabamos de remplazar un div por el link , en caso de fallar reemplazar el Link por el div //
-        <Link className='card'>  
+        <div onClick={handleClickInformation} className='card'>  
             <div className="card-product">
                 <div className="img">
                     <button className='button-glass'>
@@ -37,20 +54,21 @@ const ProductCard = ({id,title,price}) => {
                             :  
                                 <>
                                     <button 
-                                        className='button button-edit'
+                                        className='button circle button-edit'
                                     >
-                                        <span className='pencil-icon'><FaPencilAlt /></span>
+                                        <span className=' pencil-icon'><FaPencilAlt /></span>
                                     </button>
 
                                     <button 
-                                        className='button button-delete'
-                                        onClick={() => deleteProduct(id)}
+                                        className='button circle button-delete'
+                                        onClick={handleClickDelete}
                                     >
                                         <span className='trash-icon'><FaRegTrashAlt /></span>
                                     </button>
 
                                     <button
-                                        className='button button-plus'
+                                        className='button circle button-plus'
+                                        onClick={handleclickAddVariant}
                                     >
                                         <span className='plus-icon'><FaPlus /></span>
                                     </button>
@@ -67,8 +85,15 @@ const ProductCard = ({id,title,price}) => {
                 <div className="price">
                     <p>{priceFormat}</p>
                 </div>
+                {session?.data?.payload?.role==='admin' && 
+                    (
+                        <p className={`infoStatus ${status? 'enabled' : 'disabled'}`}>
+                            {status ? 'Habilitado' : 'Deshabilitado'}
+                        </p>
+                    )
+                }
             </div>
-        </Link>
+        </div>
     )
 }
 

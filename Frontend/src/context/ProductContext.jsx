@@ -7,6 +7,7 @@ const Context = createContext();
 export const ProductContextProvider = ({children}) =>{
 
     const [products,setProducts] = useState([]);
+    const [addVariantPage,setAddVariantPage] = useState(null);
 
     useEffect(()=>{    
         fetchProducts();
@@ -17,6 +18,10 @@ export const ProductContextProvider = ({children}) =>{
         setProducts(result.data.payload);
     }
 
+    const activeVariant = (productId=null) =>{
+        setAddVariantPage(productId)
+    }
+
     const addProducts = async (productFormData) =>{
         let productObject = {};
         productFormData.forEach(function(value, key){
@@ -25,8 +30,8 @@ export const ProductContextProvider = ({children}) =>{
 
         try {
             const response = await productsService.createProduct(productFormData);
-            if(response.status===200){
-                setProducts(prevProducts => [...prevProducts,productObject]);
+            if(response.status===201){
+                setProducts(prevProducts => [...prevProducts,response.data.payload]);
             }
         } catch (error) {
             console.error("Error al agregar producto:", error);
@@ -35,14 +40,24 @@ export const ProductContextProvider = ({children}) =>{
     }
 
     const deleteProduct = async (id) =>{
-        await productsService.deleteProduct(id);
-        setProducts(products.filter(product => product._id !== id));
+        try {
+            const response = await productsService.deleteProduct(id);
+            if(response.status===200){
+                setProducts(products.filter(product => product._id !== id));
+            }
+        } catch (error) {
+            console.log('Error al eliminar el producto',error);
+        }
     }
+
+    
 
     return (
         <Context.Provider
         value={{
+            addVariantPage,
             products,
+            activeVariant,
             addProducts,
             deleteProduct
         }}

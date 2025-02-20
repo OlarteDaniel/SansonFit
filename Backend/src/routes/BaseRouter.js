@@ -51,7 +51,7 @@ export default class BaseRouter{
             res.status(200).send({status:'success',payload:payload})
         }
 
-        res.sendCreated = (payload,message) => {
+        res.sendCreated = (message,payload) => {
 
             req.logger.info(`[${req.method}] ${req.originalUrl} - Response: 201 - Created resource with message: ${message}`);
             res.status(201).send({status:'success',message:message,payload:payload})

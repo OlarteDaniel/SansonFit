@@ -68,22 +68,16 @@
     width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
-    gap: .5em;
-    transform: translateY(102%);
+    justify-content: center;
+    gap: 2em;
     transition: transform 0.2s ease-in;;
 }
 
-.card:hover .img .buttons{
-    transform: translateY(0);
-}
-
-
 .card .card-product .img .button{
     width: 50px;
-    padding: .8em;
+    padding: 1em;
     border: none;
-    border-radius: 50%;
+    border-radius: 5px;
     color: #fff;
     cursor: pointer;
     font-family: 'Smack Laideth';
@@ -92,7 +86,13 @@
     transition: color 0.3s, background-color 0.3s;
 }
 
+.card .card-product .img .button.circle{
+    border-radius: 50%;
+}
+
 .card .card-product .img .button-buys{
+    width: 80%;
+    border-radius: 5px;
     background-color: #005F9E;
 }
 
@@ -129,6 +129,7 @@
 }
 
 .card .card-details{
+    position: relative;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -146,6 +147,26 @@
     font-size: 1.5em;
     color: #333333;
     margin: 0.5em 0;
+}
+
+.card .card-details .infoStatus{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    font-size: 1em;
+    letter-spacing: .1em;
+}
+
+.card .card-details .infoStatus.enabled{
+    color: #28a745;
+}
+
+.card .card-details .infoStatus.disabled{
+    color: #D32F2F;;
+}
+
+.hidden{
+    display: none;
 }
 
 @media(min-width:480px){
@@ -179,6 +200,19 @@
         transition: .2s ease-in;
     }
 
+    .card .card-product .img .buttons{
+        gap: 1em;
+        transform: translateY(102%);
+    }
+
+    .card:hover .img .buttons{
+        transform: translateY(0);
+    }
+
+    .card .card-product .img .button{
+        padding: .6em;
+    }
+
     .card:hover .img .button-glass{
         display: flex;
     }
@@ -187,6 +221,7 @@
         animation: glasshover .5s infinite;
     }
 
+    
     @keyframes glasshover {
         0%{transform: scale(1);}
         50%{transform: scale(1.1);}

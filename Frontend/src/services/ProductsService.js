@@ -7,6 +7,11 @@ export default class ProductsService {
         this.client = client;
     }
 
+    getProductById = (id) =>{
+        const requestInfo = {url: `${PRODUCTS_ENDPOINT}/${id}`,config:getBaseHeaders()};
+        return this.client.makeGetRequest(requestInfo);
+    }
+
     getProducts = () => {
         const requestInfo = {url:`${PRODUCTS_ENDPOINT}`,config: getBaseHeaders()};
         return this.client.makeGetRequest(requestInfo);
