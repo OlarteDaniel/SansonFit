@@ -11,6 +11,8 @@ class ProductsRouter extends BaseRouter{
 
         this.get('/',['PUBLIC'],productsController.getAll);
 
+        this.get('/:type/:name',['PUBLIC'],productsController.getAllByCategory);
+
         this.get('/:id',['PUBLIC'],productsController.getOneById);
 
         this.post('/',['ADMIN'],upload.array('thumbnails',3),productsController.createProduct);

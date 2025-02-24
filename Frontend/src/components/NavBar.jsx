@@ -22,7 +22,9 @@ const NavBar = () => {
 
     const dropdownRef = useRef(null);
 
-    const toggleMenu = () => setMenuActive(!menuActive);
+    const toggleMenu = () => {
+        setMenuActive(!menuActive)
+    };
 
     const resetState = () =>{
         if(menuActive){
@@ -31,7 +33,7 @@ const NavBar = () => {
     }
 
     useClickOutside(dropdownRef,resetState);
-    
+
     return (
         <header className={`navBar ${isScrolled ? 'abajo' : ''}`}>
             <div></div>

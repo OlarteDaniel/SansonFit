@@ -15,8 +15,8 @@ export default class SupplementVariantsRepository{
         return this.dao.get({productId:productId});
     }
 
-    getAllByProductFlavors(productId,flavor){
-        return this.dao.get({productId:productId,flavor:flavor});
+    getByProductFlavors(productId,flavor){
+        return this.dao.getOne({productId:productId,flavor:flavor});
     }
 
     getById(id){
@@ -33,6 +33,10 @@ export default class SupplementVariantsRepository{
 
     deleteSupplement(id){
         return this.dao.delete({_id:id});
+    }
+
+    deleteManyByProduct(productId){
+        return this.dao.deleteMany({productId:productId})
     }
 
 }

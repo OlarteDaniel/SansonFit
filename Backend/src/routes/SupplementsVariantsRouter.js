@@ -9,7 +9,11 @@ class SupplementsVariantsRouter extends BaseRouter{
         
         this.get('/',['PUBLIC'],supplementVariantController.getAll);
 
-        this.get('/:flavor',['PUBLIC'],supplementVariantController.getAllByFlavor);
+        this.get('/flavor/:flavor',['PUBLIC'],supplementVariantController.getAllByFlavor);
+
+        this.get('/product/:id',['PUBLIC'],supplementVariantController.getAllByProduct);
+
+        this.get('/product/:pid/flavor/:flavor',['PUBLIC'],supplementVariantController.getByProductAndFlavor);
         
         this.post('/:id',['ADMIN'],supplementVariantController.addFlavor);
 

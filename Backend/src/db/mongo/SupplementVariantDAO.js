@@ -22,4 +22,8 @@ export default class SupplementVariantDAO{
         return supplementModel.deleteOne(id);
     }
 
+    async deleteMany(filter){
+        return supplementModel.deleteMany(filter)
+    }
+
 }

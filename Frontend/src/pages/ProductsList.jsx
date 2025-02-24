@@ -1,6 +1,5 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 
-import UserContext from '../context/UserContext';
 import ProductContext from '../context/ProductContext';
 
 import ProductGrid from '../components/products/ProductGrid';
@@ -8,16 +7,23 @@ import SidebarFilters from '../components/filters/SidebarFilters/SidebarFilters'
 import SortingDropdown from '../components/filters/SortingDropdown';
 import ProductVariantPage from '../components/products/ProductVariantPage';
 
+import { Toaster } from 'sonner';
+
 import '../styles/pages/ProductsList.css';
 
 const ProductsList = () => {
 
-    const {session} = useContext(UserContext);
-    const {addVariantPage} = useContext(ProductContext)
+    const {product} = useContext(ProductContext)
 
     return (
         
         <main className="products-list">
+
+            <Toaster 
+                theme='system'
+                richColors
+                closeButton
+            />
 
             <header className="title-primary">
                 <h2>PRODUCTOS</h2>
@@ -31,7 +37,7 @@ const ProductsList = () => {
             <section className="product-grid">
                 <ProductGrid />
             </section>
-            <section className={`product-variant-page ${addVariantPage? 'activate':''}`}>
+            <section className={`product-variant-page ${product? 'activate':''}`}>
                 <ProductVariantPage/>
             </section>
         </main>

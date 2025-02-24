@@ -16,6 +16,18 @@ const schema = new mongoose.Schema({
     color: {
         type: String,
         required: true
+    },
+    quantity:{
+        type: Number,
+        default: 1
+    },
+    discount:{
+        type: Number,
+        default: 0
+    },
+    status:{
+        type:Boolean,
+        default: true
     }
 });
 

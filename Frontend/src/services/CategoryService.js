@@ -12,4 +12,9 @@ export default class ProductsService {
         return this.client.makeGetRequest(requestInfo);
     }
 
+    getCategoryById = (id) =>{
+        const requestInfo = {url:`${CATEGORY_ENDPOINT}/${id}`,config: getBaseHeaders()};  
+        return this.client.makeGetRequest(requestInfo);  
+    }
+
 }

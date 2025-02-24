@@ -5,6 +5,8 @@ import {categoryService} from '../services/services';
 
 import ProductContext from '../context/ProductContext';
 
+import { Toaster } from 'sonner'
+
 import '../styles/pages/RegisterProduct.css'
 
 
@@ -20,9 +22,9 @@ const RegisterProduct = () => {
         const formData = new FormData();
         formData.append('title',data.title);
         formData.append('description',data.description);
-        formData.append('code',data.code);
         formData.append('price',data.price);
         formData.append('category',data.category);
+        formData.append('globalStatus',data.status);
         if (data.thumbnails?.length) {
             for (const file of data.thumbnails) {
                 formData.append('thumbnails', file);
@@ -30,7 +32,6 @@ const RegisterProduct = () => {
         }
 
         try {
-            
             addProducts(formData);
 
         } catch (error) {
@@ -39,6 +40,8 @@ const RegisterProduct = () => {
         }
 
     }
+
+    
 
     useEffect(()=>{
 
@@ -53,6 +56,13 @@ const RegisterProduct = () => {
 
     return (
         <main className='registerProduct'>
+
+            <Toaster 
+                theme='system'
+                richColors
+                closeButton
+            />
+
             <div className="container">
                 <h2 className='title'>Registrar Producto</h2>
                 <form onSubmit={handleSubmit(onSubmit)} className="form">
@@ -80,20 +90,6 @@ const RegisterProduct = () => {
                         />
                         {
                             errors.description?.type==='required' 
-                            && 
-                            <p className='error-message'>El campo es obligatorio</p>
-                        }
-                    </div>
-
-                    <div className="inputbox">
-                        <label>Codigo</label>
-                        <input 
-                            className={`${errors.code?.type==='required' && 'border-red'}`}
-                            type="text"
-                            {...register('code',{ required: true })}
-                        />
-                        {
-                            errors.code?.type==='required' 
                             && 
                             <p className='error-message'>El campo es obligatorio</p>
                         }
@@ -138,6 +134,17 @@ const RegisterProduct = () => {
                     </div>
 
                     <div className="inputbox">
+                        <label>Estado</label>
+                        <select
+                            defaultValue=''
+                            {...register('status')}   
+                        >
+                            <option value={true}>Habilitado</option>
+                            <option value={false}>Deshabilitado</option>
+                        </select>
+                    </div>
+
+                    <div className="inputbox">
                         <input 
                             type="file" 
                             id="uploadFile" 
@@ -154,6 +161,7 @@ const RegisterProduct = () => {
                     {serverError && <p className="error-message">{serverError}</p>}
                 </form>
             </div>
+    
         </main>
     )
 }

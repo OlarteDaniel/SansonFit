@@ -3,7 +3,10 @@ import axios from 'axios';
 export default class AxiosClient{
 
     makeGetRequest = ({url,config}) =>{
-        return axios.get(url,config)
+        return axios.get(url,{
+            ...config,
+            validateStatus: status => status < 500
+        })
             .then(result =>({
                 status: result.status,
                 data: result.data
@@ -15,7 +18,10 @@ export default class AxiosClient{
     };
 
     makePostRequest = ({url,body,config}) =>{
-        return axios.post(url, body, config)
+        return axios.post(url, body, {
+            ...config,
+            validateStatus: status => status < 500
+        })
             .then(result => ({
                 status: result.status,
                 data: result.data
@@ -27,24 +33,25 @@ export default class AxiosClient{
     };
 
     makePutRequest = async({url,body,config}) =>{
-        try {
-            const result = await axios.put(url,body,config);
-
-            return{
+        return axios.put(url,body,{
+            ...config,
+            validateStatus: status => status < 500
+        })
+            .then(result => ({
                 status: result.status,
                 data: result.data
-            }
-        } catch (error) {
-            if(config.withStackTrace){
-                console.log(error)
-            }else{
-                console.log(error.message)
-            }
-        }
+            }))
+            .catch(error => ({
+                status: error.response?.status || 500,
+                error: error.response?.data?.error || 'Error desconocido'
+            }))
     };
 
     makeDeleteRequest = ({url,config}) =>{
-        return axios.delete(url,config)
+        return axios.delete(url,{
+            ...config,
+            validateStatus: status => status < 500
+        })
             .then(result => ({
                 status: result.status,
                 data: result.data

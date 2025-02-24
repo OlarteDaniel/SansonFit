@@ -1,52 +1,104 @@
 import React, {useState,createContext, useEffect} from "react";
 
-import { productsService } from '../services/services';
+import { productsService, categoryService } from '../services/services';
+import useScrollLock from "../hooks/useScrollLock";
+
+import { toast } from 'sonner'
 
 const Context = createContext();
 
 export const ProductContextProvider = ({children}) =>{
 
+    const [product,setProduct] = useState(null);
+    const [category,setCategory] = useState('');
     const [products,setProducts] = useState([]);
-    const [addVariantPage,setAddVariantPage] = useState(null);
+
+    const [toggle] = useScrollLock();
 
     useEffect(()=>{    
         fetchProducts();
     },[])
 
     const fetchProducts = async () =>{
-        const result = await productsService.getProducts();
-        setProducts(result.data.payload);
+        try {
+            const result = await productsService.getProducts();
+            if(result.status === 200 && result.data?.payload){
+                setProducts(result.data.payload);
+                return;
+            }
+            setProducts([]);
+        } catch (error) {
+            setProducts([]);
+            console.error('Error al obtener productos:', error)
+        }
     }
 
-    const activeVariant = (productId=null) =>{
-        setAddVariantPage(productId)
+    const activeVariant = async (productId=null) =>{
+        try {
+            if(productId){
+                const result = await productsService.getProductById(productId);
+                if(result.status === 200 && result.data?.payload){
+                    const resultCategory = await categoryService.getCategoryById(result.data.payload.category);
+                    if(resultCategory){
+                        setProduct(result.data.payload);
+                        setCategory(resultCategory.data.payload);
+                        toggle()
+                    }
+                }
+            }else{
+                setProduct(null)
+                setCategory('')
+                toggle()
+            }
+            
+        } catch (error) {
+            setProduct(null);
+            setCategory('');
+            // console.error('Error al obtener el producto:', error)
+        }        
     }
 
     const addProducts = async (productFormData) =>{
-        let productObject = {};
-        productFormData.forEach(function(value, key){
-            productObject[key] = value;
-        });
-
         try {
-            const response = await productsService.createProduct(productFormData);
-            if(response.status===201){
-                setProducts(prevProducts => [...prevProducts,response.data.payload]);
-            }
+
+            await toast.promise( 
+                productsService.createProduct(productFormData),
+                {
+                    loading:'Creando Producto...',
+                    success: (res) => {
+                        setProducts((prevProducts) => [...prevProducts, res.data.payload])
+                        const productTitle = res.data?.payload?.title || 'Sin nombre';
+                        return `El producto ${productTitle} ha sido creado`;
+                    },
+                    error:'Error al crear el producto',
+                }
+            )
         } catch (error) {
             console.error("Error al agregar producto:", error);
+            toast.error("No se pudo crear el producto.");
+            return
         }
         
     }
 
     const deleteProduct = async (id) =>{
         try {
-            const response = await productsService.deleteProduct(id);
-            if(response.status===200){
-                setProducts(products.filter(product => product._id !== id));
-            }
+
+            await toast.promise(
+                productsService.deleteProduct(id),
+                {
+                    loading:'Borrando Producto...',
+                    success: () => {
+                        setProducts(products.filter(product => product._id !== id));
+                        return 'El producto ha sido eliminado correctamente';
+                    },
+                    error:'Error al eliminar el producto',
+                }
+            )
         } catch (error) {
             console.log('Error al eliminar el producto',error);
+            toast.error("No se pudo eliminar el producto.");
+            return
         }
     }
 
@@ -55,7 +107,8 @@ export const ProductContextProvider = ({children}) =>{
     return (
         <Context.Provider
         value={{
-            addVariantPage,
+            category,
+            product,
             products,
             activeVariant,
             addProducts,

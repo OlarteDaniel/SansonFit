@@ -2,6 +2,10 @@ import productModel from './models/product.model.js'
 
 export default class ProductDAO{
 
+    async count(filter = null){
+        return productModel.countDocuments(filter);
+    }
+
     async get(filter = null){
         return productModel.find(filter);
     }

@@ -2,8 +2,8 @@ import categoryModel from './models/category.model.js';
 
 export default class CategoryDAO{
 
-    async get(){
-        return categoryModel.find();
+    async get(filter = null){
+        return categoryModel.find(filter);
     }
 
     async getOne(params){

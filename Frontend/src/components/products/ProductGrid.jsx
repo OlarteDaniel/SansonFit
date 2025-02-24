@@ -6,7 +6,6 @@ import ProductCard from './ProductCard'
 import UserContext from '../../context/UserContext';
 import ProductContext from '../../context/ProductContext';
 
-
 import notProduct from '../../assets/img/logos/User-icon-not-products.png'
 
 import '../../styles/components/products/ProductGrid.css'

@@ -4,6 +4,10 @@ export default class ProductRepository{
         this.dao = dao;
     }
 
+    countProductsByCategory(categoryId){
+        return this.dao.count({category:categoryId});
+    }
+
     getProducts(){
         return this.dao.get();
     }

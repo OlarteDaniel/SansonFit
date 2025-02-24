@@ -8,6 +8,10 @@ export default class CategoryRepository {
         return this.dao.get();
     }
 
+    getCategoriesByTypeAndName(type, name) {
+        return this.dao.getOne({type:type,name:name})
+    }
+
     getCategoryById(id){
         return this.dao.getOne({_id:id});
     }
