@@ -60,14 +60,13 @@ export const ProductContextProvider = ({children}) =>{
 
     const addProducts = async (productFormData) =>{
         try {
-
             await toast.promise( 
                 productsService.createProduct(productFormData),
                 {
                     loading:'Creando Producto...',
                     success: (res) => {
-                        setProducts((prevProducts) => [...prevProducts, res.data.payload])
                         const productTitle = res.data?.payload?.title || 'Sin nombre';
+                        setProducts((prevProducts) => [...prevProducts, res.data.payload])                        
                         return `El producto ${productTitle} ha sido creado`;
                     },
                     error:'Error al crear el producto',

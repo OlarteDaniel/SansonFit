@@ -17,4 +17,14 @@ export default class ProductsService {
         return this.client.makeGetRequest(requestInfo);  
     }
 
+    getCategoryByTypeAndName = (type,name)=>{
+        const requestInfo = {url:`${CATEGORY_ENDPOINT}/type/${type}/name/${name}`,config: getBaseHeaders()};
+        return this.client.makeGetRequest(requestInfo); 
+    }
+
+    createCategory = (category) =>{
+        const requestInfo = {url:`${CATEGORY_ENDPOINT}`,body:category,config: getBaseHeaders()};
+        return this.client.makePostRequest(requestInfo);
+    }
+
 }

@@ -12,7 +12,6 @@ import ProductsList from './pages/ProductsList';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import RegisterProduct from './pages/RegisterProduct';
-import AddVariant from './pages/AddVariant';
 import ProtectedRoute from './components/protective/ProtectedRoute';
 
 import './App.css'
@@ -38,7 +37,6 @@ function App() {
 
                     <Route element={<ProtectedRoute/>}>
                         <Route path='/register/product' element={<RegisterProduct/>}/>
-                        <Route path='/add/variant/:pid' element={<AddVariant/>}/>
                     </Route>
 
         

@@ -22,10 +22,13 @@ export default class AxiosClient{
             ...config,
             validateStatus: status => status < 500
         })
-            .then(result => ({
-                status: result.status,
-                data: result.data
-            }))
+            .then(result => {
+                console.log(result)
+                return {
+                    status: result.status,
+                    data: result.data
+                }
+            })
             .catch(error => ({
                 status: error.response?.status || 500,
                 error: error.response?.data?.error || 'Error desconocido'

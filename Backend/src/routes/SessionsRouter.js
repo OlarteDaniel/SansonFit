@@ -16,7 +16,7 @@ class SessionsRouter extends BaseRouter{
 
         this.get('/auth/google/callback',['PUBLIC'],passportCall('google'),sessionsController.login);
 
-        this.get('/current',['USER', 'ADMIN'],sessionsController.curren);
+        this.get('/current',['USER', 'ADMIN'],sessionsController.current);
     }
 }
 

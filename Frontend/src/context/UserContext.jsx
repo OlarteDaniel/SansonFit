@@ -17,7 +17,7 @@ export const UserContextProvider = ({children}) => {
             }
 
         } catch (error) {
-            console.error('Error obteniendo la session:',error);
+            console.warn('El usuario no está autenticado o hubo un error en la sesión.');
         }
 
         setSession(null);

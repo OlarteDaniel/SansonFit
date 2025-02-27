@@ -16,6 +16,8 @@ const ProductVariantPage = () => {
     const {category,product,activeVariant} = useContext(ProductContext)
     const {register, handleSubmit, formState:{errors},reset} = useForm();
 
+    
+
     const onSubmit = async (data) =>{
         const newVariant = {}
         

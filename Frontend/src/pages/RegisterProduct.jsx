@@ -1,9 +1,14 @@
 import React, {useContext, useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
+
 import { useForm } from 'react-hook-form'
+import useScrollLock from '../hooks/useScrollLock';
 
 import {categoryService} from '../services/services';
 
 import ProductContext from '../context/ProductContext';
+
+import VariantSection from '../components/products/VariantSection';
 
 import { Toaster } from 'sonner'
 
@@ -11,9 +16,11 @@ import '../styles/pages/RegisterProduct.css'
 
 
 const RegisterProduct = () => {
+    const [toggle] = useScrollLock();
+    const [variant, setVariant] = useState(false);
     const [categories,setCategories] = useState([]);
     const [serverError, setServerError] = useState('');
-    const {register, handleSubmit, formState:{errors}} = useForm();
+    const {register, handleSubmit, formState:{errors},reset} = useForm();
     const {addProducts} = useContext(ProductContext);
 
     const onSubmit =  async (data) =>{
@@ -33,6 +40,7 @@ const RegisterProduct = () => {
 
         try {
             addProducts(formData);
+            reset();
 
         } catch (error) {
             setServerError(`Ocurrió un problema con el servidor.`);
@@ -41,7 +49,10 @@ const RegisterProduct = () => {
 
     }
 
-    
+    const handleChange = ()=>{
+        setVariant(!variant);
+        toggle();
+    }
 
     useEffect(()=>{
 
@@ -160,8 +171,20 @@ const RegisterProduct = () => {
                     </div>
                     {serverError && <p className="error-message">{serverError}</p>}
                 </form>
+                <p className='text-category'>
+                    Presione aqui para
+                    <span 
+                        onClick={(()=> handleChange())}
+                        className="register-category">
+                            Registrar categorias
+                    </span>
+                </p>
             </div>
-    
+
+            <section className={`variantSectionComponent ${variant? 'activate': ''}`}>
+                <VariantSection handleChange={handleChange}/>
+            </section>        
+
         </main>
     )
 }

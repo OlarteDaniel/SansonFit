@@ -157,6 +157,55 @@
     color: #00335F;
 }
 
+.registerProduct .text-category{
+    padding: .5em;
+    font-size: 1em;
+    color: #333333;
+    text-align: center;
+}
+
+.registerProduct .text-category .register-category{
+    padding-left: .3em;
+    text-decoration: none;
+    color: #0085CA;
+    cursor: pointer;
+}
+
+.registerProduct .text-category .register-category:hover{
+    text-decoration: underline;
+}
+
+.registerProduct .variantSectionComponent{
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width:80vw;
+    max-width: 400px;
+    height: 50vh;
+    max-height: 340px;
+    z-index: 10;
+    background-color: #F2F2F2;
+}
+
+.registerProduct .variantSectionComponent.activate{
+    display: block;
+    box-shadow: 0 0 0 100vmax rgba(0, 0, 0, 0.5);
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.9); /* Pequeña escala para el efecto */
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
 @media(min-width:480px){
     .registerProduct{
         padding: 5.5rem 2rem 3.5rem;
@@ -176,6 +225,12 @@
 
     .registerProduct .container{
         max-width: none;
+    }
+
+    .registerProduct .text-category{
+        padding: .5em;
+        margin: 0 auto;
+        width: 90%;
     }
 
 }

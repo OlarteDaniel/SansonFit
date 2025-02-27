@@ -3,12 +3,11 @@ import {productService,supplementVariantsService} from '../service/service.js'
 
 const getAll = async(req,res) =>{
     try {
-        
         const supplementeVariants = await supplementVariantsService.getAll();
         if(supplementeVariants.length === 0){
             return res.sendNotFound('There are no registered Variants');
         }
-
+        req.logger.info('Supplement Variants fetched successfully');
         res.sendSuccessWithPayload(supplementeVariants);
 
     } catch (error) {
@@ -17,74 +16,63 @@ const getAll = async(req,res) =>{
     }
 }
 
-const getAllByFlavor = async(req,res) =>{
-    const flavor = req.params.flavor;
-    if (!flavor) {
-        return res.sendBadRequest('Flavor is required');
-    }
-
+const getAllByFlavor = async (req, res) => {
     try {
-        
-        const products = await supplementVariantsService.getAllByFlavor(flavor);
-        if(!products || products.length === 0){
-            req.logger.info(`No products found for flavor: ${flavor}`);
-            return res.sendNotFound('flavor not found');
+        const flavor = req.params.flavor;
+        if (!flavor) {
+            return res.sendBadRequest('Flavor is required');
         }
-
+        const products = await supplementVariantsService.getAllByFlavor(flavor);
+        if (!products || products.length === 0) {
+            req.logger.info(`No products found for flavor: ${flavor}`);
+            return res.sendNotFound('Flavor not found');
+        }
         req.logger.info(`Products fetched successfully for flavor: ${flavor}`);
         return res.sendSuccessWithPayload(products);
     } catch (error) {
         req.logger.error(`Error fetching products by flavor: ${error}`);
         return res.sendServerError('An error occurred while fetching products');
     }
+};
 
-}
-
-const getAllByProduct = async(req,res) =>{
-    const pid = req.params.id;
-    if(!mongoose.isValidObjectId(pid)){
-        return res.sendBadRequest('Invalid Flavor ID');
-    }
-
+const getAllByProduct = async (req, res) => {
     try {
+        const pid = req.params.id;
+        if (!mongoose.isValidObjectId(pid)) {
+            return res.sendBadRequest('Invalid Product ID');
+        }
         const variants = await supplementVariantsService.getAllByProduct(pid);
-        if(!variants || variants.length === 0){
+        if (!variants || variants.length === 0) {
             req.logger.info(`This product does not have flavors`);
             return res.sendNotFound('Product without flavors');
         }
-
         req.logger.info('The product has flavors');
         return res.sendSuccessWithPayload(variants);
-
     } catch (error) {
         req.logger.error(`Error getting product flavors: ${error}`);
         return res.sendServerError('An error occurred while fetching flavors.');
     }
-}
+};
 
 const getByProductAndFlavor = async (req, res) => {
-    const { pid, flavor } = req.params;
-
-    if (!mongoose.isValidObjectId(pid)) {
-        return res.sendBadRequest('Invalid Product ID');
-    }
-
-    const product = await productService.getProductsById(pid);
-    if (!product) {
-        return res.sendNotFound('Product not found'); 
-    }
-
-    if (!flavor) {
-        return res.sendBadRequest('Flavor is required');
-    }
-
     try {
+        const { pid, flavor } = req.params;
+        if (!mongoose.isValidObjectId(pid)) {
+            return res.sendBadRequest('Invalid Product ID');
+        }
+        const product = await productService.getProductsById(pid);
+        if (!product) {
+            return res.sendNotFound('Product not found');
+        }
+        if (!flavor) {
+            return res.sendBadRequest('Flavor is required');
+        }
         const variant = await supplementVariantsService.getByProductFlavors(pid, flavor);
         if (!variant) {
             req.logger.info(`This product does not have the flavor ${flavor}`);
-            return res.sendNotFound('Flavor not found'); 
+            return res.sendNotFound('Flavor not found');
         }
-
+        req.logger.info(`Product flavor retrieved successfully`);
         return res.sendSuccessWithPayload(variant);
     } catch (error) {
         req.logger.error(`Error getting product flavors: ${error}`);
@@ -92,42 +80,36 @@ const getByProductAndFlavor = async (req, res) => {
     }
 };
 
-
-const addFlavor = async(req,res)=>{
-    const pid = req.params.id;
-    const {flavor, quantity} = req.body;
-
-    if(!mongoose.isValidObjectId(pid)){
-        return res.sendBadRequest('Invalid ID');
+const addFlavor = async (req, res) => {
+    try {
+        const pid = req.params.id;
+        const { flavor, quantity } = req.body;
+        if (!mongoose.isValidObjectId(pid)) {
+            return res.sendBadRequest('Invalid ID');
+        }
+        const product = await productService.getProductsById(pid);
+        if (!product) {
+            return res.sendNotFound('Product not found');
+        }
+        if (!flavor || !quantity) {
+            return res.sendBadRequest('Information missing');
+        }
+        if (quantity < 0) {
+            return res.sendBadRequest('Quantity must be a positive number');
+        }
+        const newFlavor = { productId: pid, flavor, quantity };
+        const result = await supplementVariantsService.createSupplement(newFlavor);
+        const resultUpdateStock = await productService.updateProduct(pid, { stock: Number(product.stock) + Number(quantity) });
+        if (!result || !resultUpdateStock) {
+            return res.sendBadRequest('Failed to implement new flavor');
+        }
+        req.logger.info(`Flavor added successfully: ${flavor}`);
+        return res.sendCreated('Added flavor', result);
+    } catch (error) {
+        req.logger.error(`Error adding flavor: ${error}`);
+        return res.sendServerError('An error occurred while adding the flavor.');
     }
-
-    const product = await productService.getProductsById(pid);
-    if(!product){
-        return res.sendNotFound('Product not found');
-    }
-
-    if(!flavor || !quantity){
-        return res.sendBadRequest('Information missing');
-    }
-
-    if(quantity < 0){
-        return res.sendBadRequest('Price must be a positive number');
-    }
-
-    const newFlavor = {
-        productId: pid,
-        flavor,
-        quantity
-    }
-
-    const result = await supplementVariantsService.createSupplement(newFlavor);
-    const resultUpdateStock = await productService.updateProduct(pid,{stock:Number(product.stock) + Number(quantity)});
-    if(!result || !resultUpdateStock){
-        return res.sendBadRequest('Failed to implement new flavor');
-    }
-
-    return res.sendCreated('Added flavor',result);
-}
+};
 
 const updateFlavor = async(req,res)=>{
     const fid = req.params.id;
@@ -192,33 +174,28 @@ const updateFlavor = async(req,res)=>{
     }
 }
 
-const deleteFlavor = async(req,res)=>{
-    const fid = req.params.id;
-
-    if(!mongoose.isValidObjectId(fid)){
-        return res.sendBadRequest('Invalid Flavor ID');
-    }
-
-    const supplement = await supplementVariantsService.getById(fid);
-    if(!supplement){
-        return res.sendNotFound('flavor not found');
-    }
-
+const deleteFlavor = async (req, res) => {
     try {
-        
+        const fid = req.params.id;
+        if (!mongoose.isValidObjectId(fid)) {
+            return res.sendBadRequest('Invalid Flavor ID');
+        }
+        const supplement = await supplementVariantsService.getById(fid);
+        if (!supplement) {
+            return res.sendNotFound('Flavor not found');
+        }
         const result = await supplementVariantsService.deleteSupplement(fid);
-        if(!result){
+        if (!result) {
             return res.sendBadRequest('Could not delete flavor');
         }
-
-        res.sendSuccess(`supplement '${supplement.flavor}' deleted successfully`);
-
+        req.logger.info(`Flavor '${supplement.flavor}' deleted successfully`);
+        res.sendSuccess(`Supplement '${supplement.flavor}' deleted successfully`);
     } catch (error) {
         req.logger.error(`Error deleting supplement: ${error}`);
         return res.sendServerError('An error occurred while deleting the supplement');
     }
+};
 
-}
 export default {
     addFlavor,
     deleteFlavor,

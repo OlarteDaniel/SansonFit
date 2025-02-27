@@ -6,14 +6,18 @@ import {promises as fsPromises} from 'fs'
 
 const getAll = async(req,res) =>{
     
-    const products = await productService.getProducts();
+    try {
+        const products = await productService.getProducts();
+        if(products.length === 0){
+            return res.sendNotFound('There are no registered products');
+        }
+        req.logger.info('Products fetched successfully');
+        return res.sendSuccessWithPayload(products);
 
-
-    if(products.length === 0){
-        return res.sendNotFound('There are no registered products');
+    } catch (error) {
+        req.logger.error(`Error getting products: ${error}`);
+        return res.sendServerError('An error occurred while fetching products.');
     }
-
-    return res.sendSuccessWithPayload(products);
 }
 
 const getAllByCategory = async (req, res) => {
@@ -25,13 +29,11 @@ const getAllByCategory = async (req, res) => {
         }
 
         const products = await productService.getProducts();
-
         if (!products || products.length === 0) {
             return res.sendNotFound('There are no registered products');
         }
 
         const resultCategory = await categoryService.getCategoriesByTypeAndName(type, name);
-
         if (!resultCategory) {
             return res.sendBadRequest('Category not found');
         }
@@ -40,6 +42,7 @@ const getAllByCategory = async (req, res) => {
             product.category?.toString() === resultCategory._id.toString()
         );
 
+        req.logger.info(`Products successfully obtained with the category: ${type}-${name}`);
         return res.sendSuccessWithPayload(productWithCategory);
     } catch (error) {
         console.error('Error in getAllByCategory:', error);
@@ -47,32 +50,43 @@ const getAllByCategory = async (req, res) => {
     }
 };
 
-
 const getOneById = async(req,res) =>{
-    const pid = req.params.id;
+    try {
+        const pid = req.params.id;
+        if (!mongoose.isValidObjectId(pid)) {
+            return res.sendBadRequest('Invalid ID format');
+        }
 
-    if (!mongoose.isValidObjectId(pid)) {
-        return res.sendBadRequest('Invalid ID format');
+        const product = await productService.getProductsById(pid);
+        if(!product){
+            req.logger.info(`There is no product with this id`);
+            res.sendNotFound('Product not found');
+        }
+
+        req.logger.info('Product obtained successfully');
+        return res.sendSuccessWithPayload(product);
+    } catch (error) {
+        req.logger.error(`Error getting product: ${error}`);
+        return res.sendServerError('An error occurred while fetching product.');
     }
-
-    const product = await productService.getProductsById(pid);
-    if(!product){
-        res.sendNotFound('Product not found');
-    }
-
-    return res.sendSuccessWithPayload(product);
 }
 
 const getOneByCode = async(req,res) =>{
-    const pcode = req.params.code;
+    try {
+        const pcode = req.params.code;
 
-    const product = await productService.getProductByCode(pcode);
+        const product = await productService.getProductByCode(pcode);
+        if(!product){
+            req.logger.info(`There is no product with this code`);
+            res.sendNotFound('Information missing');
+        }
 
-    if(!product){
-        res.sendNotFound('Information missing');
+        req.logger.info('Product obtained successfully');
+        return res.sendSuccessWithPayload(product);
+    } catch (error) {
+        req.logger.error(`Error getting product: ${error}`);
+        return res.sendServerError('An error occurred while fetching product.');
     }
-
-    return res.sendSuccessWithPayload(product);
 }
 
 const createProduct = async(req,res) =>{

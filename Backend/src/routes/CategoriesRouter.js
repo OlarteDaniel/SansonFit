@@ -10,6 +10,8 @@ class CategoriesRouter extends BaseRouter{
 
         this.get('/:id',['ADMIN'],categoriesController.getOne);
 
+        this.get('/type/:type/name/:name',['ADMIN'],categoriesController.getOneByNameAndType)
+
         this.post('/',['ADMIN'],categoriesController.create);
 
         this.put('/:id',['ADMIN'],categoriesController.update);
