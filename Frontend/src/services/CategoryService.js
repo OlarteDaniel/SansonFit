@@ -1,4 +1,4 @@
-import { getBaseHeaders } from "../utils/http";
+import { getHeaders,postHeaders } from "../utils/http";
 
 const CATEGORY_ENDPOINT = `${import.meta.env.VITE_APP_BASE_URL}${import.meta.env.VITE_APP_CATEGORY_ENDPOINT}`;
 
@@ -8,23 +8,28 @@ export default class ProductsService {
     }
 
     getCategories = () => {
-        const requestInfo = {url:`${CATEGORY_ENDPOINT}`,config: getBaseHeaders()};
+        const requestInfo = {url:`${CATEGORY_ENDPOINT}`,config: getHeaders()};
         return this.client.makeGetRequest(requestInfo);
     }
 
     getCategoryById = (id) =>{
-        const requestInfo = {url:`${CATEGORY_ENDPOINT}/${id}`,config: getBaseHeaders()};  
+        const requestInfo = {url:`${CATEGORY_ENDPOINT}/${id}`,config: getHeaders()};  
         return this.client.makeGetRequest(requestInfo);  
     }
 
     getCategoryByTypeAndName = (type,name)=>{
-        const requestInfo = {url:`${CATEGORY_ENDPOINT}/type/${type}/name/${name}`,config: getBaseHeaders()};
+        const requestInfo = {url:`${CATEGORY_ENDPOINT}/type/${type}/name/${name}`,config: getHeaders()};
         return this.client.makeGetRequest(requestInfo); 
     }
 
     createCategory = (category) =>{
-        const requestInfo = {url:`${CATEGORY_ENDPOINT}`,body:category,config: getBaseHeaders()};
+        const requestInfo = {url:`${CATEGORY_ENDPOINT}`,body:category,config: postHeaders()};
         return this.client.makePostRequest(requestInfo);
+    }
+
+    deleteCategory = (id) =>{
+        const requestInfo = {url:`${CATEGORY_ENDPOINT}/${id}`,config: getHeaders()};  
+        return this.client.makeDeleteRequest(requestInfo);
     }
 
 }

@@ -54,7 +54,6 @@ const ProductVariantPage = () => {
                 console.log('En producción');
             } else if (category.type === 'supplements') {
                 const result = await variantService.addFlavor(product._id, newVariant);
-                console.log(result);
             }
         } catch (error) {
             console.error('Error al agregar la variante:', error);

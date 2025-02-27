@@ -1,9 +1,10 @@
-.variantForm{
+.deleteSection{
     padding: .5em;
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 1em;
     font-family: 'Smack Laideth';
     font-size: 18px;
@@ -11,26 +12,22 @@
     overflow: auto;
 }
 
-.variantForm .section-one{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    height: 55%;
-}
-
-.variantForm .section-one .header{
+.deleteSection .header{
+    padding: .1em;
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.variantForm .section-one .header .title-product{
+.deleteSection .header h3{
     text-align: center;
     font-size: 2em;
     font-weight: 100;
     color: #0085CA;
 }
 
-.variantForm .section-one .header .button-x{
+.deleteSection .header .button-x{
     position: absolute;
     right: 2%;
     top: 2%;
@@ -40,30 +37,11 @@
     cursor: pointer; 
 }
 
-.variantForm .section-one .header .icon-x{
+.deleteSection .header .icon-x{
     color: #333333;
 }
 
-.variantForm .section-one img{
-    width: 50%;
-    /* max-width: 150px; */
-}
-
-.variantForm .section-two{
-    height: 45%;
-}
-
-.variantForm .section-two .title{
-    font-size: 1.2em;
-    color: #0085CA;
-    text-align: center;
-}
-
-.variantForm .section-two .title h3{
-    font-weight: 100;
-}
-
-.variantForm .section-two .form{
+.deleteSection .form{
     padding: 1em 0;
     width: 100%;
     display: flex;
@@ -72,19 +50,18 @@
     gap: 1em;
 }
 
-.variantForm .section-two .form .inputbox{
+.deleteSection .form .inputbox{
     width: 80%;
     display: flex;
     flex-direction: column;
     color: #333333;
 }
 
-.variantForm .section-two .form .inputbox label{
+.deleteSection .form .inputbox label{
     font-size: 1.1em;
 }
 
-.variantForm .section-two .form .inputbox input,
-.variantForm .section-two .form .inputbox select{
+.deleteSection .form .inputbox select{
     appearance: none; 
     padding: .3em;
     width: 100%;
@@ -98,19 +75,19 @@
     cursor: pointer;
 }
 
-.variantForm .section-two .form .inputbox .border-red{
+.deleteSection .form .inputbox .border-red{
     border: 1px solid red;
     background: rgba(255, 0, 0, 0.1);
     box-shadow: inset 0 0 10px a(255, 0, 0, 0.2);
 }
 
-.variantForm .section-two .form .error-message{
+.deleteSection .form .error-message{
     color: red;
     font-size: 0.9em;
     margin-top: 0.3em;
 }
 
-.variantForm .section-two .form .buttons button{
+.deleteSection .form .buttons button{
     padding: 0.5em;
     background-color: #005F9E;
     border: none;
@@ -124,21 +101,19 @@
     transition: color 0.3s, background-color 0.3s, transform 0.2s ease-in;
 }
 
-.variantForm .section-two .form .buttons button:hover{
+.deleteSection .form .buttons button:hover{
     background-color: #0085CA;
     color: #00335F;
 }
 
 @media(min-width:480px){
-    .variantForm{
+    .deleteSection{
         font-size: 20px;
     }
+}
 
-    .variantForm .section-one{
-        height: 50%;
-    }
-
-    .variantForm .section-one img{
-        max-width: 160px;
+@media(min-width:768px){
+    .deleteSection{
+        font-size: 22px;
     }
 }

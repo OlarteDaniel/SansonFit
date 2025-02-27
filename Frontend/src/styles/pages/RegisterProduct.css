@@ -161,21 +161,35 @@
     padding: .5em;
     font-size: 1em;
     color: #333333;
-    text-align: center;
 }
 
-.registerProduct .text-category .register-category{
+.registerProduct .text-category .activable {
     padding-left: .3em;
     text-decoration: none;
-    color: #0085CA;
     cursor: pointer;
 }
 
-.registerProduct .text-category .register-category:hover{
-    text-decoration: underline;
+/* Colores específicos para cada acción */
+.registerProduct .text-category .add-category {
+    color: #0085CA; /* Azul para agregar */
 }
 
-.registerProduct .variantSectionComponent{
+.registerProduct .text-category .edit-category {
+    color: #E6A800; /* Amarillo/Dorado para editar */
+}
+
+.registerProduct .text-category .delete-category {
+    color: #D9534F; /* Rojo para eliminar */
+}
+
+/* Estilos al pasar el mouse */
+.registerProduct .text-category .activable:hover {
+    text-decoration: underline;
+    opacity: 0.8;
+}
+
+.registerProduct .variantSectionComponent,
+.registerProduct .deleteSectionComponent{
     display: none;
     position: fixed;
     top: 50%;
@@ -189,7 +203,12 @@
     background-color: #F2F2F2;
 }
 
-.registerProduct .variantSectionComponent.activate{
+.registerProduct .deleteSectionComponent{
+    max-height: 280px;
+}
+
+.registerProduct .variantSectionComponent.activate,
+.registerProduct .deleteSectionComponent.activate{
     display: block;
     box-shadow: 0 0 0 100vmax rgba(0, 0, 0, 0.5);
     animation: fadeIn 0.3s ease-out;
@@ -215,6 +234,14 @@
     .registerProduct .container{
         max-width: 400px;
     }
+
+    .registerProduct .variantSectionComponent{
+        max-height: 420px;
+    }
+
+    .registerProduct .deleteSectionComponent{
+        max-height: 320px;
+    }
 }
 
 @media(min-width:768px){
@@ -224,15 +251,20 @@
     }
 
     .registerProduct .container{
-        max-width: none;
+        max-width: 580px;
+    }
+
+    .registerProduct .variantSectionComponent{
+        max-height: 450px;
+    }
+    
+    .registerProduct .deleteSectionComponent{
+        max-height: 340px;
     }
 
     .registerProduct .text-category{
-        padding: .5em;
-        margin: 0 auto;
-        width: 90%;
+        text-align: center;
     }
-
 }
 
 @media(min-width:1024px){

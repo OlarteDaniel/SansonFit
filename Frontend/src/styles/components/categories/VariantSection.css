@@ -106,3 +106,15 @@
     background-color: #0085CA;
     color: #00335F;
 }
+
+@media(min-width:480px){
+    .variantSection{
+        font-size: 20px;
+    }
+}
+
+@media(min-width:768px){
+    .variantSection{
+        font-size: 22px;
+    }
+}

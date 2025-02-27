@@ -5,9 +5,9 @@ import {categoryService} from '../../services/services'
 
 import { BsXLg } from "react-icons/bs";
 
-import '../../styles/components/products/VariantSection.css'
+import '../../styles/components/categories/VariantSection.css'
 
-const VariantSection = ({handleChange}) => {
+const VariantSection = ({handleChange,addCategory}) => {
 
     const [serverError, setServerError] = useState('');
     const {register, handleSubmit, formState:{errors},reset} = useForm();
@@ -17,7 +17,6 @@ const VariantSection = ({handleChange}) => {
         setServerError("");
         try {
             const responseCategory = await categoryService.getCategoryByTypeAndName(data.type,data.name);
-            console.log(responseCategory)
             if (responseCategory && responseCategory.status === 200) {
                 setServerError('Ya existe esta categoría');
                 return;
@@ -29,9 +28,10 @@ const VariantSection = ({handleChange}) => {
             };
 
             const createCategory = await categoryService.createCategory(newCategory);
-            console.log(categoryService)
             if (createCategory && createCategory.status === 201) {
-                handleChange();
+                addCategory(createCategory.data.payload);
+                handleChange('add');
+                reset()
             }
 
         } catch (error) {
@@ -47,7 +47,7 @@ const VariantSection = ({handleChange}) => {
                 <h3>Agregar categoria</h3>
                 <div
                     onClick={() => {
-                        handleChange()
+                        handleChange('add')
                         reset();
                     }} 
                     className="button-x">

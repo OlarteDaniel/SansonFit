@@ -1,5 +1,4 @@
 import React, {useContext, useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
 
 import { useForm } from 'react-hook-form'
 import useScrollLock from '../hooks/useScrollLock';
@@ -8,7 +7,8 @@ import {categoryService} from '../services/services';
 
 import ProductContext from '../context/ProductContext';
 
-import VariantSection from '../components/products/VariantSection';
+import VariantSection from '../components/categories/VariantSection';
+import DeleteSection from '../components/categories/DeleteSection';
 
 import { Toaster } from 'sonner'
 
@@ -17,8 +17,12 @@ import '../styles/pages/RegisterProduct.css'
 
 const RegisterProduct = () => {
     const [toggle] = useScrollLock();
-    const [variant, setVariant] = useState(false);
     const [categories,setCategories] = useState([]);
+    const [categorySections,setCategorySections] = useState({
+        add:false,
+        delete:false,
+        edit:false
+    });
     const [serverError, setServerError] = useState('');
     const {register, handleSubmit, formState:{errors},reset} = useForm();
     const {addProducts} = useContext(ProductContext);
@@ -49,8 +53,19 @@ const RegisterProduct = () => {
 
     }
 
-    const handleChange = ()=>{
-        setVariant(!variant);
+    const addCategory = (category) => {
+        categories.push(category);
+    }
+
+    const deleteCategory = (id) =>{
+        setCategories(categories.filter(cat => cat._id !== id))
+    }
+
+    const handleChange = (section)=>{
+        setCategorySections( prev => ({
+            ...prev,
+            [section]: !prev[section]
+        }))
         toggle();
     }
 
@@ -58,12 +73,16 @@ const RegisterProduct = () => {
 
         const fetchCategories = async() =>{
             const result = await categoryService.getCategories();
-            setCategories(result.data.payload);
+            // Esta condicion permite que solo se actualice categories cuando
+            // el valor almacenado en el estado "categories" sea distinto del 
+            // valor obtenido  en "result". Esto significa que en result
+            // se agrego o elimino una categoria
+            if (JSON.stringify(categories) !== JSON.stringify(result.data.payload)) {
+                setCategories(result.data.payload);
+            }
         }
-
         fetchCategories();
-        
-    },[]);
+    },[categories]);
 
     return (
         <main className='registerProduct'>
@@ -171,19 +190,31 @@ const RegisterProduct = () => {
                     </div>
                     {serverError && <p className="error-message">{serverError}</p>}
                 </form>
-                <p className='text-category'>
-                    Presione aqui para
-                    <span 
-                        onClick={(()=> handleChange())}
-                        className="register-category">
-                            Registrar categorias
-                    </span>
+                
+                <p className="text-category">
+                    Presione aquí para
+                    {["add", "edit", "delete"].map((action, index, array) => (
+                        <React.Fragment key={action}>
+                            <span 
+                                onClick={() => handleChange(action)}
+                                className={`${action}-category activable`}
+                            >
+                                {action === "add" ? "Registrar" : action === "edit" ? "Editar" : "Eliminar"} categorías
+                            </span>
+                            {index < array.length - 1 && (index === array.length - 2 ? " o " : ", ")}
+                        </React.Fragment>
+                    ))}
                 </p>
+
             </div>
 
-            <section className={`variantSectionComponent ${variant? 'activate': ''}`}>
-                <VariantSection handleChange={handleChange}/>
+            <section className={`variantSectionComponent ${categorySections.add? 'activate': ''}`}>
+                <VariantSection handleChange={handleChange} addCategory={addCategory}/>
             </section>        
+
+            <section className={`deleteSectionComponent ${categorySections.delete? 'activate': ''}`}>
+                <DeleteSection handleChange={handleChange} categories={categories} deleteCategory={deleteCategory}/>
+            </section>
 
         </main>
     )
