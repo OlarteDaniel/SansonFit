@@ -94,6 +94,7 @@ export const ProductContextProvider = ({children}) =>{
                     error:'Error al eliminar el producto',
                 }
             )
+            
         } catch (error) {
             console.log('Error al eliminar el producto',error);
             toast.error("No se pudo eliminar el producto.");

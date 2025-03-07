@@ -8,7 +8,12 @@ export default class VariantService {
         this.client = client
     }
 
-    getByProductAndFlavor = async (productId,flavor) => {
+    getByProduct = (productId) => {
+        const requestInfo = {url: `${VARIANT_SUPPLEMENT_ENDPOINT}/product/${productId}`,config:getHeaders()};
+        return this.client.makeGetRequest(requestInfo);
+    }
+
+    getByProductAndFlavor = (productId,flavor) => {
         const requestInfo = {url:`${VARIANT_SUPPLEMENT_ENDPOINT}/product/${productId}/flavor/${flavor}`,config:getHeaders()};
         return this.client.makeGetRequest(requestInfo);
     }

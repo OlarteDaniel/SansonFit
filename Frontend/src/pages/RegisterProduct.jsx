@@ -9,6 +9,7 @@ import ProductContext from '../context/ProductContext';
 
 import VariantSection from '../components/categories/VariantSection';
 import DeleteSection from '../components/categories/DeleteSection';
+import UpdateSection from '../components/categories/UpdateSection';
 
 import { Toaster } from 'sonner'
 
@@ -59,6 +60,19 @@ const RegisterProduct = () => {
 
     const deleteCategory = (id) =>{
         setCategories(categories.filter(cat => cat._id !== id))
+    }
+
+    const editCategory = (id,newCategory)=>{
+        const editCategory = categories.map(cat =>{
+            if(cat._id === id){
+                return {
+                    ...cat,
+                    name:newCategory
+                }
+            }
+            return cat
+        })
+        setCategories(editCategory);
     }
 
     const handleChange = (section)=>{
@@ -199,7 +213,7 @@ const RegisterProduct = () => {
                                 onClick={() => handleChange(action)}
                                 className={`${action}-category activable`}
                             >
-                                {action === "add" ? "Registrar" : action === "edit" ? "Editar" : "Eliminar"} categorías
+                                {action === "add" ? "Registrar" : action === "edit" ? "Modificar" : "Eliminar"} categorías
                             </span>
                             {index < array.length - 1 && (index === array.length - 2 ? " o " : ", ")}
                         </React.Fragment>
@@ -214,6 +228,10 @@ const RegisterProduct = () => {
 
             <section className={`deleteSectionComponent ${categorySections.delete? 'activate': ''}`}>
                 <DeleteSection handleChange={handleChange} categories={categories} deleteCategory={deleteCategory}/>
+            </section>
+
+            <section className={`updateSectionComponent ${categorySections.edit? 'activate': ''}`}>
+                <UpdateSection handleChange={handleChange} categories={categories} editCategory={editCategory}/>
             </section>
 
         </main>

@@ -1,7 +1,6 @@
 import React, { useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
 
-import Creatina from '../../assets/img/productsList/Creatina-Start.png'
 import { HiMagnifyingGlass } from "react-icons/hi2";
 
 import UserContext from '../../context/UserContext';
@@ -11,9 +10,11 @@ import { FaRegTrashAlt } from "react-icons/fa";
 import { FaPencilAlt } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa";
 
+import imgDefault from '../../assets/img/productsList/ImagenDefault.jpg'
+
 import '../../styles/components/products/ProductCard.css'
 
-const ProductCard = ({id,title,price,status}) => {
+const ProductCard = ({id,title,price,status,thumbnails}) => {
     
     const {deleteProduct,activeVariant} = useContext(ProductContext);
     const {session} = useContext(UserContext);
@@ -24,18 +25,20 @@ const ProductCard = ({id,title,price,status}) => {
 
     const handleClickInformation = (event) =>{
         event.stopPropagation() // Evita que el evento se propague al padre
-        navigate('/')
+        navigate(`/product/detail/${id}`);
     }
 
-    const handleClickDelete = (event) => {
+    const handleClickDelete = async (event) => {
         event.stopPropagation(); 
-        deleteProduct(id)
+        await deleteProduct(id)
     };
 
     const handleclickAddVariant = (event) => {
         event.stopPropagation(); 
         activeVariant(id)
     };
+
+    const imgPrimary = thumbnails.find(img => img.main ===true)
 
     return (
         //Acabamos de remplazar un div por el link , en caso de fallar reemplazar el Link por el div //
@@ -45,7 +48,7 @@ const ProductCard = ({id,title,price,status}) => {
                     <button className='button-glass'>
                         <HiMagnifyingGlass className='glass-icon'/>
                     </button>
-                    <img src={Creatina} alt="" />
+                    <img src={imgPrimary?.url || imgDefault} alt="" />
                     {
                         session && 
                             <div className="buttons">

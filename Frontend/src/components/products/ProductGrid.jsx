@@ -25,7 +25,6 @@ const ProductGrid = () => {
         return products?.filter(product => product.globalStatus) || []
     },[userRole,products])
     
-
     return (
         filteredProducts.length > 0 ? (
             <div className="grid">
@@ -36,6 +35,7 @@ const ProductGrid = () => {
                             title={product.title} 
                             price={product.price} 
                             status={product.globalStatus} 
+                            thumbnails ={product.thumbnails}
                             />  
                 })}
             </div>

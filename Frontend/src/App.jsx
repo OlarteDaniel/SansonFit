@@ -12,6 +12,7 @@ import ProductsList from './pages/ProductsList';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import RegisterProduct from './pages/RegisterProduct';
+import ProductDetails from './pages/ProductDetails';
 import ProtectedRoute from './components/protective/ProtectedRoute';
 
 import './App.css'
@@ -39,6 +40,7 @@ function App() {
                         <Route path='/register/product' element={<RegisterProduct/>}/>
                     </Route>
 
+                    <Route path='/product/detail/:id' element={<ProductDetails/>}/>
         
                   </Routes>
                   <Footer/>

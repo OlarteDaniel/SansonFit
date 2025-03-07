@@ -57,7 +57,7 @@
 
 .card .card-product .img img{
     width: 70%; 
-    max-width: 160px;
+    max-width: 135px;
     object-fit: cover;
 }
 
@@ -176,7 +176,7 @@
     }
 
     .card .card-product .img img{
-        width: 65%;
+        max-width: 130px;
     }
 
     .card .card-product .img .buttons{
@@ -197,7 +197,7 @@
     }
 
     .card .card-product .img img{
-        width: 60%;
+        max-width: 120px;
     }
 
     .card .card-product .img img{
@@ -249,7 +249,7 @@
     }
 
     .card .card-product .img img{
-        width: 55%;
+        max-width: 110px;
     }
 
     .card .card-details .title h3{

@@ -3,11 +3,11 @@ import { useForm } from 'react-hook-form'
 
 import { BsXLg } from "react-icons/bs";
 
-import CreatinaStart from '../../assets/img/productsList/Creatina-Start.png'
-
 import ProductContext from '../../context/ProductContext';
 
 import { variantService } from '../../services/services';
+
+import imgDefault from '../../assets/img/productsList/ImagenDefault.jpg'
 
 import '../../styles/components/products/ProductVariantPage.css'
 
@@ -16,7 +16,7 @@ const ProductVariantPage = () => {
     const {category,product,activeVariant} = useContext(ProductContext)
     const {register, handleSubmit, formState:{errors},reset} = useForm();
 
-    
+    const imgPrimary = product?.thumbnails.find(img => img.main ===true)
 
     const onSubmit = async (data) =>{
         const newVariant = {}
@@ -75,7 +75,7 @@ const ProductVariantPage = () => {
                             <BsXLg className='icon-x'/>
                     </div>
                 </div>
-                <img src={CreatinaStart} alt="" />
+                <img src={imgPrimary?.url || imgDefault} alt="" />
             </div>
             <div className="section-two">
                 

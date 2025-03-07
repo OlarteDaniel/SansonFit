@@ -27,6 +27,11 @@ export default class ProductsService {
         return this.client.makePostRequest(requestInfo);
     }
 
+    updateCategory = (id,category) =>{
+        const requestInfo = {url:`${CATEGORY_ENDPOINT}/${id}`,body:category,config: postHeaders()};
+        return this.client.makePutRequest(requestInfo);
+    }
+
     deleteCategory = (id) =>{
         const requestInfo = {url:`${CATEGORY_ENDPOINT}/${id}`,config: getHeaders()};  
         return this.client.makeDeleteRequest(requestInfo);

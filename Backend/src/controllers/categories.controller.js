@@ -36,7 +36,6 @@ const getOne = async (req, res) => {
 const getOneByNameAndType = async (req, res) => {
     try {
         const { type, name } = req.params;
-        console.log(type, name)
         if (!type || !name) {
             return res.sendBadRequest('Information missing');
         }
@@ -56,8 +55,7 @@ const getOneByNameAndType = async (req, res) => {
 
 const create = async (req, res) => {
     try {
-        const { name, type } = req.body;
-        console.log(name,type)
+        const {name, type} = req.body;
         if (!name) {
             return res.sendBadRequest('Information missing');
         }
@@ -70,7 +68,7 @@ const create = async (req, res) => {
         }
 
         req.logger.info(`Category created successfully: ${name}`);
-        return res.sendSuccess('Category created');
+        return res.sendCreated('Category created',result);
     } catch (error) {
         req.logger.error('Error creating category:', error);
         return res.sendServerError('An unexpected error occurred');

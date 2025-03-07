@@ -189,7 +189,8 @@
 }
 
 .registerProduct .variantSectionComponent,
-.registerProduct .deleteSectionComponent{
+.registerProduct .deleteSectionComponent,
+.registerProduct .updateSectionComponent{
     display: none;
     position: fixed;
     top: 50%;
@@ -207,8 +208,14 @@
     max-height: 280px;
 }
 
+.registerProduct .updateSectionComponent{
+    height: 60vh;
+    max-height: 400px;
+}
+
 .registerProduct .variantSectionComponent.activate,
-.registerProduct .deleteSectionComponent.activate{
+.registerProduct .deleteSectionComponent.activate,
+.registerProduct .updateSectionComponent.activate{
     display: block;
     box-shadow: 0 0 0 100vmax rgba(0, 0, 0, 0.5);
     animation: fadeIn 0.3s ease-out;
@@ -235,7 +242,8 @@
         max-width: 400px;
     }
 
-    .registerProduct .variantSectionComponent{
+    .registerProduct .variantSectionComponent,
+    .registerProduct .updateSectionComponent{
         max-height: 420px;
     }
 
@@ -254,7 +262,8 @@
         max-width: 580px;
     }
 
-    .registerProduct .variantSectionComponent{
+    .registerProduct .variantSectionComponent,
+    .registerProduct .updateSectionComponent{
         max-height: 450px;
     }
     

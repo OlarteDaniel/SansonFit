@@ -1,0 +1,120 @@
+.updateSection{
+    padding: .5em;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1em;
+    font-family: 'Smack Laideth';
+    font-size: 18px;
+    letter-spacing: .05em;
+    overflow: auto;
+}
+
+.updateSection .header{
+    padding: .1em;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.updateSection .header h3{
+    text-align: center;
+    font-size: 2em;
+    font-weight: 100;
+    color: #0085CA;
+}
+
+.updateSection .header .button-x{
+    position: absolute;
+    right: 2%;
+    top: 2%;
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer; 
+}
+
+.updateSection .header .icon-x{
+    color: #333333;
+}
+
+.updateSection .form{
+    padding: 1em 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+}
+
+.updateSection .form .inputbox{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    color: #333333;
+}
+
+.updateSection .form .inputbox label{
+    font-size: 1.1em;
+}
+
+.updateSection .form .inputbox input,
+.updateSection .form .inputbox select{
+    appearance: none; 
+    padding: .3em;
+    width: 100%;
+    outline: none;
+    font-size: .9em;
+    border-radius: 5px;
+    background: rgba(192, 192, 192, 0.1);
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    color: #333333;
+    cursor: pointer;
+}
+
+.updateSection .form .inputbox .border-red{
+    border: 1px solid red;
+    background: rgba(255, 0, 0, 0.1);
+    box-shadow: inset 0 0 10px a(255, 0, 0, 0.2);
+}
+
+.updateSection .form .error-message{
+    color: red;
+    font-size: 0.9em;
+    margin-top: 0.3em;
+}
+
+.updateSection .form .buttons button{
+    padding: 0.5em;
+    background-color: #005F9E;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    font-family: 'Smack Laideth';
+    font-size: .9em;
+    letter-spacing: .05em;
+    text-align: center;
+    transition: color 0.3s, background-color 0.3s, transform 0.2s ease-in;
+}
+
+.updateSection .form .buttons button:hover{
+    background-color: #0085CA;
+    color: #00335F;
+}
+
+@media(min-width:480px){
+    .updateSection{
+        font-size: 20px;
+    }
+}
+
+@media(min-width:768px){
+    .updateSection{
+        font-size: 22px;
+    }
+}
