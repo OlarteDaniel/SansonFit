@@ -1,5 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
+
+import { IoIosArrowDown } from "react-icons/io";
 
 import {productsService,variantService} from '../services/services';
 
@@ -12,10 +14,15 @@ import '../styles/pages/ProductDetails.css'
 
 const ProductDetails = () => {
 
+    const navigate = useNavigate();
+
     const {id} = useParams()
     const [product,setProduct] = useState(null);
     const [variants,setVariants] = useState(null);
     const [selectedVariant, setSelectedVariant] = useState(null);
+    const [dropdownActive,setDropdownActive] = useState(false);
+
+    const toggleDropdown = () => setDropdownActive(!dropdownActive);
 
     const {deleteProduct} = useContext(ProductContext);
     const {session} = useContext(UserContext)
@@ -53,8 +60,9 @@ const ProductDetails = () => {
         }))
     }
 
-    const handleClickDelete = () =>{
-        deleteProduct(id);
+    const handleClickDelete = async () =>{
+        await deleteProduct(id);
+        navigate('/products')
     }
 
     const imgPrimary = product?.thumbnails?.find?.(img => img.main) || imgDefault;
@@ -67,6 +75,7 @@ const ProductDetails = () => {
                 <div className="section-img">
                     <div className="main-image">
                         <img src={imgPrimary.url} alt="" />
+                        <p className={product?.globalStatus? 'active' : ''}>{product?.globalStatus? 'Habilitado' : 'Deshabilitado'}</p>
                     </div>
                     <div className="secondary-images">
                         {
@@ -124,7 +133,12 @@ const ProductDetails = () => {
                     }
 
                     <div className="description">
-                        {product?.description}
+                        <div className="input-description" onClick={toggleDropdown}>
+                            <p>Descripcion <IoIosArrowDown className={`arrowDown-icon ${dropdownActive? 'down':'up'}`}/></p>
+                        </div>
+                        <div className={`value-description ${dropdownActive? 'active' : ''}`}>
+                            {product?.description}
+                        </div>
                     </div>
 
                     <div className="buttons">
