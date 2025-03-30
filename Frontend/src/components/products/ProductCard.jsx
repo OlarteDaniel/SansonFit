@@ -38,6 +38,11 @@ const ProductCard = ({id,title,price,status,thumbnails}) => {
         activeVariant(id)
     };
 
+    const handleclickUpdate = (event) =>{
+        event.stopPropagation();
+        navigate(`/product/modify/${id}`)
+    }
+
     const imgPrimary = thumbnails.find(img => img.main ===true)
 
     return (
@@ -58,6 +63,7 @@ const ProductCard = ({id,title,price,status,thumbnails}) => {
                                 <>
                                     <button 
                                         className='button circle button-edit'
+                                        onClick={handleclickUpdate}
                                     >
                                         <span className=' pencil-icon'><FaPencilAlt /></span>
                                     </button>

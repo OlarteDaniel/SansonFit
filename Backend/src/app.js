@@ -12,6 +12,7 @@ import config from './config/config.js';
 import CategoriesRouter from './routes/CategoriesRouter.js';
 import ProductsRouter from './routes/ProductsRouter.js';
 import SessionsRouter from './routes/SessionsRouter.js';
+import ImagesRouter from './routes/ImagesRouter.js'
 import SupplementsVariantsRouter from './routes/SupplementsVariantsRouter.js';
 
 
@@ -35,6 +36,7 @@ app.use(passport.initialize());
 app.use('/api/sessions',SessionsRouter);
 app.use('/api/categories',CategoriesRouter);
 app.use('/api/products',ProductsRouter);
+app.use('/api/images',ImagesRouter)
 app.use('/api/supplements',SupplementsVariantsRouter)
 
 const serve = app.listen(PORT,()=> {

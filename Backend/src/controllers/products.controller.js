@@ -142,7 +142,8 @@ const createProduct = async(req,res) =>{
         thumbnails.push(...uploadedImages.map((image, index) => ({
             mimeType: req.files[index].mimeType,
             url: image.secure_url,
-            main: index === 0
+            main: index === 0,
+            fileId: `${code}-image-${index}`
         })));      
 
     } catch (error) {
@@ -194,30 +195,21 @@ const updateProduct = async(req,res) =>{
         return res.sendBadRequest('Invalid Category ID');
     }
 
-    // Creamos un objeto que reflejara la actualizacion del producto
-    let updateFields = {}
-
-    // Aca detectamos si vamos a modificar en la 1ra seccion o 2da
-    if(discount !== undefined || globalStatus !== undefined){
-
-        if(discount !== undefined) updateFields.discount = discount
-
-        if(globalStatus !== undefined) updateFields.globalStatus = globalStatus
-
-    }else{
-
-        if(!title || !description || !price || !category){
-            return res.sendBadRequest('Information missing');
-        }
-
-        updateFields = {
-            title,
-            description,
-            price,
-            category
-        }
-
+    if(!title || !description || !price ||!category){
+        return res.sendBadRequest('Information missing');
     }
+
+
+    const updateFields = {
+        title,
+        description,
+        price,
+        category,
+        discount: discount || 0,
+        globalStatus: globalStatus || false
+    }
+
+    
 
     try {
         const updatedProduct = await productService.updateProduct(pid,updateFields);

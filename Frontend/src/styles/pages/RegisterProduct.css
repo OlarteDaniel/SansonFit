@@ -43,7 +43,8 @@
 }
 
 .registerProduct .container .form .inputbox input,
-.registerProduct .container .form .inputbox select{
+.registerProduct .container .form .inputbox select,
+.registerProduct .container .form .inputbox textarea{
     appearance: none; 
     padding: .3em;
     width: 100%;
@@ -55,6 +56,10 @@
     border: 1px solid rgba(0, 0, 0, 0.2);
     color: #333333;
     cursor: pointer;
+}
+
+.registerProduct .container .form .inputbox textarea{
+    height: 100px;
 }
 
 .registerProduct .container .form .inputbox input[type="file"] {
@@ -242,6 +247,10 @@
         max-width: 400px;
     }
 
+    .registerProduct .container .form .inputbox textarea{
+        height: 120px;
+    }
+
     .registerProduct .variantSectionComponent,
     .registerProduct .updateSectionComponent{
         max-height: 420px;
@@ -260,6 +269,10 @@
 
     .registerProduct .container{
         max-width: 580px;
+    }
+
+    .registerProduct .container .form .inputbox textarea{
+        height: 150px;
     }
 
     .registerProduct .variantSectionComponent,

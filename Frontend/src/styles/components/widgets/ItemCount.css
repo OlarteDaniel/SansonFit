@@ -1,0 +1,97 @@
+/* Contenedor principal */
+.counter {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;    
+    justify-content: center;
+    font-size: 1em;
+    gap: 1em;
+}
+
+/* Contenedor de la cantidad */
+.counter .quantity {
+    display: flex;
+    align-items: center;
+    gap: 0.8em;
+}
+
+/* Botones de cantidad */
+.counter .quantity .btn {
+    width: 40px;
+    height: 40px;
+    background-color: #005F9E;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+/* Efecto hover y active */
+.counter .quantity .btn:hover {
+    background-color: #00497a;
+}
+
+.counter .quantity .btn:active {
+    background-color: #00345a;
+}
+
+/* Estilo del número */
+.counter .quantity h2 {
+    margin: 0;
+    font-size: 1.8em;
+    font-weight: 100;
+    text-align: center;
+    min-width: 55px;
+}
+
+/* Botón de agregar al carrito */
+.counter .btn-cart {
+    width: 100%;
+    outline: none; 
+    font-size: 1em;
+    font-weight: 600;
+    color: #fff;
+    border-radius: 10px;
+    background-color: #005F9E;
+    border: 1px solid #00538a;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Efectos en hover y active */
+.counter .btn-cart:hover {
+    background-color: #00497a;
+}
+
+.counter .btn-cart:active {
+    background-color: #00345a;
+}
+
+/* Deshabilitar el botón si no hay stock */
+.counter .btn-cart:disabled {
+    background-color: #ccc;
+    border-color: #aaa;
+    cursor: not-allowed;
+}
+
+@media(min-width:480px){
+    .counter{
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
+
+@media(min-width:768px){
+    .counter .quantity .btn {
+        width: 35px;
+        height: 35px;
+    }    
+}

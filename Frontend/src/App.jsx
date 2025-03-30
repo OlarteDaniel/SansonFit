@@ -13,6 +13,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import RegisterProduct from './pages/RegisterProduct';
 import ProductDetails from './pages/ProductDetails';
+import ProductEdit from './pages/ProductEdit';
 import ProtectedRoute from './components/protective/ProtectedRoute';
 
 import './App.css'
@@ -38,6 +39,7 @@ function App() {
 
                     <Route element={<ProtectedRoute/>}>
                         <Route path='/register/product' element={<RegisterProduct/>}/>
+                        <Route path='/product/modify/:id' element={<ProductEdit/>} />
                     </Route>
 
                     <Route path='/product/detail/:id' element={<ProductDetails/>}/>

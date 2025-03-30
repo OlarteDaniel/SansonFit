@@ -1,0 +1,123 @@
+.DefaultForm{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .8em;
+}
+
+.DefaultForm .inputbox{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    color: #333333;
+}
+
+.DefaultForm .inputbox .price-discount{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: .8em;
+    color: #777777;
+}
+
+.DefaultForm .inputbox label{
+    font-size: 1.1em;
+}
+
+.DefaultForm .inputbox input,
+.DefaultForm .inputbox select,
+.DefaultForm .inputbox textarea{
+    appearance: none; 
+    padding: .3em;
+    width: 100%;
+    outline: none;
+    font-size: .9em;
+    border-radius: 5px;
+    background: rgba(192, 192, 192, 0.1);
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    color: #333333;
+    cursor: pointer;
+}
+
+.DefaultForm .inputbox textarea{
+    height: 150px;
+}
+
+.DefaultForm .inputbox select:focus{
+    border-color: #007bff;
+    box-shadow: inset 0 0 15px rgba(0, 123, 255, 0.2);
+}
+
+.DefaultForm .inputbox select option {
+    background: white;
+    color: #333;
+    padding: 10px;
+}
+
+/* Estilo para mejorar la apariencia en navegadores WebKit (Chrome, Safari) */
+
+.DefaultForm .inputbox select::-webkit-scrollbar {
+    width: 8px;
+}
+
+.DefaultForm .inputbox select::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+}
+
+.DefaultForm .inputbox select::-webkit-scrollbar-track {
+    background: rgba(192, 192, 192, 0.1);
+}
+
+/* Para Edge (ocultar el ícono por defecto) */
+.DefaultForm .inputbox select::-ms-expand {
+    display: none;
+}
+
+.DefaultForm .inputbox select option:hover {
+    background: rgba(0, 123, 255, 0.2);
+}
+
+/* Estilo cuando una opción está seleccionada */
+.DefaultForm .inputbox select option:checked {
+    background: rgba(0, 123, 255, 0.4);
+    color: #fff;
+}
+
+.DefaultForm .inputbox .border-red{
+    border: 1px solid red;
+    background: rgba(255, 0, 0, 0.1);
+    box-shadow: inset 0 0 10px a(255, 0, 0, 0.2);
+}
+
+.DefaultForm .error-message{
+    color: red;
+    font-size: 0.9em;
+    margin-top: 0.3em;
+}
+
+.DefaultForm .btns{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.DefaultForm .btns button{
+    padding: 0.5em;
+    background-color: #005F9E;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    font-family: 'Smack Laideth';
+    font-size: .9em;
+    letter-spacing: .05em;
+    text-align: center;
+    transition: color 0.3s, background-color 0.3s, transform 0.2s ease-in;
+}
+
+.DefaultForm .btns button:hover{
+    background-color: #0085CA;
+    color: #00335F;
+}

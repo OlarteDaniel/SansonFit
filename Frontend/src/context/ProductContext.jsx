@@ -108,6 +108,7 @@ export const ProductContextProvider = ({children}) =>{
         <Context.Provider
         value={{
             category,
+            fetchProducts,
             product,
             products,
             activeVariant,

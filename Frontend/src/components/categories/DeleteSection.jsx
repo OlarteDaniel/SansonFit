@@ -5,7 +5,7 @@ import {categoryService} from '../../services/services'
 
 import { BsXLg } from "react-icons/bs";
 
-import '../../styles/components/categories/DeleteSection.css'
+import '../../styles/components/categories/DeleteSection.css'                                                                                                               
 
 const DeleteSection = ({handleChange,categories,deleteCategory}) => {
 

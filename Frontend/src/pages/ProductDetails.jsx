@@ -5,12 +5,15 @@ import { IoIosArrowDown } from "react-icons/io";
 
 import {productsService,variantService} from '../services/services';
 
+import ItemCount from '../components/widgets/ItemCount';
+
 import UserContext from '../context/UserContext';
 import ProductContext from '../context/ProductContext';
 
 import imgDefault from '../assets/img/productsList/ImagenDefault.jpg'
 
 import '../styles/pages/ProductDetails.css'
+
 
 const ProductDetails = () => {
 
@@ -65,12 +68,24 @@ const ProductDetails = () => {
         navigate('/products')
     }
 
+    const handleclickUpdate = () =>{
+        navigate(`/product/modify/${id}`)
+    }
+
+    const quantityVariants = () =>{
+        const variant = variants?.find(variant => variant.flavor ===selectedVariant); 
+        return variant?.quantity || product?.stock
+    }
+
+    
+
     const imgPrimary = product?.thumbnails?.find?.(img => img.main) || imgDefault;
 
     const priceFormat = Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(product?.price);
 
     return (
         <main className="productDetails">
+
             <div className="container">
                 <div className="section-img">
                     <div className="main-image">
@@ -103,9 +118,14 @@ const ProductDetails = () => {
                             {priceFormat}
                         </div>
 
-                        <div className="quantity">
-                            Stock: {product?.stock}
-                        </div>
+                        {
+                            role === 'admin' && 
+                            (
+                                <div className="quantity">
+                                    Stock: {product?.stock}
+                                </div>
+                            )
+                        }
                         
                     </div>
 
@@ -146,13 +166,18 @@ const ProductDetails = () => {
                             role === 'admin'?
                             <>
 
-                                <button className='modify'>Modificar</button>
+                                <button className='modify' onClick={handleclickUpdate}>Modificar</button>
                                 <button className='delete' onClick={handleClickDelete}>Eliminar</button>
 
                             </>
                             :
                             <>
-                                <p>Trabajando en ello</p>
+                                {
+                                    role === 'user' && 
+                                    (
+                                        <ItemCount stock={quantityVariants()} initialValue={1} />
+                                    )
+                                }
                             </>
                         }
                     </div>

@@ -1,0 +1,118 @@
+.productEdit {
+    width: 100%;
+    padding: 5.5rem 2rem 2rem;
+    font-family: 'Smack Laideth', sans-serif;
+    font-size: 18px;
+    color: #333;
+    display: flex;
+    justify-content: center;
+}
+
+.productEdit .container {
+    width: 100%;
+    padding: 1em 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    max-width: 768px;
+    background: #F2F2F2;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    letter-spacing: 0.05em;
+}
+
+/* Título de la página */
+.productEdit .container .title {
+    font-style: italic;
+    font-weight: 100;
+    color: #0085CA;
+    text-align: center;
+    font-size: 1.8em;
+}
+
+/* Contenedor de pestañas */
+.productEdit .container .header {
+    padding: 0 1em;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #ccc transparent;
+    background-color: #F7F9FB;
+    border-bottom: 2px solid #ddd;
+}
+
+.productEdit .container .header::-webkit-scrollbar {
+    height: 6px;
+}
+
+.productEdit .container .header::-webkit-scrollbar-thumb {
+    background-color: #aaa;
+    border-radius: 3px;
+}
+
+.productEdit .container .header .section-list {
+    display: flex;
+    gap: 1em;
+    font-size: 1em;
+    list-style: none;
+    padding: 0.5em 0;
+}
+
+/* Estilos para cada pestaña */
+.productEdit .container .header .section-list li {
+    padding: 0.5em;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Estilo de la pestaña activa */
+.productEdit .container .header .section-list li.active {
+    background: #0085CA;
+    color: #fff;
+    font-weight: bold;
+}
+
+/* Contenido del cuerpo */
+.productEdit .container .body {
+    padding: 1em;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+}
+
+@media(min-width:480px){
+    .productEdit {
+        padding: 5.5rem 2rem 3.5rem;
+        font-size: 22px;
+    }
+
+    .productEdit .container .header .section-list {
+        font-size: .8em;
+    }
+}
+
+@media(min-width:768px){
+    .productEdit{
+        padding: 7rem 2rem 2.5rem;
+        font-size: 20px;
+    }
+
+    .productEdit .container .header .section-list {
+        font-size: 1em;
+    }
+}
+
+@media(min-width:1024px){
+    .productEdit{
+        padding: 7rem 4rem 2.5rem;
+    }
+}
+
+@media(min-width:1280px){
+    .productEdit{
+        padding: 7rem 4rem 2.5rem;
+        font-size: 24px;
+    }
+}

@@ -24,13 +24,18 @@ const RegisterProduct = () => {
         delete:false,
         edit:false
     });
+    const [selectedFiles, setSelectedFiles] = useState([]);
     const [serverError, setServerError] = useState('');
     const {register, handleSubmit, formState:{errors},reset} = useForm();
     const {addProducts} = useContext(ProductContext);
 
+    const handleFileChange = (event) => {
+        const files = Array.from(event.target.files).map(file => file.name);
+        setSelectedFiles(files);
+    };
+
     const onSubmit =  async (data) =>{
         setServerError('');
-
         const formData = new FormData();
         formData.append('title',data.title);
         formData.append('description',data.description);
@@ -126,20 +131,6 @@ const RegisterProduct = () => {
                     </div>
 
                     <div className="inputbox">
-                        <label>Descripcion</label>
-                        <input 
-                            className={`${errors.description?.type==='required' && 'border-red'}`}
-                            type="text"
-                            {...register('description',{ required: true })}
-                        />
-                        {
-                            errors.description?.type==='required' 
-                            && 
-                            <p className='error-message'>El campo es obligatorio</p>
-                        }
-                    </div>
-
-                    <div className="inputbox">
                         <label>Precio</label>
                         <input 
                             className={`${errors.price?.type==='required' && 'border-red'}`}
@@ -186,6 +177,20 @@ const RegisterProduct = () => {
                             <option value={true}>Habilitado</option>
                             <option value={false}>Deshabilitado</option>
                         </select>
+                    </div>
+
+                    <div className="inputbox">
+                        <label>Descripcion</label>
+                        <textarea 
+                            className={`${errors.description?.type==='required' && 'border-red'}`}
+                            type="text"
+                            {...register('description',{ required: true })}
+                        />
+                        {
+                            errors.description?.type==='required' 
+                            && 
+                            <p className='error-message'>El campo es obligatorio</p>
+                        }
                     </div>
 
                     <div className="inputbox">

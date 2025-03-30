@@ -1,0 +1,186 @@
+.ImageForm{
+    width: 100%;
+    max-width: 480px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .8em;
+}
+
+.ImageForm .images{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.ImageForm .images .imgPrimary{
+    position: relative;
+    padding: 1em;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #F2F2F2;
+    min-height: 320px;
+    border-radius: 8px;
+}
+
+.ImageForm .images .imgPrimary img{
+    width: 60%;
+    max-width: 150px;
+    object-fit: cover;
+}
+
+.ImageForm .images .imgPrimary .button-icon,
+.ImageForm .images .imgPrimary .button-focusedEye{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    border: none;
+}
+
+.ImageForm .images .imgPrimary .button-icon{
+    cursor: pointer;
+}
+
+.ImageForm .images .imgPrimary .eye-icon{
+    font-size: 2em;
+}
+
+.ImageForm .images .imgPrimary .focusedEye-icon{
+    font-size: 2.2em;
+}
+
+.ImageForm .images .imgSecondary{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: .5em;
+}
+
+.ImageForm .images .imgSecondary .img{
+    position: relative;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    cursor: pointer;
+}
+
+.ImageForm .images .imgSecondary img{
+    width: 40%;
+    max-width: 40px;
+    transition: .3s;
+}
+
+.ImageForm .images .imgSecondary .focusedEye-icon{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+.ImageForm .images .imgSecondary img:hover{
+    transform: scale(1.1);
+}
+
+.ImageForm .addImages .inputbox{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    color: #333333;
+}
+
+.ImageForm .addImages .inputbox label{
+    font-size: 1.1em;
+}
+
+.ImageForm .addImages .inputbox input[type="file"] {
+    display: none; 
+}
+
+.ImageForm .addImages .inputbox .file-label {
+    display: inline-block;
+    background: rgba(192, 192, 192, 0.2);
+    color: #333;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: .9em;
+    cursor: pointer;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    text-align: center;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.ImageForm .addImages .inputbox .file-label:hover {
+    background: rgba(192, 192, 192, 0.4);
+}
+
+.ImageForm .addImages .inputbox .file-names {
+    margin-top: 8px;
+    font-size: 0.9em;
+    color: #555;
+}
+
+.ImageForm .addImages .inputbox .file-name {
+    display: block;
+    background: rgba(0, 123, 255, 0.1);
+    padding: 5px;
+    border-radius: 3px;
+    margin-top: 3px;
+    font-weight: 500;
+}
+
+.ImageForm .images .clarification{
+    font-size: .8em;
+    text-align: center;
+}
+
+.ImageForm .images .imgPrimary .button{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 5px;
+    background-color: #D32F2F;
+    color: #fff;
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ImageForm .btns{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.ImageForm .btns button{
+    padding: 0.5em;
+    background-color: #005F9E;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    font-family: 'Smack Laideth';
+    font-size: .9em;
+    letter-spacing: .05em;
+    text-align: center;
+    transition: color 0.3s, background-color 0.3s, transform 0.2s ease-in;
+}
+
+.ImageForm .disable{
+    opacity: .5;
+}
+
