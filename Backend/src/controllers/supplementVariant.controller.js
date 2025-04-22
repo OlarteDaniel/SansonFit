@@ -111,57 +111,130 @@ const addFlavor = async (req, res) => {
     }
 };
 
-const updateFlavor = async(req,res)=>{
+// const updateFlavor = async(req,res)=>{
+//     const fid = req.params.id;
+//     const { productId, flavor, quantity, newQuantity, discount, status } = req.body;
+//     let product = {};
+    
+//     // Verificación del ID del sabor
+//     if (!mongoose.isValidObjectId(fid)) {
+//         return res.sendBadRequest('Invalid Flavor ID');
+//     }
+
+//     // Buscar la variante del suplemento
+//     const supplementVariant = await supplementVariantsService.getById(fid);
+//     if (!supplementVariant) {
+//         return res.sendNotFound('Supplement Variant not found');
+//     }
+
+//     let updateFields = {};
+
+//     // Actualización de descuento o estado, si es necesario
+//     if(discount !== undefined || status !== undefined){
+//         if(discount !== undefined) updateFields.discount = discount
+
+//         if(status !== undefined) updateFields.status = status
+//     }else{
+//         if(!flavor || !quantity){
+//             return res.sendBadRequest('Information missing');
+//         }
+
+//         updateFields = {
+//             flavor,
+//             quantity
+//         }
+
+//         // Si se especifica el ID del producto, aseguramos que no se toque el stock general
+//         if(productId){
+//             if(!mongoose.isValidObjectId(productId)){
+//                 return res.sendBadRequest('Invalid Product ID');
+//             }
+
+//             product = await productService.getProductsById(productId);
+//             const resultUpdateStock = await productService.updateProduct(productId, {
+//                 stock: Number(product.stock) + Number(newQuantity),
+//             });            
+//             if(!resultUpdateStock){
+//                 return res.sendBadRequest('Could not update product stock');
+//             }
+//         }
+//     }
+
+//     try {
+//         // Actualizar la variante del suplemento sin modificar el stock general
+//         const updateSupplementVariant = await supplementVariantsService.updateSupplement(fid, updateFields);
+//         if (!updateSupplementVariant) {
+//             return res.sendBadRequest('Could not update Supplement Variant');
+//         }
+
+//         res.sendSuccessWithPayload(updateSupplementVariant);
+//     } catch (error) {
+//         req.logger.error(`Error updating Supplement Variant: ${error}`);
+//         return res.sendServerError('An error occurred while updating the Supplement Variant');
+//     }
+// }
+
+const updateFlavor = async(req,res) =>{
     const fid = req.params.id;
     const { productId, flavor, quantity, newQuantity, discount, status } = req.body;
-    let product = {};
-    
-    // Verificación del ID del sabor
-    if (!mongoose.isValidObjectId(fid)) {
-        return res.sendBadRequest('Invalid Flavor ID');
-    }
 
-    // Buscar la variante del suplemento
-    const supplementVariant = await supplementVariantsService.getById(fid);
-    if (!supplementVariant) {
-        return res.sendNotFound('Supplement Variant not found');
-    }
-
-    let updateFields = {};
-
-    // Actualización de descuento o estado, si es necesario
-    if(discount !== undefined || status !== undefined){
-        if(discount !== undefined) updateFields.discount = discount
-
-        if(status !== undefined) updateFields.status = status
-    }else{
-        if(!flavor || !quantity){
-            return res.sendBadRequest('Information missing');
+    try {
+        // Verificación del ID del sabor
+        if (!mongoose.isValidObjectId(fid)) {
+            return res.sendBadRequest('Invalid Flavor ID');
         }
 
-        updateFields = {
-            flavor,
-            quantity
+        if(!mongoose.isValidObjectId(productId)){
+            return res.sendBadRequest('Invalid Product ID');
         }
 
-        // Si se especifica el ID del producto, aseguramos que no se toque el stock general
-        if(productId){
-            if(!mongoose.isValidObjectId(productId)){
-                return res.sendBadRequest('Invalid Product ID');
+        // Buscar la variante del suplemento
+        const supplementVariant = await supplementVariantsService.getById(fid);
+        if (!supplementVariant) {
+            return res.sendNotFound('Supplement Variant not found');
+        }
+
+        const product = await productService.getProductsById(productId);
+        if (!product) {
+            return res.sendNotFound('Product not found');
+        }
+
+        let updateFields = {};
+
+        if(discount !== undefined || status !== undefined){
+            updateFields = {
+                flavor,
+                quantity,
+                discount,
+                status
+            }
+        }else{
+            if(!flavor || !quantity){
+                return res.sendBadRequest('Information missing');
             }
 
-            product = await productService.getProductsById(productId);
+            updateFields = {
+                flavor,
+                quantity
+            }
+        }
+
+        if(newQuantity){
             const resultUpdateStock = await productService.updateProduct(productId, {
                 stock: Number(product.stock) + Number(newQuantity),
             });            
             if(!resultUpdateStock){
                 return res.sendBadRequest('Could not update product stock');
             }
+        }else{
+            const resultUpdateStock = await productService.updateProduct(productId, {
+                stock: (Number(product.stock) - Number(supplementVariant.quantity) + Number(quantity)),
+            });    
+            if(!resultUpdateStock){
+                return res.sendBadRequest('Could not update product stock');
+            }
         }
-    }
 
-    try {
-        // Actualizar la variante del suplemento sin modificar el stock general
         const updateSupplementVariant = await supplementVariantsService.updateSupplement(fid, updateFields);
         if (!updateSupplementVariant) {
             return res.sendBadRequest('Could not update Supplement Variant');
@@ -172,6 +245,7 @@ const updateFlavor = async(req,res)=>{
         req.logger.error(`Error updating Supplement Variant: ${error}`);
         return res.sendServerError('An error occurred while updating the Supplement Variant');
     }
+
 }
 
 const deleteFlavor = async (req, res) => {

@@ -216,8 +216,8 @@ const updateProduct = async(req,res) =>{
         if(!updatedProduct){
             return res.sendBadRequest('Could not update product');
         }
-
-        res.sendSuccessWithPayload(updatedProduct)
+        
+        res.sendSuccess('Updated product')
     } catch (error) {
         req.logger.error(`Error updating product: ${error}`);
         return res.sendServerError('An error occurred while updating the product');

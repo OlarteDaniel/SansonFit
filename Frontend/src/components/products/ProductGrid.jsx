@@ -1,4 +1,4 @@
-import React, { useContext, useMemo } from 'react'
+import React, { useContext, useEffect, useMemo } from 'react'
 import { Link } from 'react-router-dom';
 
 import ProductCard from './ProductCard'
@@ -12,7 +12,7 @@ import '../../styles/components/products/ProductGrid.css'
 
 const ProductGrid = () => {
 
-    const {products} = useContext(ProductContext);
+    const {products} = useContext(ProductContext);    
     const {session} = useContext(UserContext);
 
     const userRole = session?.data?.payload?.role;
@@ -34,6 +34,7 @@ const ProductGrid = () => {
                             id={product._id} 
                             title={product.title} 
                             price={product.price} 
+                            discount={product.discount}
                             status={product.globalStatus} 
                             thumbnails ={product.thumbnails}
                             />  

@@ -142,10 +142,28 @@
     color: #333333;
 }
 
+.productDetails .container .section-details .values .price{
+    position: relative;
+}
+
 .productDetails .container .section-details .values .price,
 .productDetails .container .flavor-text{
     font-size: 1.2em;
     color: #0085CA;
+}
+
+.productDetails .container .section-details .values .price .old-price {
+    text-decoration: line-through;
+    color: #888;
+    font-size: 0.9em;
+}
+
+.productDetails .container .section-details .values .price .new-price {
+    position: absolute;
+    right: -50%;
+    top: -25%;
+    color: #0085CA;
+    font-size: .8em;
 }
 
 /* Contenedor de variantes */
@@ -172,6 +190,16 @@
     text-align: center;
 }
 
+.productDetails .container .section-details .variant .discount-icon{
+    position: absolute;
+    top: -5%;
+    right: 2%;
+    display: flex;
+    align-items: center;
+    color: #0085CA;
+    font-size: 1em;
+}
+
 /* Ocultar el input radio */
 .productDetails .container .section-details .variant input {
     display: none;
@@ -189,6 +217,10 @@
     border-color: #0085CA;
 }
 
+.productDetails .container .section-details .variants label:has(input:checked) .discount-icon{
+    color: white;    
+}
+
 /* 🔴 Estilos para variantes agotadas */
 .productDetails .container .section-details .variant.disabled {
     cursor: not-allowed;
@@ -197,6 +229,8 @@
     border-color: #ccc;
     background: #f0f0f0;
 }
+
+
 
 
 .productDetails .container .section-details .buttons{
@@ -263,6 +297,15 @@
         gap: .8em;
     }
 
+    .productDetails .container .section-details .values .price .old-price {
+        font-size: 1em;
+    }
+    
+    .productDetails .container .section-details .values .price .new-price {
+        top: -35%;
+        font-size: .9em;
+    }
+
     .productDetails .container .flavor-text{
         font-size: 1.6em;
     }
@@ -311,6 +354,11 @@
         font-size: 1.4em;
     }
 
+    .productDetails .container .section-details .values .price .new-price {
+        top: -45%;
+        font-size: 1em;
+    }
+
     .productDetails .container .flavor-text{
         font-size: 1.4em;
     }
@@ -321,6 +369,10 @@
 
     .productDetails .container .section-details .buttons button{
         padding: 0.5em;
+    }
+
+    .productDetails .container .section-details .variant .discount-icon{
+        top: -10%;
     }
 }
 

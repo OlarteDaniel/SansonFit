@@ -21,7 +21,7 @@ const ProductEdit = () => {
         <main className="productEdit">
 
             <Toaster 
-                theme='system'
+                theme='light'
                 richColors
                 closeButton
             />

@@ -102,6 +102,32 @@ export const ProductContextProvider = ({children}) =>{
         }
     }
 
+    const updateProduct = async (id, updatedData) => {
+        try {
+            await toast.promise(
+                productsService.updateProduct(id, updatedData),
+                {
+                    loading: "Actualizando Producto...",
+                    success: (() =>{
+                        fetchProducts();
+                        return 'Producto actualizado'
+                    }),
+                    error: "Error al actualizar el producto",
+                }
+            );
+    
+            // Actualizar el estado de los productos sin necesidad de recargar la página
+            setProducts((prevProducts) =>
+                prevProducts.map((product) =>
+                    product._id === id ? { ...product, ...updatedData } : product
+                )
+            );
+    
+        } catch (error) {
+            console.error("Error al actualizar el producto:", error);
+            toast.error("No se pudo actualizar el producto.");
+        }
+    };
     
 
     return (
@@ -113,7 +139,8 @@ export const ProductContextProvider = ({children}) =>{
             products,
             activeVariant,
             addProducts,
-            deleteProduct
+            deleteProduct,
+            updateProduct 
         }}
         >
             {children}

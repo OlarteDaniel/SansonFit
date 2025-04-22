@@ -1,14 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
 import { categoryService, productsService} from '../../services/services';
+
+import ProductContext from '../../context/ProductContext';
+
 import '../../styles/components/formsUpdates/DefaultForm.css';
+
+import { toast } from 'sonner'
 
 const DefaultForm = () => {
     const { id } = useParams();
     const [categories, setCategories] = useState([]);
     const [product, setProduct] = useState(null);
+    const {updateProduct} = useContext(ProductContext);
     // Configuración del formulario con react-hook-form
     const { register, handleSubmit, formState: { errors }, reset, watch, } = useForm();
 
@@ -18,7 +24,20 @@ const DefaultForm = () => {
     const calculatedPrice = (watchPrice - (watchPrice * (watchDiscount / 100))).toFixed(2);
 
     const onSubmit = async (data) => {
-        console.log(data);
+        const productUpdate = {
+            title:data.title,
+            description: data.description,
+            price: Number(data.price),
+            category: data.category,
+            discount:Number(data.discount),
+            globalStatus:data.globalStatus
+        }
+
+        try {
+            await updateProduct(id, productUpdate);
+        } catch (error) {
+            toast.error("No se pudo actualizar el producto");
+        }
     };
     // Función para obtener el producto
     const fetchProduct = async () => {

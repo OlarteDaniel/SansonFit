@@ -39,6 +39,21 @@
     overflow: hidden;
 }
 
+.card .card-product .img .discount-banner {
+    position: absolute;
+    top: 25px;
+    right: -60px;
+    background-color: #005F9E;
+    color: white;
+    padding: 5px 50px;
+    transform: rotate(45deg);
+    font-weight: bold;
+    font-size: 1.8em;
+    z-index: 2;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+
 .card .card-product .img .button-glass{
     padding: .5em;
     position: absolute;

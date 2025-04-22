@@ -14,7 +14,7 @@ import imgDefault from '../../assets/img/productsList/ImagenDefault.jpg'
 
 import '../../styles/components/products/ProductCard.css'
 
-const ProductCard = ({id,title,price,status,thumbnails}) => {
+const ProductCard = ({id,title,price,discount,status,thumbnails}) => {
     
     const {deleteProduct,activeVariant} = useContext(ProductContext);
     const {session} = useContext(UserContext);
@@ -53,6 +53,9 @@ const ProductCard = ({id,title,price,status,thumbnails}) => {
                     <button className='button-glass'>
                         <HiMagnifyingGlass className='glass-icon'/>
                     </button>
+                    {discount > 0 && (
+                    <div className="discount-banner">Oferta</div>
+                    )}
                     <img src={imgPrimary?.url || imgDefault} alt="" />
                     {
                         session && 

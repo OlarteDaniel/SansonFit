@@ -42,7 +42,7 @@ const ImageForm = () => {
       const response = await productsService.getProductById(id);
       if (response && response.status === 200) {
         setProduct(response.data.payload);
-    }
+      }
     } catch (error) {
       setProduct(null);
       console.error('Error al obtener el producto:', error);

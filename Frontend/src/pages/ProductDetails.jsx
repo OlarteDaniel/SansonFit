@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 
 import { IoIosArrowDown } from "react-icons/io";
+import { RiDiscountPercentFill } from "react-icons/ri";
 
 import {productsService,variantService} from '../services/services';
 
@@ -30,7 +31,6 @@ const ProductDetails = () => {
     const {deleteProduct} = useContext(ProductContext);
     const {session} = useContext(UserContext)
     const role = session?.data?.payload.role
-
     const fetchProduct = async ()=>{
         try {
             const response = await productsService.getProductById(id);
@@ -77,11 +77,21 @@ const ProductDetails = () => {
         return variant?.quantity || product?.stock
     }
 
-    
+    const discountActive = () =>{
+        const variant = variants?.find(variant => variant.flavor ===selectedVariant); 
+        const discountProduct = product?.discount
+        const discount = variant?.discount + discountProduct
+        return discount
+    }    
 
     const imgPrimary = product?.thumbnails?.find?.(img => img.main) || imgDefault;
 
-    const priceFormat = Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(product?.price);
+    const price = product?.price;
+    const priceFormat = Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(price);
+
+    const discountedPrice = price - (price*(discountActive()/100));
+    const discountedPriceFormat = Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(discountedPrice);
+
 
     return (
         <main className="productDetails">
@@ -90,7 +100,9 @@ const ProductDetails = () => {
                 <div className="section-img">
                     <div className="main-image">
                         <img src={imgPrimary.url} alt="" />
-                        <p className={product?.globalStatus? 'active' : ''}>{product?.globalStatus? 'Habilitado' : 'Deshabilitado'}</p>
+                        {role === 'admin' && 
+                            <p className={product?.globalStatus? 'active' : ''}>{product?.globalStatus? 'Habilitado' : 'Deshabilitado'}</p>
+                        }
                     </div>
                     <div className="secondary-images">
                         {
@@ -115,7 +127,14 @@ const ProductDetails = () => {
 
                     <div className="values">
                         <div className="price">
-                            {priceFormat}
+                            {discountActive()? 
+                                <>
+                                    <span className="old-price">{priceFormat}</span>
+                                    <span className="new-price">{discountedPriceFormat}</span>
+                                </>
+                                :
+                                <>{priceFormat}</>
+                            }
                         </div>
 
                         {
@@ -134,19 +153,35 @@ const ProductDetails = () => {
                             <>
                                 <p className="flavor-text">Sabor:</p>
                                 <div className="variants">
-                                    {variants.map((variant) => (
-                                        <label key={variant._id} 
-                                            className={`variant ${variant.quantity < 1 ? 'disabled' : ''}`}>
-                                            <input
-                                                type="radio"
-                                                name="variant"
-                                                disabled= {variant.quantity < 1}
-                                                value={variant.flavor}
-                                                onChange={() => setSelectedVariant(variant.flavor)}
-                                            />
-                                            {variant.flavor}
-                                        </label>
-                                    ))}
+                                {variants.map((variant) => {
+                                    const hasProductDiscount = product?.discount > 0;
+                                    const hasVariantDiscount = variant?.discount > 0;
+                                    const totalDiscount = (hasProductDiscount ? product.discount : 0) + (hasVariantDiscount ? variant.discount : 0);
+
+                                    return (
+                                    <label
+                                        key={variant._id}
+                                        className={`variant ${variant.quantity < 1 ? 'disabled' : ''}`}
+                                    >
+                                        {/* Mostrar el ícono si al menos uno tiene descuento */}
+                                        {(hasProductDiscount || hasVariantDiscount) && (
+                                        <span className="discount-icon">
+                                            {totalDiscount}
+                                            <RiDiscountPercentFill />
+                                        </span>
+                                        )}
+
+                                        <input
+                                        type="radio"
+                                        name="variant"
+                                        disabled={variant.quantity < 1}
+                                        value={variant.flavor}
+                                        onChange={() => setSelectedVariant(variant.flavor)}
+                                        />
+                                        {variant.flavor}
+                                    </label>
+                                    );
+                                })}
                                 </div>
                             </>
                         )

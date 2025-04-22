@@ -1,4 +1,4 @@
-import { getHeaders,postFileHeaders } from "../utils/http";
+import { getHeaders,postFileHeaders, postHeaders } from "../utils/http";
 
 const PRODUCTS_ENDPOINT = `${import.meta.env.VITE_APP_BASE_URL}${import.meta.env.VITE_APP_PRODUCTS_ENDPOINT}`;
 
@@ -25,5 +25,10 @@ export default class ProductsService {
     deleteProduct = (id) =>{
         const requestInfo = {url: `${PRODUCTS_ENDPOINT}/${id}`,config: getHeaders()};
         return this.client.makeDeleteRequest(requestInfo)
+    }
+
+    updateProduct = (id,product) => {
+        const requestInfo = {url:`${PRODUCTS_ENDPOINT}/${id}`,body:product,config: postHeaders()};
+        return this.client.makePutRequest(requestInfo);
     }
 }
