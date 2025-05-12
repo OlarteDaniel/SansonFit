@@ -44,7 +44,9 @@ const getAllByProduct = async (req, res) => {
         const variants = await supplementVariantsService.getAllByProduct(pid);
         if (!variants || variants.length === 0) {
             req.logger.info(`This product does not have flavors`);
-            return res.sendNotFound('Product without flavors');
+            // MODIFICAR EN CASO DE ERROR
+            // return res.sendNotFound('Product without flavors');
+            return res.sendSuccessWithPayload([]);
         }
         req.logger.info('The product has flavors');
         return res.sendSuccessWithPayload(variants);

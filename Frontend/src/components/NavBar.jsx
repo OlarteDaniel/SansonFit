@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { RxHamburgerMenu } from "react-icons/rx";
 import { BsXLg } from "react-icons/bs";
 
-import Cart from './widgets/Cart';
+import CartButton from './widgets/CartButton';
 import User from './widgets/User';
 import useScroll from '../hooks/useScroll';
 import useClickOutside from '../hooks/useClickOutside ';
@@ -37,6 +37,7 @@ const NavBar = () => {
     return (
         <header className={`navBar ${isScrolled ? 'abajo' : ''}`}>
             <div></div>
+            
             <button onClick={toggleMenu} className="button-burger">
                 <RxHamburgerMenu className={`burger-icon ${isScrolled ? 'light' : ''}`} />
             </button>
@@ -48,7 +49,7 @@ const NavBar = () => {
                 </Link>
 
                 <div className="buttons">
-                    <Cart/>
+                    <CartButton/>
 
                     <User ButtonClass="button-user"/>
                 </div>

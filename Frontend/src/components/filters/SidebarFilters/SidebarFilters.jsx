@@ -1,4 +1,6 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
+
+import {categoryService} from '../../../services/services';
 
 import { IoFilter } from "react-icons/io5";
 import { BsXLg } from "react-icons/bs";
@@ -15,50 +17,8 @@ import '../../../styles/components/filters/sideBar/SidebarFilters.css'
 
 const SidebarFilters = () => {
 
-    const types = [
-        {   _id: "6755ed3439f16c45e6131b7c",
-            name: "Creatina",
-            type: "supplements"
-        },{
-            _id: "6755ed3b39f16c45e6131b7e",
-            name: "Creatina",
-            type: "supplements"
-        },{
-            _id: "6755ed5539f16c45e6131b80",
-            name: "Creatina",
-            type: "supplements"
-        },{
-            _id: "6755ed3439f16c45e6131b7a",
-            name: "Proteina",
-            type: "supplements"
-        },{
-            _id: "6755ed5539f16c45e6131b81",
-            name: "Pre-Entreno",
-            type: "supplements"
-        },{
-            _id: "6755ed5539f16c45e6131b82",
-            name: "Pre-Entreno",
-            type: "supplements"
-        }
-    ]
-
-    // acc = Acumulador
-    // curr = Valor actual
-    const uniqueProducts = types.reduce((acc,curr) =>{
-
-        // Si el nombre del producto ya existe en el acumulador, aumenta el contador
-        if(acc[curr.name]){
-            acc[curr.name].count++;
-        }else{
-            // Si no existe, crea una nueva entrada con count = 1
-            acc[curr.name] = { name: curr.name, count: 1, type: curr.type };
-        }
-        return acc;
-    }, {});
-
-    // Convertimos el objeto en un array
-    const result = Object.values(uniqueProducts);
-
+    const [types,setTypes] = useState([]);
+    const [filters, setFilters] = useState([])
     const [filterMenuActive, setFilterMenuActive] = useState(false);
     const [priceActive, setPriceActive] = useState(false);
     const [typeActive, setTypeActive] = useState(false);
@@ -79,6 +39,29 @@ const SidebarFilters = () => {
             setTypeActive(false);
         }
     })
+
+    const addFilters = (active, type) => {
+        setFilters(prev =>
+            active ? [...prev, type] : prev.filter(f => f !== type)
+        );
+    };
+    
+
+    const fetchCategories = async ()=>{
+        try {
+            const result = await categoryService.getCategories();
+            if(result.status === 200 && result.data?.payload){
+                setTypes(result.data.payload);
+            }
+        } catch (error) {
+            setTypes([])
+            console.error('Error al obtener categorias:', error)
+        }
+    }
+
+    useEffect(() =>{
+        fetchCategories();
+    },[])
 
     return (
         <div className='sidebar'>
@@ -140,18 +123,12 @@ const SidebarFilters = () => {
                         </div>
 
                         <div className="body-types">
-                            {result.map((type) => (
+                            {types.map((type) => (
                                 <div className="inputbox" key={type.name}>
                                     
                                     <label>
-                                        <input type="checkbox"/>
-
+                                        <input onChange={(e)=> addFilters(e.target.checked, type.name)} type="checkbox"/>
                                         {type.name}
-
-                                        <span>
-                                            ({type.count})
-                                        </span>
-
                                     </label>
                                 </div>
                             ))}

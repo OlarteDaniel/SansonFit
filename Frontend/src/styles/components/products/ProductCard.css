@@ -96,7 +96,7 @@
     color: #fff;
     cursor: pointer;
     font-family: 'Smack Laideth';
-    font-size: .9em;
+    font-size: .8em;
     text-align: center;
     transition: color 0.3s, background-color 0.3s;
 }
@@ -197,6 +197,11 @@
     .card .card-product .img .buttons{
         gap: 1em;
     }
+
+    .card .card-product .img .button.button-buys{
+        font-size: .9em;
+        padding: .4em;
+    }
 }
 
 @media(min-width:768px){
@@ -230,6 +235,10 @@
 
     .card .card-product .img .button{
         padding: .6em;
+    }
+
+    .card .card-product .img .button.button-buys{
+        font-size: .9em;
     }
 
     .card:hover .img .button-glass{

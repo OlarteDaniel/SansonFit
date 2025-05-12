@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 import { HiMagnifyingGlass } from "react-icons/hi2";
@@ -13,16 +13,62 @@ import { FaPlus } from "react-icons/fa";
 import imgDefault from '../../assets/img/productsList/ImagenDefault.jpg'
 
 import '../../styles/components/products/ProductCard.css'
+import { variantService } from '../../services/services';
 
-const ProductCard = ({id,title,price,discount,status,thumbnails}) => {
+const ProductCard = ({id,title,price,discount,hasDiscount,status,thumbnails}) => {
     
+    const [hasVariantDiscount, setHasVariantDiscount] = useState(false);
+    const [variants, setVariants] = useState([]);
+
+    useEffect(() => {
+        const checkVariantDiscount = async () => {
+            try {
+                const res = await variantService.getByProduct(id);
+                const variants = res.data?.payload || [];
+                setVariants(variants);
+
+                const anyVariantHasDiscount = variants.some(variant => variant.discount > 0);
+                setHasVariantDiscount(anyVariantHasDiscount);
+            } catch (error) {
+                console.error('Error al obtener variantes:', error);
+                setHasVariantDiscount(false);
+            }
+        };
+
+        // Solo ejecuta si no hay descuento a nivel producto
+        if (!hasDiscount) {
+            checkVariantDiscount();
+        }
+    }, [id, hasDiscount]);
+
+    // Función que devuelve el descuento activo
+    const discountActive = () => {
+        // Si hay variantes, buscar si la variante seleccionada tiene descuento
+        let variant = null;
+
+        if (variants.length === 1) {
+            // Si solo hay una variante, la tomamos como seleccionada
+            variant = variants[0];
+        }
+
+        const productDiscount = hasDiscount ? discount : 0;
+        const variantDiscount = variant?.discount || 0;
+
+        // Combina los descuentos o toma el mayor
+        return productDiscount + variantDiscount;
+    };
+
+    const finalDiscount = discountActive();
+    const finalPrice = price - (price * finalDiscount / 100);
+    const finalPriceFormat = Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(finalPrice);
+
+    const showDiscountBadge = hasDiscount || hasVariantDiscount;
+
     const {deleteProduct,activeVariant} = useContext(ProductContext);
     const {session} = useContext(UserContext);
 
     const navigate = useNavigate();
-
-    const priceFormat = Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(price);
-
+    
     const handleClickInformation = (event) =>{
         event.stopPropagation() // Evita que el evento se propague al padre
         navigate(`/product/detail/${id}`);
@@ -53,7 +99,7 @@ const ProductCard = ({id,title,price,discount,status,thumbnails}) => {
                     <button className='button-glass'>
                         <HiMagnifyingGlass className='glass-icon'/>
                     </button>
-                    {discount > 0 && (
+                    {showDiscountBadge && (
                     <div className="discount-banner">Oferta</div>
                     )}
                     <img src={imgPrimary?.url || imgDefault} alt="" />
@@ -61,7 +107,7 @@ const ProductCard = ({id,title,price,discount,status,thumbnails}) => {
                         session && 
                             <div className="buttons">
                             {session.data.payload.role === 'user'? 
-                                <button className='button button-buys'>Comprar</button>
+                                <button className='button button-buys'>Añadir al carrito</button>
                             :  
                                 <>
                                     <button 
@@ -95,7 +141,7 @@ const ProductCard = ({id,title,price,discount,status,thumbnails}) => {
                     <h3>{title}</h3>
                 </div>
                 <div className="price">
-                    <p>{priceFormat}</p>
+                    <p>{finalPriceFormat}</p>
                 </div>
                 {session?.data?.payload?.role==='admin' && 
                     (

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo } from 'react'
+import { useContext, useMemo } from 'react'
 import { Link } from 'react-router-dom';
 
 import ProductCard from './ProductCard'
@@ -13,10 +13,11 @@ import '../../styles/components/products/ProductGrid.css'
 const ProductGrid = () => {
 
     const {products} = useContext(ProductContext);    
+
     const {session} = useContext(UserContext);
 
     const userRole = session?.data?.payload?.role;
-    
+
     // Esta logica consiste en que si el rol del usuario es admin, que la lista de productos siga siendo 'products'
     // Caso contrario que se obtenga un array nuevo donde se filtren aquellos que tengan 'globalStatus' en true,
     // si no hay ningun producto con 'globalStatus' en true se retorna un array vacio []
@@ -24,7 +25,7 @@ const ProductGrid = () => {
         if(userRole==='admin') return products;
         return products?.filter(product => product.globalStatus) || []
     },[userRole,products])
-    
+
     return (
         filteredProducts.length > 0 ? (
             <div className="grid">
@@ -35,6 +36,7 @@ const ProductGrid = () => {
                             title={product.title} 
                             price={product.price} 
                             discount={product.discount}
+                            hasDiscount={product.discount > 0}
                             status={product.globalStatus} 
                             thumbnails ={product.thumbnails}
                             />  

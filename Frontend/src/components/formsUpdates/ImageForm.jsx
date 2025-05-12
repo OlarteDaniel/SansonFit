@@ -152,8 +152,7 @@ const ImageForm = () => {
     const formData = new FormData();
     if (data.thumbnails?.length) {
       for (const file of data.thumbnails) {
-        console.log('first')
-          formData.append('thumbnails', file);
+        formData.append('thumbnails', file);
       }
     }
     try {

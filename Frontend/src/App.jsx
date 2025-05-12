@@ -2,10 +2,12 @@ import {BrowserRouter, Route, Routes} from 'react-router-dom';
 
 import {UserContextProvider} from './context/UserContext'
 import { ProductContextProvider } from './context/ProductContext';
+import { CartContextProvider } from './context/CartContext';
 
 import Wrapper from './hocs/Wrapper';
 
 import NavBar from './components/NavBar';
+import Cart from './components/cart/Cart';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import ProductsList from './pages/ProductsList';
@@ -26,8 +28,10 @@ function App() {
         <BrowserRouter>
           <UserContextProvider>
             <ProductContextProvider>
+              <CartContextProvider>
                 <Wrapper>
                   <NavBar/>
+                  <Cart/>
                   <Routes>
                     <Route path='/' element={<Home/>}/>
 
@@ -47,8 +51,9 @@ function App() {
                   </Routes>
                   <Footer/>
                 </Wrapper>
-              </ProductContextProvider>
-            </UserContextProvider>
+              </CartContextProvider>
+            </ProductContextProvider>
+          </UserContextProvider>
         </BrowserRouter>
     </div>
   );

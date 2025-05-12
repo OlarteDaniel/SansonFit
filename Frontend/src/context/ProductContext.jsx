@@ -1,6 +1,6 @@
 import React, {useState,createContext, useEffect} from "react";
 
-import { productsService, categoryService } from '../services/services';
+import { productsService, categoryService} from '../services/services';
 import useScrollLock from "../hooks/useScrollLock";
 
 import { toast } from 'sonner'
@@ -12,18 +12,25 @@ export const ProductContextProvider = ({children}) =>{
     const [product,setProduct] = useState(null);
     const [category,setCategory] = useState('');
     const [products,setProducts] = useState([]);
+    const [paginate,setPaginate] = useState({});
+    const [sorting, setSorting] = useState({ field: 'title', order: 'asc' });
 
     const [toggle] = useScrollLock();
 
     useEffect(()=>{    
         fetchProducts();
-    },[])
+    },[sorting])
 
-    const fetchProducts = async () =>{
+    const fetchProducts = async (page=1, sort = sorting) =>{
         try {
-            const result = await productsService.getProducts();
+            const result = await productsService.getProducts(page,sort.field,sort.order);
             if(result.status === 200 && result.data?.payload){
-                setProducts(result.data.payload);
+                setProducts(result.data.payload.docs);
+                setPaginate({prevPage: result.data.payload.prevPage,
+                            nextPage: result.data.payload.nextPage,
+                            totalPages: result.data.payload.totalPages,
+                            limit: result.data.payload.limit
+                });
                 return;
             }
             setProducts([]);
@@ -128,19 +135,21 @@ export const ProductContextProvider = ({children}) =>{
             toast.error("No se pudo actualizar el producto.");
         }
     };
-    
 
     return (
         <Context.Provider
         value={{
             category,
             fetchProducts,
+            paginate,
             product,
             products,
             activeVariant,
             addProducts,
             deleteProduct,
-            updateProduct 
+            updateProduct,
+            sorting,
+            setSorting
         }}
         >
             {children}

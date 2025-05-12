@@ -38,6 +38,10 @@
     animation: fadeIn 0.3s ease-out;
 }
 
+.number-paginate {
+    margin-top: 1em;
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;

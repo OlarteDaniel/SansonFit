@@ -6,10 +6,20 @@ import {promises as fsPromises} from 'fs'
 
 const getAll = async(req,res) =>{
     
+    const limit = parseInt(req.query.limit) || 8;
+    const page = parseInt(req.query.page) || 1;
+    const sortField = req.query.sortBy || 'title'; // campo para ordenar
+    const sortOrder = req.query.order === 'desc' ? -1 : 1; // asc o desc
+
+    console.log(req.query.sortBy)
+    console.log(req.query.order)
+
     try {
-        const products = await productService.getProducts();
+        const products = await productService.getProducts(page,limit,sortField,sortOrder);
         if(products.length === 0){
-            return res.sendNotFound('There are no registered products');
+            // MODIFICAR EN CASO DE ERROR
+            // return res.sendNotFound('There are no registered products');
+            return res.sendSuccessWithPayload([]);
         }
         req.logger.info('Products fetched successfully');
         return res.sendSuccessWithPayload(products);
@@ -38,9 +48,11 @@ const getAllByCategory = async (req, res) => {
             return res.sendBadRequest('Category not found');
         }
 
-        const productWithCategory = products.filter(product => 
+        const productWithCategory = products.docs.filter(product => 
             product.category?.toString() === resultCategory._id.toString()
-        );
+        );        
+
+        
 
         req.logger.info(`Products successfully obtained with the category: ${type}-${name}`);
         return res.sendSuccessWithPayload(productWithCategory);

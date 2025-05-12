@@ -8,8 +8,8 @@ export default class ProductRepository{
         return this.dao.count({category:categoryId});
     }
 
-    getProducts(){
-        return this.dao.get();
+    getProducts(page,limit,sortField,sortOrder){
+        return this.dao.get({},{page:page,limit:limit,sort:{[sortField]:sortOrder}});
     }
 
     getProductsById(id){

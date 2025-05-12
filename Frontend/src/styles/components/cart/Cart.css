@@ -1,0 +1,81 @@
+.cart{
+    position: fixed;
+    padding: 1.5rem 2rem;
+    width: 35vw;
+    min-width: 250px;
+    height: 100vh;
+    right: 0;
+    top: 0;
+    background-color: #00457E;
+    transform: translateX(100%);
+    transition: transform 0.5s ease-in-out;
+    font-size: 20px;
+    z-index: 10;
+}
+
+.cart.activate{
+    box-shadow: 0 0 0 100vmax rgba(0, 0, 0, 0.5);
+    transform: translateX(0);
+}
+
+.cart .message{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: .4em;
+}
+
+.cart .message p{
+    color: #fff;
+    font-family: 'Smack Laideth';
+    font-size: 1em;
+}
+
+.cart .message button{
+    padding: 0.5em;
+    background-color: transparent;
+    border: 1px solid #EEEEEE;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    font-family: 'Smack Laideth';
+    font-size: .8em;
+    letter-spacing: .05em;
+    text-align: center;
+    transition: transform 0.2s ease-in;
+}
+
+.cart .message button:hover{
+    border: 2px solid #dedddd;
+}
+
+.cart .head{
+    padding-bottom: .2em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: 'Smack Laideth';
+    font-size: 1.2em;
+    border-bottom: 1px solid #dedddd;
+}
+
+.cart .head p{
+    color: #fff;
+    letter-spacing: .1em;
+}
+
+.cart .head .btns{
+    display: flex;
+    gap: .6em;
+}
+
+.cart .head .btns button{
+    display: flex;
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;    
+    font-size: .9em;
+}

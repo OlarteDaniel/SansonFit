@@ -12,8 +12,8 @@ export default class ProductsService {
         return this.client.makeGetRequest(requestInfo);
     }
 
-    getProducts = () => {
-        const requestInfo = {url:`${PRODUCTS_ENDPOINT}`,config: postFileHeaders()};
+    getProducts = (page,field,order) => {
+        const requestInfo = {url:`${PRODUCTS_ENDPOINT}?page=${page}&sortBy=${field}&order=${order}`,config: postFileHeaders()};
         return this.client.makeGetRequest(requestInfo);
     }
 

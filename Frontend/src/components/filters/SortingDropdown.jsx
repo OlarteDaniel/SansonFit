@@ -1,6 +1,8 @@
-import React, {useRef, useState } from 'react'
+import {useContext, useEffect, useRef, useState } from 'react'
 
 import { IoIosArrowDown } from "react-icons/io";
+
+import ProductContext from '../../context/ProductContext';
 
 import useClickOutside from '../../hooks/useClickOutside ';
 
@@ -10,14 +12,15 @@ import '../../styles/components/filters/SortingDropdown.css'
 const SortingDropdown = () => {
 
     const sortingOptions = [
-        { value: 1, label: 'Alfabéticamente, A-Z' },
-        { value: 2, label: 'Alfabéticamente, Z-A' },
-        { value: 3, label: 'Precio, menor a mayor' },
-        { value: 4, label: 'Precio, mayor a menor' },
+        { value: { field: 'title', order: 'asc' }, label: 'Alfabéticamente, A-Z' },
+        { value: { field: 'title', order: 'desc' }, label: 'Alfabéticamente, Z-A' },
+        { value: { field: 'price', order: 'asc' }, label: 'Precio, menor a mayor' },
+        { value: { field: 'price', order: 'desc' }, label: 'Precio, mayor a menor' },
     ];
 
     const [dropdownActive,setDropdownActive] = useState(false);
-    const [sorting, setSorting] = useState(1);
+
+    const {sorting,setSorting} = useContext(ProductContext);    
 
     const dropdownRef = useRef(null)
 
@@ -26,9 +29,13 @@ const SortingDropdown = () => {
     const toggleDropdown = () => setDropdownActive(!dropdownActive);
 
     const handleRadioChange = (e)=>{
-        const value = e.target.value;
-        setSorting(value);
+        const selected = JSON.parse(e.target.value); // parsea el string a objeto
+        setSorting(selected);
     }
+
+    useEffect(()=>{
+        console.log('first')
+    },[sorting]);
 
     return (
         <div ref={dropdownRef} className="dropdown">
@@ -36,16 +43,16 @@ const SortingDropdown = () => {
 
             <ul className={`sortings ${dropdownActive? 'sortings-active':''}`}>
                 {sortingOptions.map(option => (
-                    <li key={option.value}>
+                    <li key={option.label}>
                         <label>
                             <input
                                 type="radio"
                                 name="sort_by"
                                 className="radio"
-                                value={option.value}
+                                value={JSON.stringify(option.value)}  // stringify aquí
                                 onChange={handleRadioChange}
                             />
-                            <span className={`label ${sorting == option.value ? 'activate' : ''}`}>
+                            <span className={`label ${JSON.stringify(sorting) === JSON.stringify(option.value) ? 'activate' : ''}`}>
                                 {option.label}
                             </span>
                         </label>

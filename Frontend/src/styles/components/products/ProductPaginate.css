@@ -1,0 +1,52 @@
+/* ProductPaginate.css */
+
+/* Estilos base: Mobile first (<480px) */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap; /* Por si hay muchos números */
+    list-style: none;
+    padding: 0;
+    font-size: 18px;
+    gap: .5em;
+}
+
+.pagination li {
+    cursor: pointer;
+    padding: .2em .4em;
+    display: flex;
+    background-color: #e0f0ff; /* Azul muy clarito */
+    border-radius: 6px;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #00457E; /* Azul fuerte */
+    transition: all 0.3s ease;
+    user-select: none;
+    border: 1px solid transparent;
+}
+
+.pagination li:hover {
+    background-color: #0085CA; /* Azul intermedio */
+    border-color: #00457E;
+    color: white;
+}
+
+.pagination li.active {
+    background-color: #00457E; /* Azul fuerte */
+    color: white;
+    font-weight: bold;
+}
+
+@media (min-width: 768px) {
+    .pagination{
+        font-size: 22px;
+    }
+}
+
+
+@media (min-width: 1280px) {
+    .pagination{
+        font-size: 24px;
+    }
+}

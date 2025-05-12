@@ -6,8 +6,12 @@ export default class ProductDAO{
         return productModel.countDocuments(filter);
     }
 
-    async get(filter = null){
-        return productModel.find(filter);
+    async get(filter = null, options = null){
+        if (options) {
+            return productModel.paginate(filter, options);
+        } else {
+            return productModel.find(filter);
+        }
     }
 
     async getOne(params){

@@ -77,11 +77,25 @@ const ProductDetails = () => {
         return variant?.quantity || product?.stock
     }
 
-    const discountActive = () =>{
-        const variant = variants?.find(variant => variant.flavor ===selectedVariant); 
-        const discountProduct = product?.discount
-        const discount = variant?.discount + discountProduct
-        return discount
+    const discountActive = () => {
+        if (!variants || variants.length === 0) return product?.discount || 0;
+    
+        let variant;
+    
+        if (selectedVariant) {
+            variant = variants.find(v => v.flavor === selectedVariant);
+        }
+    
+        // Si no hay variante seleccionada pero hay solo una, usar esa
+        if (!variant && variants.length === 1) {
+            variant = variants[0];
+        }
+    
+        const productDiscount = product?.discount || 0;
+        const variantDiscount = variant?.discount || 0;
+    
+        // Por ejemplo, sumar ambos descuentos
+        return productDiscount + variantDiscount;
     }    
 
     const imgPrimary = product?.thumbnails?.find?.(img => img.main) || imgDefault;
