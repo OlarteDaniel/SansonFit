@@ -1,6 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useContext } from 'react'
 
 import {categoryService} from '../../../services/services';
+
+import ProductContext from '../../../context/ProductContext';
 
 import { IoFilter } from "react-icons/io5";
 import { BsXLg } from "react-icons/bs";
@@ -14,14 +16,18 @@ import useClickOutside from '../../../hooks/useClickOutside .jsx';
 
 import '../../../styles/components/filters/sideBar/SidebarFilters.css'
 
-
 const SidebarFilters = () => {
 
+    const {prices,setPricesFilter,minMaxPrices, setFilters} = useContext(ProductContext);    
+
     const [types,setTypes] = useState([]);
-    const [filters, setFilters] = useState([])
     const [filterMenuActive, setFilterMenuActive] = useState(false);
     const [priceActive, setPriceActive] = useState(false);
     const [typeActive, setTypeActive] = useState(false);
+    const [selectedTypes, setSelectedTypes] = useState([]);
+
+    const [min, setMin] = useState(prices.min || 0);
+    const [max, setMax] = useState(prices.max || 100000);
 
     const toggleFilterMenu = () => {
         setFilterMenuActive(!filterMenuActive);
@@ -44,6 +50,10 @@ const SidebarFilters = () => {
         setFilters(prev =>
             active ? [...prev, type] : prev.filter(f => f !== type)
         );
+
+        setSelectedTypes(prev =>
+            active ? [...prev, type] : prev.filter(id => id !== type)
+        );
     };
     
 
@@ -61,7 +71,20 @@ const SidebarFilters = () => {
 
     useEffect(() =>{
         fetchCategories();
+        minMaxPrices()
     },[])
+
+    const handleApplyFilters = () => {
+        const parsedMin  = parseFloat(min) || 0;
+        const parsedMax  = parseFloat(max) || 100000;
+        setPricesFilter({min:parsedMin, max:parsedMax })
+    };
+
+    const resetFilters = () =>{
+        setFilters([])
+        setSelectedTypes([]);
+        setPricesFilter({min: prices.min ,max:prices.max})
+    }
 
     return (
         <div className='sidebar'>
@@ -91,7 +114,7 @@ const SidebarFilters = () => {
                                     Desde
                                     <div className="input">
                                     <span>$</span>
-                                    <input type="number" placeholder='0'/>
+                                    <input type="number" value={min} onChange={(e) => setMin(Number(e.target.value))}/>
                                     </div>
                                 </label>
                                 
@@ -102,13 +125,13 @@ const SidebarFilters = () => {
                                     Hasta
                                     <div className="input">
                                         <span>$</span>
-                                        <input type="number" placeholder='100000'/>
+                                        <input type="number" value={max} onChange={(e) => setMax(Number(e.target.value))} />
                                     </div>
                                 </label>
                                 
                             </div>
 
-                            <DoubleSlider/>
+                            <DoubleSlider min={min} max={max} changePrice={setPricesFilter} priceMax={prices.max}/>
 
                         </div>
 
@@ -127,7 +150,11 @@ const SidebarFilters = () => {
                                 <div className="inputbox" key={type.name}>
                                     
                                     <label>
-                                        <input onChange={(e)=> addFilters(e.target.checked, type.name)} type="checkbox"/>
+                                        <input
+                                            type="checkbox"
+                                            checked={selectedTypes.includes(type._id)}
+                                            onChange={(e) => addFilters(e.target.checked, type._id)}
+                                        />
                                         {type.name}
                                     </label>
                                 </div>
@@ -137,8 +164,8 @@ const SidebarFilters = () => {
                 </div>
 
                 <div className="btns">
-                    <button className='apply'>APLICAR</button>
-                    <button className='trash'><FaRegTrashAlt /></button>
+                    <button className='apply' onClick={handleApplyFilters}>APLICAR</button>
+                    <button className='trash' onClick={resetFilters}><FaRegTrashAlt /></button>
                 </div>
             </div>
 

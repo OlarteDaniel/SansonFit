@@ -116,14 +116,19 @@
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     gap: .5em;
     font-size: 1.3em;
 }
 
+.slider-values .inputbox-min span,
+.slider-values .inputbox-max span{
+    width: 80%;
+}
+
 .slider-values .inputbox-min input,
 .slider-values .inputbox-max input{
-    width: 50px;
+    width: 100%;
     border: 1px solid #333333;
     outline: none;
     caret-color: #00335F;

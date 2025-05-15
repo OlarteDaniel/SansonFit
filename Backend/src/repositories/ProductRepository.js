@@ -8,8 +8,20 @@ export default class ProductRepository{
         return this.dao.count({category:categoryId});
     }
 
-    getProducts(page,limit,sortField,sortOrder){
-        return this.dao.get({},{page:page,limit:limit,sort:{[sortField]:sortOrder}});
+    getProducts(page,limit,sortField,sortOrder,minPrice,maxPrice,filters){
+        const query = {
+            price: { $gte: minPrice, $lte: maxPrice }
+        };
+
+        if (filters && filters.length > 0) {
+            query.category = { $in: filters };
+        }
+
+        return this.dao.get(query, {
+            page: page,
+            limit: limit,
+            sort: { [sortField]: sortOrder }
+        });
     }
 
     getProductsById(id){
@@ -18,6 +30,12 @@ export default class ProductRepository{
 
     getProductByCode(code){
         return this.dao.getOne({code:code});
+    }
+
+    async getPriceRange() {
+        const min = await this.dao.getMinPrice(); // <- fijate que acá el método en DAO se llama getMinPrice
+        const max = await this.dao.getMaxPriceProduct();
+        return { min, max };
     }
 
     createProduct(product){

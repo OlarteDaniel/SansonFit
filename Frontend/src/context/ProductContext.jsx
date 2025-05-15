@@ -1,4 +1,4 @@
-import React, {useState,createContext, useEffect} from "react";
+import {useState,createContext, useEffect} from "react";
 
 import { productsService, categoryService} from '../services/services';
 import useScrollLock from "../hooks/useScrollLock";
@@ -14,16 +14,19 @@ export const ProductContextProvider = ({children}) =>{
     const [products,setProducts] = useState([]);
     const [paginate,setPaginate] = useState({});
     const [sorting, setSorting] = useState({ field: 'title', order: 'asc' });
+    const [prices, setPrices] = useState({});
+    const [pricesFilter,setPricesFilter] = useState({})
+    const [filters, setFilters] = useState([]);
 
     const [toggle] = useScrollLock();
 
     useEffect(()=>{    
         fetchProducts();
-    },[sorting])
+    },[sorting,pricesFilter,prices,filters])
 
     const fetchProducts = async (page=1, sort = sorting) =>{
         try {
-            const result = await productsService.getProducts(page,sort.field,sort.order);
+            const result = await productsService.getProducts(page,sort.field,sort.order,pricesFilter.min,pricesFilter.max,filters);
             if(result.status === 200 && result.data?.payload){
                 setProducts(result.data.payload.docs);
                 setPaginate({prevPage: result.data.payload.prevPage,
@@ -38,6 +41,15 @@ export const ProductContextProvider = ({children}) =>{
             setProducts([]);
             console.error('Error al obtener productos:', error)
         }
+    }
+
+    const minMaxPrices = async ()=>{
+        try {
+            const result = await productsService.getPrices();
+            setPrices(result.data.payload)
+        } catch (error) {
+            setPrices({});
+        }   
     }
 
     const activeVariant = async (productId=null) =>{
@@ -149,7 +161,11 @@ export const ProductContextProvider = ({children}) =>{
             deleteProduct,
             updateProduct,
             sorting,
-            setSorting
+            setSorting,
+            minMaxPrices,
+            prices,
+            setPricesFilter,
+            setFilters
         }}
         >
             {children}

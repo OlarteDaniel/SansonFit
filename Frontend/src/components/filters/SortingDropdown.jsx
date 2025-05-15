@@ -1,4 +1,4 @@
-import {useContext, useEffect, useRef, useState } from 'react'
+import {useContext, useRef, useState } from 'react'
 
 import { IoIosArrowDown } from "react-icons/io";
 
@@ -32,10 +32,6 @@ const SortingDropdown = () => {
         const selected = JSON.parse(e.target.value); // parsea el string a objeto
         setSorting(selected);
     }
-
-    useEffect(()=>{
-        console.log('first')
-    },[sorting]);
 
     return (
         <div ref={dropdownRef} className="dropdown">

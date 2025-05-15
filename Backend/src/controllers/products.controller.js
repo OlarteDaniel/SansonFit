@@ -5,17 +5,27 @@ import {promises as fsPromises} from 'fs'
 
 
 const getAll = async(req,res) =>{
-    
+    const { ObjectId } = mongoose.Types;
+
     const limit = parseInt(req.query.limit) || 8;
     const page = parseInt(req.query.page) || 1;
     const sortField = req.query.sortBy || 'title'; // campo para ordenar
     const sortOrder = req.query.order === 'desc' ? -1 : 1; // asc o desc
+    const minPrice = parseInt(req.query.minPrice);
+    const maxPrice = parseInt(req.query.maxPrice);
+    let filters = req.query.filters
 
-    console.log(req.query.sortBy)
-    console.log(req.query.order)
+    if (filters) {
+    // Convertir string separado por comas en array de ObjectIds
+        filters = filters.split(',').map(id => new ObjectId(id));
+    } else {
+        filters = []; // o null si preferís
+    }
 
     try {
-        const products = await productService.getProducts(page,limit,sortField,sortOrder);
+        const prices = await productService.getPriceRange();
+
+        const products = await productService.getProducts(page,limit,sortField,sortOrder,minPrice || prices.min,maxPrice || prices.max,filters);
         if(products.length === 0){
             // MODIFICAR EN CASO DE ERROR
             // return res.sendNotFound('There are no registered products');
@@ -98,6 +108,17 @@ const getOneByCode = async(req,res) =>{
     } catch (error) {
         req.logger.error(`Error getting product: ${error}`);
         return res.sendServerError('An error occurred while fetching product.');
+    }
+}
+
+const getMinMaxPrices = async(req,res) =>{
+    try {
+        const prices = await productService.getPriceRange();
+        req.logger.info('Prices obtained correctly');
+        res.sendSuccessWithPayload(prices);
+    } catch (error) {
+        req.logger.error(`Error getting Prices: ${error}`);
+        return res.sendServerError('An error occurred while fetching Prices.');
     }
 }
 
@@ -295,6 +316,7 @@ export default{
     getAllByCategory,
     getOneById,
     getOneByCode,
+    getMinMaxPrices,
     eliminate,
     updateProduct
 }

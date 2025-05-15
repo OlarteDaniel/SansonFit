@@ -14,6 +14,16 @@ export default class ProductDAO{
         }
     }
 
+    async getMinPrice() {
+        const [minProduct] = await productModel.find().sort({ price: 1 }).limit(1);
+        return minProduct?.price || 0;
+    }
+
+    async getMaxPriceProduct() {
+        const [maxProduct] = await productModel.find().sort({ price: -1 }).limit(1);
+        return maxProduct?.price || 0;
+    }
+
     async getOne(params){
         return productModel.findOne(params);
     }

@@ -12,8 +12,13 @@ export default class ProductsService {
         return this.client.makeGetRequest(requestInfo);
     }
 
-    getProducts = (page,field,order) => {
-        const requestInfo = {url:`${PRODUCTS_ENDPOINT}?page=${page}&sortBy=${field}&order=${order}`,config: postFileHeaders()};
+    getProducts = (page,field,order,minPrice,maxPrice,filters) => {
+        const requestInfo = {url:`${PRODUCTS_ENDPOINT}?page=${page}&sortBy=${field}&order=${order}&minPrice=${minPrice}&maxPrice=${maxPrice}&filters=${filters}`,config: postFileHeaders()};
+        return this.client.makeGetRequest(requestInfo);
+    }
+
+    getPrices = () =>{
+        const requestInfo = {url: `${PRODUCTS_ENDPOINT}/price-range`,config:getHeaders()};
         return this.client.makeGetRequest(requestInfo);
     }
 
