@@ -6,7 +6,7 @@ class CategoriesRouter extends BaseRouter{
 
     init(){
 
-        this.get('/',['ADMIN'],categoriesController.getAll);
+        this.get('/',['PUBLIC'],categoriesController.getAll);
 
         this.get('/:id',['ADMIN'],categoriesController.getOne);
 

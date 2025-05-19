@@ -17,6 +17,11 @@ export default class ProductsService {
         return this.client.makeGetRequest(requestInfo);
     }
 
+    getCount = () =>{
+        const requestInfo = {url: `${PRODUCTS_ENDPOINT}/count`,config:getHeaders()};
+        return this.client.makeGetRequest(requestInfo);
+    }
+
     getPrices = () =>{
         const requestInfo = {url: `${PRODUCTS_ENDPOINT}/price-range`,config:getHeaders()};
         return this.client.makeGetRequest(requestInfo);

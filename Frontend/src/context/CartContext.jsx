@@ -1,16 +1,17 @@
-import React, {useState,createContext, useEffect} from "react";
+import {useState,createContext} from "react";
 
 const Context = createContext();
 
 export const CartContextProvider = ({children}) =>{
 
     const [cartActivate, setCartActivate] = useState(false);
-    const [cartItems, setCartItems] = useState([{}]);
+    const [cartItems, setCartItems] = useState([]);
 
     const toggleCart = () =>{
         setCartActivate(!cartActivate);
     }
 
+    
     return (
         <Context.Provider
             value={{

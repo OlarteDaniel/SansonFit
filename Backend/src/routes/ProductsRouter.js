@@ -11,6 +11,8 @@ class ProductsRouter extends BaseRouter{
 
         this.get('/',['PUBLIC'],productsController.getAll);
 
+        this.get('/count',['PUBLIC'],productsController.getCount)
+
         this.get('/price-range',['PUBLIC'],productsController.getMinMaxPrices);
 
         this.get('/:type/:name',['PUBLIC'],productsController.getAllByCategory);

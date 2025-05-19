@@ -20,8 +20,15 @@ export default class ProductRepository{
         return this.dao.get(query, {
             page: page,
             limit: limit,
-            sort: { [sortField]: sortOrder }
+            sort: { 
+                globalStatus: -1,
+                [sortField]: sortOrder
+            }
         });
+    }
+
+    getCountActive(){
+        return this.dao.getCountActive()
     }
 
     getProductsById(id){

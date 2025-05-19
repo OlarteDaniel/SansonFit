@@ -40,6 +40,19 @@ const getAll = async(req,res) =>{
     }
 }
 
+const getCount = async(req,res) =>{
+    try {
+        const response = await productService.getCountActive();
+
+        req.logger.info('Amount obtained correctly');
+        return res.sendSuccessWithPayload({count:response});
+
+    } catch (error) {
+        req.logger.error(`Error getting the amount: ${error}`);
+        return res.sendServerError('An error occurred while retrieving product quantities.');
+    }
+}
+
 const getAllByCategory = async (req, res) => {
     try {
         const { type, name } = req.params; // Destructuración directa
@@ -313,6 +326,7 @@ const eliminate = async(req,res)=>{
 export default{
     createProduct,
     getAll,
+    getCount,
     getAllByCategory,
     getOneById,
     getOneByCode,

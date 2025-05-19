@@ -24,6 +24,10 @@ export default class ProductDAO{
         return maxProduct?.price || 0;
     }
 
+    async getCountActive(){
+        return productModel.countDocuments({globalStatus:true})
+    }
+
     async getOne(params){
         return productModel.findOne(params);
     }

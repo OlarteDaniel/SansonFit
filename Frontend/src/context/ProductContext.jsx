@@ -17,6 +17,7 @@ export const ProductContextProvider = ({children}) =>{
     const [prices, setPrices] = useState({});
     const [pricesFilter,setPricesFilter] = useState({})
     const [filters, setFilters] = useState([]);
+    const [activeQuantity, setActiveQuantity] = useState(0);
 
     const [toggle] = useScrollLock();
 
@@ -26,6 +27,8 @@ export const ProductContextProvider = ({children}) =>{
 
     const fetchProducts = async (page=1, sort = sorting) =>{
         try {
+            const count = await productsService.getCount();
+            setActiveQuantity(count.data.payload)
             const result = await productsService.getProducts(page,sort.field,sort.order,pricesFilter.min,pricesFilter.max,filters);
             if(result.status === 200 && result.data?.payload){
                 setProducts(result.data.payload.docs);
@@ -39,6 +42,7 @@ export const ProductContextProvider = ({children}) =>{
             setProducts([]);
         } catch (error) {
             setProducts([]);
+            setActiveQuantity(0)
             console.error('Error al obtener productos:', error)
         }
     }
@@ -151,6 +155,7 @@ export const ProductContextProvider = ({children}) =>{
     return (
         <Context.Provider
         value={{
+            activeQuantity,
             category,
             fetchProducts,
             paginate,

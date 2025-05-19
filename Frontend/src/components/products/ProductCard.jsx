@@ -107,7 +107,11 @@ const ProductCard = ({id,title,price,discount,hasDiscount,status,thumbnails}) =>
                         session && 
                             <div className="buttons">
                             {session.data.payload.role === 'user'? 
-                                <button className='button button-buys'>Añadir al carrito</button>
+                                <button 
+                                    className='button button-buys' //Antes este boton era el de compra pero decidimos utilizarlo como ver más 
+                                >
+                                    Ver más
+                                </button>
                             :  
                                 <>
                                     <button 

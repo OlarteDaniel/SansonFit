@@ -26,6 +26,7 @@ const ProductGrid = () => {
         return products?.filter(product => product.globalStatus) || []
     },[userRole,products])
 
+
     return (
         filteredProducts.length > 0 ? (
             <div className="grid">
