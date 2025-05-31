@@ -1,4 +1,4 @@
-import React, { useState,useEffect, useContext } from 'react';
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import { FaUser } from "react-icons/fa6";

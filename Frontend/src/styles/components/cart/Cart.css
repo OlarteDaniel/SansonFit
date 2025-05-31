@@ -2,7 +2,7 @@
     position: fixed;
     padding: 1.5rem 2rem;
     width: 35vw;
-    min-width: 250px;
+    min-width: 330px;
     height: 100vh;
     right: 0;
     top: 0;
@@ -78,4 +78,106 @@
     color: #fff;
     cursor: pointer;    
     font-size: .9em;
+}
+
+.cart .body {
+    max-height: 78%;
+    margin-top: 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    overflow-y: auto;
+    padding-right: 8px;
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: #00e0ff rgba(255, 255, 255, 0.05); /* Firefox */
+}
+
+/* Webkit Scrollbar */
+.cart .body::-webkit-scrollbar {
+    width: 8px;
+}
+
+.cart .body::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+}
+
+.cart .body::-webkit-scrollbar-thumb {
+    background-color: #00e0ff;
+    border-radius: 4px;
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease;
+}
+
+.cart .body::-webkit-scrollbar-thumb:hover {
+    background-color: #00bcd4;
+}
+
+.cart .footer {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    background-color: #00457E;
+    font-family: 'Smack Laideth';
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .5em;
+}
+
+.cart .footer .total {
+    display: flex;
+    gap: 1em;
+    font-size: 1.1em;
+    
+}
+
+.cart .footer .total .price {
+    color: #eeeeee;
+}
+
+.cart .footer .total .finalPrice {
+    color: #00e0ff;
+}
+
+.cart .footer .btns {
+    display: flex;
+    gap: 0.5em;
+    justify-content: space-between;
+}
+
+.cart .footer .btns button {
+    flex: 1;
+    padding: 0.6em;
+    font-size: .8em;
+    border-radius: 6px;
+    font-family: 'Smack Laideth';
+    cursor: pointer;
+    background-color: transparent;
+    color: #00e0ff;
+    border: 1px solid #00e0ff;
+    letter-spacing: 0.05em;
+    transition: background-color 0.3s, color 0.3s, transform 0.2s ease;
+}
+
+.cart .footer .btns button:hover {
+    background-color: #00e0ff;
+    color: #00457E;
+    transform: scale(1.03);
+}
+
+
+@media(min-width:480px){
+    .cart{
+        min-width: 400px;
+    }
+}
+
+@media(min-width:768px){
+    .cart{
+        min-width: 480px;
+    }
 }

@@ -10,10 +10,13 @@ import ItemCount from '../components/widgets/ItemCount';
 
 import UserContext from '../context/UserContext';
 import ProductContext from '../context/ProductContext';
+import CartContext from '../context/CartContext';
 
 import imgDefault from '../assets/img/productsList/ImagenDefault.jpg'
 
 import '../styles/pages/ProductDetails.css'
+
+import { Toaster } from 'sonner'
 
 
 const ProductDetails = () => {
@@ -29,7 +32,9 @@ const ProductDetails = () => {
     const toggleDropdown = () => setDropdownActive(!dropdownActive);
 
     const {deleteProduct} = useContext(ProductContext);
-    const {session} = useContext(UserContext)
+    const {session} = useContext(UserContext);
+    const {addItem} = useContext(CartContext);
+
     const role = session?.data?.payload.role
     const fetchProduct = async ()=>{
         try {
@@ -39,12 +44,13 @@ const ProductDetails = () => {
                 setProduct(response.data.payload);
                 const responseVariant = await variantService.getByProduct(id);
                 setVariants(responseVariant.data.payload);
-
+                setSelectedVariant(responseVariant.data.payload.length > 0? responseVariant.data.payload[0]._id : null )
             }
 
         } catch (error) {
             setProduct(null)
             setVariants(null)
+            setSelectedVariant(null)
             console.error('Error al obtener el producto:', error)
         }
     }
@@ -73,7 +79,7 @@ const ProductDetails = () => {
     }
 
     const quantityVariants = () =>{
-        const variant = variants?.find(variant => variant.flavor ===selectedVariant); 
+        const variant = variants?.find(variant => variant._id ===selectedVariant); 
         return variant?.quantity || product?.stock
     }
 
@@ -83,7 +89,7 @@ const ProductDetails = () => {
         let variant;
     
         if (selectedVariant) {
-            variant = variants.find(v => v.flavor === selectedVariant);
+            variant = variants.find(v => v._id === selectedVariant);
         }
     
         // Si no hay variante seleccionada pero hay solo una, usar esa
@@ -95,6 +101,7 @@ const ProductDetails = () => {
         const variantDiscount = variant?.discount || 0;
     
         // Por ejemplo, sumar ambos descuentos
+
         return productDiscount + variantDiscount;
     }    
 
@@ -106,9 +113,19 @@ const ProductDetails = () => {
     const discountedPrice = price - (price*(discountActive()/100));
     const discountedPriceFormat = Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(discountedPrice);
 
+    const addCart = (count) =>{
+        const variant = variants?.find(variant => variant._id ===selectedVariant)
+        addItem(product,variant,count,imgDefault)
+    }
 
     return (
         <main className="productDetails">
+
+            <Toaster 
+                theme='light'
+                richColors
+                closeButton
+            />
 
             <div className="container">
                 <div className="section-img">
@@ -187,10 +204,11 @@ const ProductDetails = () => {
 
                                         <input
                                         type="radio"
+                                        checked={variant._id === selectedVariant}
                                         name="variant"
                                         disabled={variant.quantity < 1}
                                         value={variant.flavor}
-                                        onChange={() => setSelectedVariant(variant.flavor)}
+                                        onChange={() => setSelectedVariant(variant._id)}
                                         />
                                         {variant.flavor}
                                     </label>
@@ -224,7 +242,7 @@ const ProductDetails = () => {
                                 {
                                     role === 'user' && 
                                     (
-                                        <ItemCount stock={quantityVariants()} initialValue={1} />
+                                        <ItemCount stock={quantityVariants()} initialValue={1} addCart={addCart}/>
                                     )
                                 }
                             </>

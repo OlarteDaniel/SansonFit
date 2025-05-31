@@ -72,7 +72,7 @@ const getByProductAndFlavor = async (req, res) => {
         const variant = await supplementVariantsService.getByProductFlavors(pid, flavor);
         if (!variant) {
             req.logger.info(`This product does not have the flavor ${flavor}`);
-            return res.sendNotFound('Flavor not found');
+            return res.sendSuccess('Flavor not found');
         }
         req.logger.info(`Product flavor retrieved successfully`);
         return res.sendSuccessWithPayload(variant);

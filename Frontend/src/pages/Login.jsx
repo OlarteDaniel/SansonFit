@@ -65,6 +65,10 @@ const Login = () => {
             console.error("Error al iniciar sesión:", error);
         }
     }
+
+    const onSubmitGoogle = () =>{
+        window.location.href = "http://localhost:8080/api/sessions/auth/google";
+    }
     
     return (
         <main className="login">
@@ -129,7 +133,7 @@ const Login = () => {
                 
                 <div className="login-nets">
 
-                        <button className='btn-google'>
+                        <button className='btn-google' onClick={()=> onSubmitGoogle()}>
                             <FcGoogle /> 
                             Continuar con Google
                         </button>

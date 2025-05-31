@@ -19,7 +19,7 @@ const useScrollLock = () =>{
 
     const toggle = () => setIsLocked(!isLocked);
 
-    return [toggle,setIsLocked]
+    return [toggle]
 }
 
-export default useScrollLock
+export default useScrollLock;

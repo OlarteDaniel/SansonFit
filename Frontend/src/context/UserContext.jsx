@@ -1,4 +1,4 @@
-import React, {useState,createContext, useEffect} from "react";
+import {useState,createContext, useEffect} from "react";
 import { sessionsService } from '../services/services';
 
 const Context = createContext();
@@ -6,6 +6,7 @@ const Context = createContext();
 export const UserContextProvider = ({children}) => {
 
     const [session, setSession] = useState(null);
+    const [cartKey, setCartKey] = useState('cart_guest');
 
     const fetchSession = async () =>{
         try {
@@ -13,6 +14,7 @@ export const UserContextProvider = ({children}) => {
             
             if(result?.status === 200){
                 setSession(result);
+                setCartKey(result.data.payload.id ? `cart_${result.data.payload.id}` : 'cart_guest')
                 return;
             }
 
@@ -34,6 +36,7 @@ export const UserContextProvider = ({children}) => {
     return (
         <Context.Provider 
         value={{
+            cartKey,
             session,
             setSession,
             updateSession

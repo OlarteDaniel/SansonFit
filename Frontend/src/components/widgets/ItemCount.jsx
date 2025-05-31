@@ -4,7 +4,7 @@ import useCounter from '../../hooks/useCounter';
 
 import '../../styles/components/widgets/ItemCount.css'
 
-const ItemCount = ({stock,initialValue}) => {
+const ItemCount = ({stock,initialValue,addCart}) => {
 
     const {count, incrementar, decrementar} = useCounter(stock, initialValue);
 
@@ -15,7 +15,7 @@ const ItemCount = ({stock,initialValue}) => {
                 <h2>{count}</h2>
                 <button onClick={incrementar} className='btn'>+</button>
             </div>
-            <button className='btn-cart'>Añadir al carrito</button>
+            <button onClick={()=> addCart(count)} className='btn-cart'>Añadir al carrito</button>
         </div>
     )
     }

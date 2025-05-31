@@ -1,0 +1,100 @@
+.cart-item {
+    display: flex;
+    font-family: 'Smack Laideth';
+    gap: 0.75em;
+    color: #fff;
+    padding: 1em;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 2px 5px rgba(0, 224, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: background 0.3s ease;
+}
+
+.cart-item:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.cart-item:last-child {
+    border-bottom: none; /* elimina borde en el último item */
+}
+
+.cart-item .img {
+    width: 20%;
+    min-height: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cart-item .img img {
+    width: 100%;
+    max-width: 80px;
+    border-radius: 6px;
+}
+
+.cart-item .info {
+    width: 80%;
+    font-size: 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.cart-item .info .title {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 0.5em;
+}
+
+.cart-item .info .title p {
+    font-size: 1.05em;
+}
+
+.cart-item .info .title button {
+    position: absolute;
+    right: 0;
+    background: none;
+    border: none;
+    color: #00e0ff;
+    cursor: pointer;
+    font-size: 1.1em;
+    padding: 0.2em;
+    transition: transform 0.2s ease;
+}
+
+.cart-item .info .title button:hover {
+    transform: scale(1.1);
+    color: #00bcd4;
+}
+
+.cart-item .info .details {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1em;
+}
+
+.cart-item .info .details .count {
+    color: #fff;
+}
+
+.cart-item .info .details .prices {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    line-height: 1.2em;
+}
+
+.cart-item .info .details .old-price {
+    text-decoration: line-through;
+    color: #999;
+    font-size: 0.9em;
+}
+
+.cart-item .info .details .new-price {
+    color: #00e0ff;
+    font-size: 1em;
+}

@@ -9,6 +9,8 @@ import { variantService } from '../../services/services';
 
 import imgDefault from '../../assets/img/productsList/ImagenDefault.jpg'
 
+import { toast } from 'sonner'
+
 import '../../styles/components/products/ProductVariantPage.css'
 
 const ProductVariantPage = () => {
@@ -29,7 +31,7 @@ const ProductVariantPage = () => {
                 // Verificar si el sabor ya existe
                 const existsFlavor = await variantService.getByProductAndFlavor(product._id, data.flavor);
                 
-                if (existsFlavor.status === 200) {
+                if (existsFlavor.status === 200 && existsFlavor.data?.payload) {
                     // Si existe, actualizar la cantidad
                     const flavorUpdate = {
                         productId: product._id,
@@ -37,10 +39,19 @@ const ProductVariantPage = () => {
                         quantity: Number(data.quantity) + Number(existsFlavor.data.payload.quantity),
                         newQuantity: data.quantity
                     };
-                    await variantService.updateFlavor(existsFlavor.data.payload._id, flavorUpdate);
+                    await toast.promise(
+                        variantService.updateFlavor(existsFlavor.data.payload._id, flavorUpdate),
+                        {
+                            loading:'Agregando Variante...',
+                            success: () => {
+                                return `El sabor ${flavorUpdate.flavor} ha aumentado su cantidad`;
+                            },
+                            error:'Error al agregar sabor',
+                        }
+                    );
                     return;
                 } else {
-                    // Si no existe el sabor
+                    // Si el payload está vacío o no existe, agregamos nuevo sabor
                     newVariant.flavor = data.flavor;
                 }
             } catch (error) {
@@ -53,7 +64,16 @@ const ProductVariantPage = () => {
             if (category.type === 'apparel') {
                 console.log('En producción');
             } else if (category.type === 'supplements') {
-                const result = await variantService.addFlavor(product._id, newVariant);
+                await toast.promise(
+                    variantService.addFlavor(product._id, newVariant),
+                    {
+                        loading:'Agregando Variante...',
+                        success: () => {
+                            return `El sabor ${newVariant.flavor} ha sido agregado`;
+                        },
+                        error:'Error al agregar sabor',
+                    }
+                )
             }
         } catch (error) {
             console.error('Error al agregar la variante:', error);

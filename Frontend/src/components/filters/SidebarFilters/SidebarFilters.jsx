@@ -18,7 +18,7 @@ import '../../../styles/components/filters/sideBar/SidebarFilters.css'
 
 const SidebarFilters = () => {
 
-    const {prices,setPricesFilter,minMaxPrices, setFilters} = useContext(ProductContext);    
+    const {prices,setPricesFilter,minMaxPrices, setFilters,filters} = useContext(ProductContext);    
 
     const [types,setTypes] = useState([]);
     const [filterMenuActive, setFilterMenuActive] = useState(false);
@@ -152,7 +152,8 @@ const SidebarFilters = () => {
                                     <label>
                                         <input
                                             type="checkbox"
-                                            checked={selectedTypes.includes(type._id)}
+                                            // Agregamos el array de filters proveniente de productContext para evitar error de compartida de informacion
+                                            checked={selectedTypes.includes(type._id) || filters.includes(type._id)} 
                                             onChange={(e) => addFilters(e.target.checked, type._id)}
                                         />
                                         {type.name}

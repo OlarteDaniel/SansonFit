@@ -4,7 +4,7 @@ export default class UserDTOSessions{
     role;
 
     constructor(user){
-        this.id = user._id;
+        this.id = user.id
         this.name = `${user.first_name} ${user.last_name}`;
         this.role = user.roles;
     }

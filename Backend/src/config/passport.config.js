@@ -83,7 +83,6 @@ const initializePassportConfig = () =>{
                 password: hashedPassword,
             }
             const result = await userService.createUser(newUser);
-            
             return cb(null,result);
         }
     }

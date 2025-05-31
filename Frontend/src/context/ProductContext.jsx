@@ -18,6 +18,7 @@ export const ProductContextProvider = ({children}) =>{
     const [pricesFilter,setPricesFilter] = useState({})
     const [filters, setFilters] = useState([]);
     const [activeQuantity, setActiveQuantity] = useState(0);
+    const [totalProducts,setTotalProducts] = useState(0)
 
     const [toggle] = useScrollLock();
 
@@ -31,6 +32,7 @@ export const ProductContextProvider = ({children}) =>{
             setActiveQuantity(count.data.payload)
             const result = await productsService.getProducts(page,sort.field,sort.order,pricesFilter.min,pricesFilter.max,filters);
             if(result.status === 200 && result.data?.payload){
+                setTotalProducts(result.data.payload.totalDocs);
                 setProducts(result.data.payload.docs);
                 setPaginate({prevPage: result.data.payload.prevPage,
                             nextPage: result.data.payload.nextPage,
@@ -170,7 +172,9 @@ export const ProductContextProvider = ({children}) =>{
             minMaxPrices,
             prices,
             setPricesFilter,
-            setFilters
+            setFilters,
+            filters,
+            totalProducts
         }}
         >
             {children}

@@ -11,7 +11,7 @@ import '../../styles/components/widgets/CartButton.css'
 const CartButton = () => {
 
     const {session} = useContext(UserContext)
-    const {toggleCart} = useContext(CartContext);
+    const {toggleCart,count} = useContext(CartContext);
 
     const isScrolled = useScroll();
     
@@ -19,7 +19,7 @@ const CartButton = () => {
     session && 
         <button onClick={()=> toggleCart()} className="button-cart">
             <FaShoppingCart className={`cart-icon ${isScrolled ? 'light' : ''}`} />
-            <p className={`stock ${isScrolled ? 'light' : ''}`}>0</p>
+            <p className={`stock ${isScrolled ? 'light' : ''}`}>{count}</p>
         </button>   
     )
 }

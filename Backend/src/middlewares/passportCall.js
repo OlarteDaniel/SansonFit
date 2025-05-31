@@ -22,7 +22,6 @@ export const passportCall = (strategy) =>{
                     return res.sendUnauthorized(info.message);
                 }
             }
-
             req.user = user;
             next();
         })(req,res,next);

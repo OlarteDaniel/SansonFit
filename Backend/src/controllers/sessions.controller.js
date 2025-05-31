@@ -13,8 +13,20 @@ const login = (req,res)=>{
         const sessionUser = {...sessionUserObject};
 
         const token = jwt.sign(sessionUser,config.auth.jwt.SECRET,{expiresIn:'1d'});
-
         return res.cookie('sid',token,{httpOnly:true}).sendSuccess('loggend in');
+    } catch (error) {
+        req.logger.error('Error during login:', error);
+        return res.sendServerError('An unexpected error occurred during login');
+    }
+}
+
+const loginGoogleCallback = (req,res) =>{
+    try {
+        const sessionUserObject = new UserDTOSession(req.user);
+        const sessionUser = {...sessionUserObject};
+
+        const token = jwt.sign(sessionUser,config.auth.jwt.SECRET,{expiresIn:'1d'});
+        return res.cookie('sid', token, { httpOnly: true }).redirect('http://localhost:5173/');
     } catch (error) {
         req.logger.error('Error during login:', error);
         return res.sendServerError('An unexpected error occurred during login');
@@ -31,6 +43,7 @@ const current = (req,res)=>{
             return  res.sendUnauthorized('Not logged in') 
         }
     
+
         const currentUserObject = new UserDTOCurrent(req.user)
         const currentUser = {...currentUserObject};
     
@@ -44,6 +57,7 @@ const current = (req,res)=>{
 export default{
     current,
     login,
+    loginGoogleCallback,
     logout,
     register
 }
