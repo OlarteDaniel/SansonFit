@@ -15,7 +15,7 @@ import '../../styles/components/cart/Cart.css'
 
 const Cart = () => {
 
-    const {cartActivate,cart,setCartActivate,deleteItem,total,emptyCart} = useContext(CartContext);
+    const {cartActivate,cart,carCheck,setCartActivate,deleteItem,total,emptyCart} = useContext(CartContext);
     const {session} = useContext(UserContext);
 
     const dropdownRef = useRef(null);
@@ -57,7 +57,6 @@ const Cart = () => {
                             {cart.map((item) => {
                                 return <CartItem 
                                         key={`${item.productTitle}-${item.flavor}`}
-                                        productId={item.productId}
                                         productTitle={item.productTitle}
                                         price={item.price}
                                         image={item.image}
@@ -76,7 +75,7 @@ const Cart = () => {
                                 <p className='finalPrice'>{priceFormat}</p>
                             </div>
                             <div className="btns">
-                                <button>Finalizar Compra</button>
+                                <button onClick={carCheck}>Finalizar Compra</button>
                                 <button onClick={emptyCart}>Limpiar Carrito</button>
                             </div>
                         </div>

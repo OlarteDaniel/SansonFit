@@ -260,6 +260,17 @@ const deleteFlavor = async (req, res) => {
         if (!supplement) {
             return res.sendNotFound('Flavor not found');
         }
+
+        const product = await productService.getProductsById(supplement.productId);
+        if (!product) {
+            return res.sendNotFound('Product not found');
+        }
+        
+        const resultUpdateStock = await productService.updateProduct(product._id, { stock: Number(product.stock) - Number(supplement.quantity) });
+        if (!resultUpdateStock) {
+            return res.sendNotFound('Could not delete flavor');
+        }
+
         const result = await supplementVariantsService.deleteSupplement(fid);
         if (!result) {
             return res.sendBadRequest('Could not delete flavor');

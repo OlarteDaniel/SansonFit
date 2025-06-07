@@ -138,10 +138,10 @@ const Login = () => {
                             Continuar con Google
                         </button>
 
-                        <button className='btn-facebook'>
+                        {/* <button className='btn-facebook'>
                             <SiFacebook className='facebook-icon'/> 
                             Continuar con Facebook
-                        </button>
+                        </button> */}
                 </div>
 
                 <p className='text-register'>

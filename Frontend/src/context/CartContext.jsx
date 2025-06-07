@@ -14,6 +14,7 @@ export const CartContextProvider = ({children}) =>{
     const [total,setTotal] = useState(0);
     const [count,setCount] = useState(0);
     const [cart, setCart] = useLocalStorage(cartKey, []);
+    const [cartMp,setCartMP] =useState([]);
     const [storageReady, setStorageReady] = useState(false);
 
     useEffect(() => {
@@ -43,13 +44,14 @@ export const CartContextProvider = ({children}) =>{
     const addItem = (product, variant, count, imgDefault) => {
         const item = {
             productId: product._id,
+            variantId:variant._id,
             productTitle: product.title,
             price: product.price,
             image: product.thumbnails[0]?.url || imgDefault,
             productDiscount: product.discount,
             variantDiscount: variant.discount,
             flavor: variant.flavor,
-            count: count
+            count:count
         };
 
         setCart(prevItems => {
@@ -95,6 +97,16 @@ export const CartContextProvider = ({children}) =>{
 
     };
 
+    const carCheck = () => {
+        setCartMP(cart.map((item) => {
+            return {
+                productId: item.productId,
+                variantId: item.variantId,
+                count: item.count
+            }
+        }))
+    }
+
     const deleteItem = (productTitle,flavor) => {
         setCart(cart.filter(item =>  item.productTitle !== productTitle || item.flavor !== flavor))
     }
@@ -135,6 +147,7 @@ export const CartContextProvider = ({children}) =>{
                 addItem,
                 cartActivate,
                 cart,
+                carCheck,
                 deleteItem,
                 emptyCart,
                 count,

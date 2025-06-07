@@ -64,6 +64,10 @@ const Register = () => {
         }
     }
 
+    const onSubmitGoogle = () =>{
+        window.location.href = "http://localhost:8080/api/sessions/auth/google";
+    }
+
     return (
         <main className='register'>
             <div className="container">
@@ -190,15 +194,15 @@ const Register = () => {
 
                     <div className="register-nets">
                     
-                        <button className='btn-google'>
+                        <button className='btn-google' onClick={()=> onSubmitGoogle()}>
                             <FcGoogle /> 
                             Continuar con Google
                         </button>
 
-                        <button className='btn-facebook'>
+                        {/* <button className='btn-facebook'>
                             <SiFacebook className='facebook-icon'/> 
                             Continuar con Facebook
-                        </button>
+                        </button> */}
                     </div>
 
                     <p className='text-login'>

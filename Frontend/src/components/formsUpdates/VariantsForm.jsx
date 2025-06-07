@@ -102,6 +102,26 @@ const VariantsForm = () => {
     }
   }
 
+  const deleteFlavor = async () =>{
+    try {
+      await toast.promise(
+        variantService.deleteFlavor(variantSelected._id),
+        {
+          loading: "Borrando variante...",
+          success: (() =>{
+            setVariants(prev => prev.filter(v => v._id !== variantSelected._id));
+            setVariantSelected(null)
+            reset()
+            return "Variante eliminado"
+          }),
+          error: "Error al eliminar la variante"
+        }
+      );
+    } catch (error) {
+      toast.error('No se pudo eliminar la variante')
+    }
+  }
+
 
   return variants.length > 0 ? (
     <form onSubmit={handleSubmit(onSubmit)} className="VariantsForm">
@@ -182,6 +202,9 @@ const VariantsForm = () => {
 
       <div className={`btns ${!variantSelected? 'disable' : ''}`}>
         <button disabled={!variantSelected} type="submit">Modificar</button>
+
+        <button  type="button" className='delete' disabled={!variantSelected} onClick={deleteFlavor} >Eliminar</button>
+
       </div>
 
     </form>

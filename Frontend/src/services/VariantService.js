@@ -28,4 +28,9 @@ export default class VariantService {
         return this.client.makePostRequest(requestInfo);
     }
 
+    deleteFlavor = (flavorId) =>{
+        const requestInfo = {url: `${VARIANT_SUPPLEMENT_ENDPOINT}/${flavorId}`,config: getHeaders()};
+        return this.client.makeDeleteRequest(requestInfo)
+    }
+
 }

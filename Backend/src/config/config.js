@@ -28,5 +28,15 @@ export default{
     google:{
         ID:process.env.CLIENT_ID,
         SECRET:process.env.CLIENT_SECRET
+    },
+    mercadoPago:{
+        ACCESS_TOKEN:process.env.ACCESS_TOKEN
+    },
+    ngrok: {
+        AUTHTOKEN: process.env.NGROK_AUTHTOKEN,
+        PUBLIC_URL: process.env.PUBLIC_URL
+    },
+    frontend: {
+        URL: process.env.FRONT_URL
     }
 };

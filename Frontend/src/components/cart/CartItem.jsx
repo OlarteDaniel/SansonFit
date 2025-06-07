@@ -3,7 +3,7 @@ import { BsXLg } from "react-icons/bs";
 
 import '../../styles/components/cart/CartItem.css';
 
-const CartItem = ({productId, productTitle, price, image, productDiscount, variantDiscount, flavor, count,deleteItem}) => {
+const CartItem = ({productTitle, price, image, productDiscount, variantDiscount, flavor, count,deleteItem}) => {
     const discount = productDiscount + variantDiscount;
     const hasDiscount = discount > 0;
 

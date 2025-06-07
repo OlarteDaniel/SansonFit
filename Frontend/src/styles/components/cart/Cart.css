@@ -2,7 +2,7 @@
     position: fixed;
     padding: 1.5rem 2rem;
     width: 35vw;
-    min-width: 330px;
+    min-width: 350px;
     height: 100vh;
     right: 0;
     top: 0;
@@ -131,7 +131,7 @@
 .cart .footer .total {
     display: flex;
     gap: 1em;
-    font-size: 1.1em;
+    font-size: 1.2em;
     
 }
 
@@ -178,6 +178,6 @@
 
 @media(min-width:768px){
     .cart{
-        min-width: 480px;
+        min-width: 520px;
     }
 }

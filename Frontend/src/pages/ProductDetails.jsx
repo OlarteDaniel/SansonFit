@@ -126,7 +126,7 @@ const ProductDetails = () => {
                 richColors
                 closeButton
             />
-
+            
             <div className="container">
                 <div className="section-img">
                     <div className="main-image">

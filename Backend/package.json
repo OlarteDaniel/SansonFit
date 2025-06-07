@@ -5,6 +5,7 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
+    "ngrok": "node src/start-ngrok.js --mode dev",
     "start": "node src/app.js --mode prod",
     "dev": "nodemon src/app.js --mode dev",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -14,6 +15,7 @@
   "license": "ISC",
   "dependencies": {
     "@faker-js/faker": "^9.2.0",
+    "@ngrok/ngrok": "^1.5.1",
     "bcrypt": "^5.1.1",
     "cloudinary": "^2.5.1",
     "commander": "^12.1.0",
@@ -23,6 +25,7 @@
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
     "jsonwebtoken": "^9.0.2",
+    "mercadopago": "^2.7.0",
     "mongoose": "^8.8.2",
     "mongoose-findorcreate": "^4.0.0",
     "mongoose-paginate-v2": "^1.9.0",
