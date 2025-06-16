@@ -10,7 +10,7 @@ const createPayment = async(req,res) =>{
     const itemsForMP = [];
 
     try {
-        const products = req.body.products; // Debe venir como array en el body
+        const products = req.body; // Debe venir como array en el body
 
         if (!products || !Array.isArray(products) || products.length === 0) {
             return res.sendBadRequest( 'Productos no válidos.' );
@@ -53,15 +53,15 @@ const createPayment = async(req,res) =>{
 }
 
 const success = async(req,res) =>{
-    res.redirect(`${config.frontend.URL}/success`);
+    res.redirect(`${config.frontend.URL}payment-result?status=success`);
 }
 
 const failure = async(req,res) =>{
-    res.redirect(`${config.frontend.URL}/failure`);
+    res.redirect(`${config.frontend.URL}payment-result?status=failure`);
 }
 
 const pending = async(req,res) =>{
-    res.redirect(`${config.frontend.URL}/pending`);
+    res.redirect(`${config.frontend.URL}payment-result?status=pending`);
 }
 
 const receiveWebhook = async(req,res) =>{
@@ -94,12 +94,7 @@ const receiveWebhook = async(req,res) =>{
             }
 
             return res.sendSuccess('Updated stock')
-
         }
-
-        
-
-        
 
         res.sendStatus(200);
     } catch (error) {

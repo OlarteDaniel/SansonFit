@@ -1,6 +1,9 @@
 import {useState,createContext, useEffect, useContext} from "react";
+
+import { paymentService} from '../services/services';
 import UserContext from "./UserContext";
 import useLocalStorage from "../hooks/useLocalStorage";
+
 import { toast } from 'sonner'
 
 const Context = createContext();
@@ -14,8 +17,8 @@ export const CartContextProvider = ({children}) =>{
     const [total,setTotal] = useState(0);
     const [count,setCount] = useState(0);
     const [cart, setCart] = useLocalStorage(cartKey, []);
-    const [cartMp,setCartMP] =useState([]);
     const [storageReady, setStorageReady] = useState(false);
+    const [loader,setLoader] = useState(false);
 
     useEffect(() => {
         if (cartKey) {
@@ -97,15 +100,28 @@ export const CartContextProvider = ({children}) =>{
 
     };
 
-    const carCheck = () => {
-        setCartMP(cart.map((item) => {
-            return {
+    const cartCheck = async () => {
+        try {
+            setLoader(true); // Comenzamos mostrando loader
+
+            const cartToSend = cart.map(item => ({
                 productId: item.productId,
                 variantId: item.variantId,
                 count: item.count
+            }));
+
+            const response = await paymentService.createPayment(cartToSend);
+
+            if (response.status === 200) {
+                window.location.href = response.data.payload.url 
             }
-        }))
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setLoader(false); // Ocultamos loader al terminar
+        }
     }
+
 
     const deleteItem = (productTitle,flavor) => {
         setCart(cart.filter(item =>  item.productTitle !== productTitle || item.flavor !== flavor))
@@ -147,13 +163,15 @@ export const CartContextProvider = ({children}) =>{
                 addItem,
                 cartActivate,
                 cart,
-                carCheck,
+                cartCheck,
                 deleteItem,
                 emptyCart,
                 count,
                 total,
                 setCartActivate,
-                toggleCart
+                toggleCart,
+                loader,
+                cartKey
             }}
         >
             {children}
