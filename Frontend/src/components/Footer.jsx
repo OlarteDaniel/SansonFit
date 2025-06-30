@@ -21,12 +21,10 @@ const Footer = () => {
 
                     <div className="details info">
                         <p>
-                        Lorem ipsum dolor sit amet consectetur 
-                        adipisicing elit. Architecto perferendis 
-                        magnam quis ut ratione minus reiciendis 
-                        accusantium adipisci nihil illo veniam 
-                        reprehenderit omnis quas rem, inventore et 
-                        facilis vitae maiores.
+                            En Sanson Fit nos comprometemos a brindarte productos de calidad, 
+                            atención cercana y el asesoramiento que necesitás para alcanzar tu 
+                            mejor versión. Más que un distribuidor de suplementos, somos tu aliado 
+                            en el camino hacia una vida saludable y activa.
                         </p>
                     </div>
                 </div>

@@ -31,6 +31,7 @@ const RegisterProduct = () => {
 
     const handleFileChange = (event) => {
         const files = Array.from(event.target.files).map(file => file.name);
+        const count = files.length;
         setSelectedFiles(files);
     };
 
@@ -197,10 +198,19 @@ const RegisterProduct = () => {
                         <input 
                             type="file" 
                             id="uploadFile" 
-                            {...register('thumbnails')}
+                            {...register('thumbnails', {
+                                onChange: (e) => handleFileChange(e) // Captura los archivos manualmente
+                            })}
                             multiple
                             />
                         <label htmlFor="uploadFile" className="file-label">Seleccionar archivo</label>
+                        {selectedFiles.length > 0 && (
+                            <div className="file-names">
+                                {selectedFiles.map((file, index) => (
+                                    <span key={index} className="file-name">{file}</span>
+                                ))}
+                            </div>
+                        )}
                     </div>
 
                     <div className="btns">

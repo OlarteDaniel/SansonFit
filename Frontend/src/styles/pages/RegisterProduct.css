@@ -83,6 +83,21 @@
     background: rgba(192, 192, 192, 0.4);
 }
 
+.registerProduct .container .form .inputbox .file-names {
+    margin-top: 8px;
+    font-size: 0.9em;
+    color: #555;
+}
+
+.registerProduct .container .form .inputbox .file-name {
+    display: block;
+    background: rgba(0, 123, 255, 0.1);
+    padding: 5px;
+    border-radius: 3px;
+    margin-top: 3px;
+    font-weight: 500;
+}
+
 .registerProduct .container .form .inputbox select:focus{
     border-color: #007bff;
     box-shadow: inset 0 0 15px rgba(0, 123, 255, 0.2);

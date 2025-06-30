@@ -27,15 +27,13 @@ const Home = () => {
                     <div className="details">
                         <h1>SANSON FIT</h1>
                         <p>
-                            Lorem ipsum dolor sit amet 
-                            consectetur adipisicing elit. 
-                            Omnis corrupti incidunt aperiam. 
-                            Rem omnis magnam soluta eum eius 
-                            corrupti harum quo molestias. Magni, 
-                            eligendi. Beatae dolorem id quaerat 
-                            error eligendi.
+                            Descubrí nuestra selección de suplementos de alta calidad, cuidadosamente elegidos para ayudarte a mejorar tu 
+                            rendimiento, cuidar tu salud y alcanzar tus metas. En Sanson Fit, trabajamos con marcas confiables para 
+                            acercarte lo mejor en nutrición deportiva, siempre con un asesoramiento cercano y personalizado.
                         </p>
-                        <button>Mas sobre nosotros</button>
+                        <Link to='/about-us'>
+                            <button>Mas sobre nosotros</button>
+                        </Link>
                     </div>
                     
                     <div className="products">

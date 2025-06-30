@@ -74,7 +74,7 @@ const NavBar = () => {
                         <Link onClick={resetState} to="/products" className="nav-link">Productos</Link>
                     </li>
                     <li>
-                        <Link onClick={resetState} to="#" className="nav-link">Sobre nosotros</Link>
+                        <Link onClick={resetState} to="/about-us" className="nav-link">Sobre nosotros</Link>
                     </li>
                     <li>
                         <Link onClick={resetState} to="#" className="nav-link">Contacto</Link>
